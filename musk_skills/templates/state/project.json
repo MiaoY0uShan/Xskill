@@ -1,0 +1,17 @@
+{
+  "schema_version": "0.1",
+  "name": "unnamed-project",
+  "goal": "",
+  "constraints": [
+    "Keep the always-on context small.",
+    "Load skills only when their trigger matches the current step.",
+    "Require explicit verification before claiming completion."
+  ],
+  "non_goals": [],
+  "default_checks": [],
+  "risk_policy": {
+    "high": ["question-requirements", "delete-scope", "optimize-path", "shorten-iteration"],
+    "medium": ["delete-scope", "optimize-path", "shorten-iteration"],
+    "low": ["delete-scope", "optimize-path"]
+  }
+}
