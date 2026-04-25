@@ -1,481 +1,348 @@
 # Xskill
 
-**Musk 5-Step Xskill** is a lightweight skill pack and local runtime for AI-assisted software development.
+**Context diet for AI coding agents.**
 
-It turns heavyweight agent workflows into five compact, executable skills based on the five-step engineering method:
+Xskill is a portable skill bundle that turns vague coding tasks into small, bounded, verifiable execution briefs.
 
-1. **Question requirements**
-2. **Delete unnecessary scope**
-3. **Optimize the path**
-4. **Shorten iteration cycles**
-5. **Automate only after the process is stable**
+Most agent workflows add more context.
 
-The goal is simple:
-
-> Use less context, less ceremony, and fewer tokens — while keeping stronger execution discipline.
-
----
-
-## Why this exists
-
-Modern AI coding workflows are powerful, but many of them become too heavy:
-
-- too many prompts
-- too many agents
-- too many roles
-- too much always-on context
-- too much process before the task is even understood
-
-This project takes a different approach.
-
-Instead of building another large agent framework, **Musk 5-Step Xskill** extracts useful mechanisms from proven AI workflow projects and recompiles them into a small set of skills that can be loaded only when needed.
-
-The result is a lean workflow for planning, building, verifying, and iterating with AI coding agents.
-
----
-
-## Core idea
-
-This project is not a replacement for coding agents.
-
-It is a **thinking and execution layer** on top of them.
+Xskill removes context until the task becomes safe to execute.
 
 ```text
-User goal
-  ↓
-Question requirements
-  ↓
-Delete unnecessary scope
-  ↓
-Optimize the implementation path
-  ↓
-Shorten the iteration loop
-  ↓
-Automate stable repeated work
-  ↓
-Record learning into state
+Use Xskill to create an execution brief before editing code:
+Fix password reset bug.
 ```
 
-Each step is implemented as a compact skill.
+Expected output:
 
-Each skill has:
+```md
+# Execution Brief
 
-- a trigger
-- a goal
-- an execution procedure
-- an output contract
-- a failure mode
+## Task
+Fix password reset bug.
 
-This makes the workflow easier to reuse across tools like Claude Code, Codex, Cursor, OpenCode, or any agent runtime that can read Markdown instructions.
+## Goal
+Fix reset token expiry validation.
 
-------
+## Context Budget
+- Max files to read: 4
+- Max files to touch: 2
+- Files to avoid:
+  - src/oauth/**
+  - src/billing/**
 
-## What is Xskill?
+## Checks
+- pytest tests/auth/test_reset.py
 
-**Xskill** means **executable skill**.
+## Evidence Required
+- Failing test before fix
+- Passing test after fix
 
-A normal prompt tells an agent what to do.
-
-An Xskill defines:
-
-- when to activate
-- what input it needs
-- what output it must produce
-- how to verify the result
-- when to stop
-
-The emphasis is on small, composable, auditable behavior.
-
-------
-
-## The five skills
-
-### 1. `question-requirements`
-
-Question assumptions before execution.
-
-Use this when the task is vague, large, risky, or product-facing.
-
-It produces:
-
-- goal
-- assumptions
-- unknowns
-- risks
-- success criteria
-- things not to do
-- decision: continue, reduce scope, or stop
-
-------
-
-### 2. `delete-scope`
-
-Remove unnecessary work before planning implementation.
-
-Use this before creating tasks or touching code.
-
-It produces:
-
-- must-have scope
-- nice-to-have scope
-- deleted scope
-- deferred scope
-- files to touch
-- files to avoid
-- minimum viable slice
-
-------
-
-### 3. `optimize-path`
-
-Choose the simplest correct implementation path.
-
-Use this before editing code.
-
-It produces:
-
-- implementation path
-- test strategy
-- verification commands
-- review lenses
-- refactor permission
-
-The default rule is:
-
-> Do the smallest correct thing that can be verified.
-
-------
-
-### 4. `shorten-iteration`
-
-Break work into small, verifiable iterations.
-
-Use this when a task is too large for one clean context window.
-
-It produces:
-
-- atomic tasks
-- context slices
-- parallel groups
-- stop conditions
-- rollback plan
-
-The default unit is:
-
-```
-one task
-one context slice
-one verification
-one state update
+## Stop Condition
+Do not refactor auth provider internals.
 ```
 
-------
+**Less context. Smaller changes. Verified progress.**
 
-### 5. `automate-after-stable`
+---
 
-Automate only after the manual process has repeated successfully.
+## What this is
 
-Use this after a workflow has been executed several times by hand.
+Xskill is not a CLI, npm package, Python package, or full agent framework.
 
-It produces:
+It is a **portable skill bundle**:
 
-- automation candidates
-- guardrails
-- commands to create
-- failure recovery rules
-- state update rules
-
-The principle is:
-
-> Do not automate confusion.
-
-------
-
-## Semantic memory
-
-The project also includes a supporting skill:
-
-```
-semantic-memory
+```text
+Download zip.
+Unzip.
+Copy the xskill/ folder into your agent skills directory.
+Use it with your coding agent.
 ```
 
-This is used to keep long-term project context lightweight.
+Xskill is designed for AI coding agents that can read `SKILL.md` files or project-level agent instructions.
 
-Instead of injecting an entire repository into the model context, the project maintains a small semantic tree:
+---
 
-```
-{
-  "nodes": [
-    {
-      "id": "auth.login",
-      "type": "code.module",
-      "path": "src/auth/login.ts",
-      "summary": "Handles login validation and session creation",
-      "tags": ["auth", "session", "security"],
-      "risk": "high"
-    }
-  ],
-  "edges": [
-    {
-      "from": "auth.login",
-      "to": "db.users",
-      "relation": "depends_on",
-      "evidence": "EXTRACTED",
-      "confidence": 0.92
-    }
-  ]
-}
-```
+## Why it exists
 
-The agent should retrieve only the relevant semantic slice for the current task.
+AI coding agents often fail in predictable ways:
 
-------
+| Without Xskill | With Xskill |
+|---|---|
+| Reads too much context | Reads only the relevant slice |
+| Touches unrelated files | Gets a context budget |
+| Says "done" without proof | Produces an evidence ledger |
+| Retries failed tasks blindly | Splits failure into smaller work |
+| Accumulates huge rule files | Loads one skill at a time |
 
-## Project structure
+Xskill focuses on one job:
 
-```
-.musk/
-  kernel.md
-  skills/
-    question-requirements/SKILL.md
-    delete-scope/SKILL.md
-    optimize-path/SKILL.md
-    shorten-iteration/SKILL.md
-    automate-after-stable/SKILL.md
-    semantic-memory/SKILL.md
-  state/
-    project.json
-    tasks.json
-    progress.jsonl
-    decisions.jsonl
-    semantic_tree.json
-```
+> Turn open-ended agent work into bounded, evidence-backed execution.
 
-------
+---
 
 ## Installation
 
-Clone the repository:
+Xskill does not require npm, pip, or a command-line installer.
 
-```
-git clone https://github.com/YOUR_NAME/5step-xskill.git
-cd 5step-xskill
-```
+### Option A: Project-local installation
 
-Install locally:
+Use this when you want Xskill available only inside one repository.
 
-```
-pip install -e .
-```
+1. Download the latest `xskill-v0.1.0.zip` from GitHub Releases.
+2. Unzip it.
+3. Copy the `xskill/` folder into your project.
 
-------
+Recommended structure:
 
-## Quick start
-
-Initialize Xskill state in your project:
-
-```
-musk init
-```
-
-Add a task:
-
-```
-musk task add "Add password reset flow" \
-  --priority 5 \
-  --risk high \
-  --check "pytest"
+```text
+your-project/
+  AGENTS.md
+  .agents/
+    skills/
+      xskill/
+        question-requirements/SKILL.md
+        delete-scope/SKILL.md
+        optimize-path/SKILL.md
+        shorten-iteration/SKILL.md
+        automate-after-stable/SKILL.md
+        semantic-memory/SKILL.md
 ```
 
-Get the next task:
+If your agent does not use `.agents/skills/`, place the `xskill/` folder wherever your agent expects skill folders.
 
-```
-musk next
-```
+### Option B: Global installation
 
-Generate a step brief:
+Use this when you want Xskill available across projects.
 
-```
-musk brief question-requirements --task "Add password reset flow"
-```
-
-Index project context:
-
-```
-musk index
+```text
+~/.agents/skills/xskill/
+  question-requirements/SKILL.md
+  delete-scope/SKILL.md
+  optimize-path/SKILL.md
+  shorten-iteration/SKILL.md
+  automate-after-stable/SKILL.md
+  semantic-memory/SKILL.md
 ```
 
-Mark a task as done:
+Restart your coding agent after copying the folder.
 
-```
-musk task done T001 --note "pytest passed"
-```
+---
 
-------
+## AGENTS.md
 
-## Example workflow
+Xskill includes a root `AGENTS.md` template.
 
-```
-1. Run question-requirements
-   Clarify the goal, assumptions, risks, and success criteria.
+Copy it to your project root if your coding agent supports `AGENTS.md`.
 
-2. Run delete-scope
-   Remove anything not required for the minimum viable slice.
+`AGENTS.md` is the always-on router. It should stay short.
 
-3. Run optimize-path
-   Decide the smallest implementation path and verification strategy.
+The detailed procedures live in the skill files and should be loaded only when needed.
 
-4. Run shorten-iteration
-   Split the work into atomic tasks with clean context boundaries.
+---
 
-5. Run automate-after-stable
-   Only automate steps that have become stable through repetition.
+## How to use
+
+Ask your coding agent:
+
+```text
+Use Xskill to create an execution brief before editing code:
+<your task>
 ```
 
-------
+For larger tasks:
+
+```text
+Use Xskill question-requirements, then delete-scope, then optimize-path for:
+<your task>
+```
+
+For failed tasks:
+
+```text
+Use Xskill shorten-iteration to split this failure into smaller verifiable tasks.
+```
+
+For completed work:
+
+```text
+Use Xskill to produce an evidence ledger for the completed change.
+```
+
+---
+
+## The five-step system
+
+Xskill adapts the five-step engineering loop into agent skills.
+
+| Step | Skill | Output |
+|---|---|---|
+| Question | `question-requirements` | assumptions, risks, success criteria |
+| Delete | `delete-scope` | minimum slice, files to avoid |
+| Optimize | `optimize-path` | smallest implementation path |
+| Iterate | `shorten-iteration` | atomic tasks and stop conditions |
+| Automate | `automate-after-stable` | repeatable commands and guardrails |
+
+A supporting skill, `semantic-memory`, keeps long-term project context lightweight.
+
+---
+
+## Core artifacts
+
+### Execution Brief
+
+A short plan the agent must follow before editing code.
+
+```md
+# Execution Brief
+
+## Task
+...
+
+## Goal
+...
+
+## Context Budget
+- Max files to read: ...
+- Max files to touch: ...
+- Files to avoid: ...
+
+## Checks
+...
+
+## Evidence Required
+...
+
+## Stop Condition
+...
+```
+
+### Context Budget
+
+A hard boundary for agent behavior.
+
+```md
+# Context Budget
+
+- Max files to read: 5
+- Max files to touch: 3
+- Forbidden context:
+  - unrelated migrations
+  - auth provider internals
+- Scope boundary:
+  - implement reset-token validation only
+```
+
+### Evidence Ledger
+
+A record of what changed and what proves it.
+
+```md
+# Evidence Ledger
+
+## Files touched
+- src/auth/reset.ts
+- tests/auth/test_reset.ts
+
+## Commands run
+- pytest tests/auth/test_reset.py — pass
+
+## Verified claims
+- Expired reset tokens are rejected.
+
+## Unverified claims
+- None.
+
+## Scope violations
+- None.
+```
+
+---
+
+## Folder structure
+
+```text
+xskill/
+  question-requirements/
+    SKILL.md
+  delete-scope/
+    SKILL.md
+  optimize-path/
+    SKILL.md
+  shorten-iteration/
+    SKILL.md
+  automate-after-stable/
+    SKILL.md
+  semantic-memory/
+    SKILL.md
+  templates/
+    execution-brief.md
+    context-budget.md
+    evidence-ledger.md
+  examples/
+    password-reset.execution-brief.md
+    password-reset.evidence-ledger.md
+```
+
+---
 
 ## Design principles
 
-### 1. Keep the kernel small
+### Keep the always-on layer small
 
-The always-on instruction layer should be short.
+Do not paste the full system into every agent instruction file.
 
-Long methodology documents should not live permanently in context.
+`AGENTS.md` should route behavior.
 
-------
+Skills should contain the actual workflow.
 
-### 2. Load skills only when needed
+### Prefer boundaries over advice
 
-Each skill should be activated by task type, risk level, or workflow stage.
+Weak instruction:
 
-No skill should be active by default unless the task requires it.
-
-------
-
-### 3. Prefer state over memory
-
-The agent should not rely on conversation memory.
-
-Important information should be written to:
-
-- `tasks.json`
-- `progress.jsonl`
-- `decisions.jsonl`
-- `semantic_tree.json`
-
-------
-
-### 4. Optimize for verifiable progress
-
-A task is not complete because the agent says it is complete.
-
-It is complete only when there is evidence:
-
-- tests passed
-- typecheck passed
-- lint passed
-- review completed
-- acceptance criteria satisfied
-
-------
-
-### 5. Failure should create smaller work
-
-When an iteration fails, do not blindly retry the same task.
-
-Instead:
-
-```
-failure
-  ↓
-record cause
-  ↓
-create smaller follow-up task
-  ↓
-retry with narrower context
+```text
+Be careful not to change too much.
 ```
 
-------
+Xskill instruction:
+
+```text
+Max files to touch: 2.
+Files to avoid: src/oauth/**.
+Stop if auth provider refactor is required.
+```
+
+### Evidence over claims
+
+The agent should not claim completion without evidence.
+
+Tests, typechecks, lint results, screenshots, manual verification notes, or explicit acceptance checks count as evidence.
+
+### Failure should shrink scope
+
+A failed task should produce a smaller follow-up task instead of an unbounded retry.
+
+---
 
 ## Influences
 
-This project is inspired by mechanisms from several AI coding and agent workflow projects:
+Xskill is influenced by ideas from AI coding workflow projects such as GSD, Superpowers, Ralph, gstack, Karpathy-style coding principles, Graphify, and agent harness projects.
 
-- Karpathy-inspired coding skills
-- Superpowers
-- Get Shit Done
-- Ralph
-- gstack
-- Graphify
-- oh-my-openagent
+It does not copy their prompts or workflows.
 
-This project does not copy those projects.
+It extracts general execution mechanisms and compresses them into a smaller skill bundle.
 
-It extracts general workflow mechanisms and recompiles them into a smaller five-step skill system.
-
-------
-
-## Roadmap
-
-### MVP
-
--  Five core skills
--  Semantic memory skill
--  Local state structure
--  CLI initialization
--  Task queue
--  Step brief generation
--  Lightweight semantic index
-
-### Next
-
--  Better semantic tree generation
--  Git-aware progress tracking
--  Agent-specific adapters
--  Skill self-improvement loop
--  Verification command auto-selection
--  Parallel task grouping
--  HTML report output
-
-### Later
-
--  Claude Code adapter
--  Cursor adapter
--  Codex adapter
--  OpenCode adapter
--  Multi-agent execution mode
--  Graph visualization
-
-------
-
-## Philosophy
-
-Most agent systems try to become smarter by adding more process.
-
-This project tries to become smarter by deleting process.
-
-The default behavior is:
-
-```
-question first
-delete aggressively
-implement minimally
-verify honestly
-iterate quickly
-automate last
-```
-
-------
+---
 
 ## Disclaimer
 
-This project is inspired by the five-step engineering method popularized by Elon Musk.
+Xskill is inspired by the five-step engineering method popularized by Elon Musk.
 
-It is not affiliated with Elon Musk, Tesla, SpaceX, X, xAI, or any of the referenced open-source projects.
+It is not affiliated with Elon Musk, Tesla, SpaceX, X, xAI, or any referenced open-source project.
 
 All skill text and implementation in this repository are original unless otherwise stated.
 
-------
+---
 
 ## License
 

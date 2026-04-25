@@ -1,9 +1,13 @@
 # Changelog
 
-## 0.1.0
+## v0.1.0
 
-- Initial MVP skill pack.
-- Added `.musk` project initializer.
-- Added task queue commands.
-- Added lightweight semantic tree indexing.
-- Added step-specific prompt brief generation.
+Portable skill bundle release.
+
+- Removed CLI-first positioning.
+- Added root `AGENTS.md` template.
+- Added portable `xskill/` skill bundle.
+- Added five Xskill step skills.
+- Added `semantic-memory` support skill.
+- Added execution brief, context budget, and evidence ledger templates.
+- Added password reset example brief and evidence ledger.

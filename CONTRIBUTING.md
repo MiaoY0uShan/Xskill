@@ -1,18 +1,27 @@
 # Contributing
 
-Keep the project lean.
+Xskill should stay small.
 
-Before adding a feature, run the project against its own method:
+Before adding a new file or workflow, ask:
 
-1. Question the requirement.
-2. Delete scope.
-3. Optimize the path.
-4. Shorten the iteration.
-5. Automate only if stable.
+1. Does this reduce context?
+2. Does this make execution more bounded?
+3. Does this improve evidence quality?
+4. Can this be expressed as a smaller skill or template?
 
-Rules:
+## Contribution types
 
-- Do not add always-on prompt weight without a clear deletion elsewhere.
-- Do not add a new skill if an existing skill can be tightened.
-- Do not add automation before the manual workflow is documented.
-- Keep every skill short enough to be loaded on demand.
+Good contributions:
+
+- Shorter skill instructions.
+- Better trigger descriptions.
+- Better execution brief templates.
+- Better evidence ledger examples.
+- Real before/after examples.
+
+Avoid:
+
+- Large always-on prompts.
+- Full agent frameworks.
+- Complex installation flows.
+- Premature automation.
