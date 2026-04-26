@@ -1,67 +1,72 @@
-# Using Xskill
+# Example: Using Xskill
 
-Xskill is a portable skill bundle. It does not require a CLI.
+## Goal
 
-## Basic flow
+Use Xskill to compile a vague coding task into one bounded Execution Brief.
 
-```text
-Use Xskill question-requirements for:
-<task>
-```
-
-Then:
+## User prompt
 
 ```text
-Use Xskill delete-scope after question-requirements for:
-<task>
+Use Xskill to compile this task into an Execution Brief before editing code:
+Fix password reset bug.
 ```
 
-For larger work:
+## Expected agent behavior
+
+The agent should not edit code immediately.
+
+It should run the Xskill gates:
 
 ```text
-Use Xskill semantic-architecture after delete-scope for:
-<task>
+question-requirements
+→ delete-scope
+→ semantic-architecture if needed
+→ optimize-path
+→ shorten-iteration if needed
+→ compiled execution brief
 ```
 
-Then:
+## Final output
+
+The final output should be a short brief, not a long planning essay.
+
+It should include:
 
 ```text
-Use Xskill optimize-path after scope and architecture are clear for:
-<task>
+Task
+Real Goal
+MVP Scope
+Must Not Do
+Files To Read
+Files To Touch
+Files To Avoid
+Context Budget
+Selected Path
+TDD Micro-Loops
+Checks
+Evidence Required
+Stop Condition
 ```
 
-If the selected route is too large:
+## Execution
+
+After producing the brief, the agent may execute only within the brief.
+
+If the agent needs to exceed the brief, it must stop and create a new narrower brief.
+
+## After execution
+
+The agent should create an Evidence Ledger:
 
 ```text
-Use Xskill shorten-iteration to split the selected path into TDD micro-loops.
+files touched
+commands run
+verified claims
+unverified claims
+scope violations
+remaining risk
 ```
 
-After execution:
+If the run produced reusable evidence, the agent may create an Adaptive Improvement Report or Schema Memory Card.
 
-```text
-Use Xskill evidence-ledger to record the run.
-```
-
-If the run produced reusable evidence:
-
-```text
-Use Xskill adaptive-improvement to decide whether this should update schema memory, a checklist, a template, or become an automation candidate.
-```
-
-If a repeated pattern emerges:
-
-```text
-Use Xskill schema-memory to create or update a schema memory card.
-```
-
-## Rule of thumb
-
-Do not run every skill for every task.
-
-Use Xskill when the task is vague, risky, multi-module, likely to drift, or important enough to verify.
-
-## Self-improvement rule
-
-Xskill learns from evidence, not confidence.
-
-Do not promote a lesson unless it reduces context, narrows scope, improves verification, prevents repeated failure, or stabilizes a repeated workflow.
+Do not update skills from one run.

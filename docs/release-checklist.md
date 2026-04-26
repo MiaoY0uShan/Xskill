@@ -1,41 +1,33 @@
 # Release Checklist
 
-## v0.1.6 — Schema memory and adaptive improvement
+## v0.1.7 — Compiled Execution Brief
 
 Before release:
 
-- [ ] Confirm no CLI, npm, npx, pip, Python package, runtime, database, or automatic self-modifying engine is introduced.
-- [ ] Confirm `adaptive-improvement/SKILL.md` exists.
-- [ ] Confirm `schema-memory/SKILL.md` exists.
-- [ ] Confirm `evidence-ledger/SKILL.md` exists.
-- [ ] Confirm old `automate-after-stable`, `learn-after-run`, and `semantic-memory` directories are removed.
-- [ ] Confirm templates exist:
-  - `adaptive-improvement-report.md`
-  - `schema-memory-card.md`
-  - `automation-candidate.md`
-  - `evidence-ledger.md`
-- [ ] Confirm examples exist:
-  - `password-reset.adaptive-improvement.md`
-  - `validation-bug.schema-memory-card.md`
-  - `validation-bug.automation-candidate.md`
-- [ ] Confirm README and AGENTS.md describe the adaptive improvement loop.
+- [ ] README states that Xskill is a portable task compiler.
+- [ ] README states that the primary output is a compiled Execution Brief.
+- [ ] `AGENTS.md` routes agents toward producing a brief before editing code.
+- [ ] `xskill/optimize-path/SKILL.md` compiles upstream reports into the final brief.
+- [ ] `xskill/templates/compiled-execution-brief.md` exists.
+- [ ] `xskill/templates/execution-brief.md` includes real goal, MVP scope, module boundaries, context budget, files to read/touch/avoid, checks, evidence, and stop condition.
+- [ ] `xskill/examples/password-reset.compiled-execution-brief.json` exists.
+- [ ] Release bundle contains `README.md`, `AGENTS.md`, `LICENSE`, and `xskill/`.
+- [ ] No CLI, npm, npx, pip, runtime, database, or graph engine is introduced.
 
-Release title:
+Suggested release title:
 
 ```text
-v0.1.6 — Schema memory and adaptive improvement
+v0.1.7 — Compiled Execution Brief
 ```
 
-Release note:
+Suggested release note:
 
 ```text
-- Replaced semantic-memory with schema-memory
-- Merged automate-after-stable and learn-after-run into adaptive-improvement
-- Added evidence-ledger skill
-- Added schema memory cards
-- Added adaptive improvement reports
-- Added automation candidate template
-- Added evidence-based promotion rules
-- Clarified that Xskill learns from evidence, not confidence
-- Kept Xskill portable: no CLI, runtime, database, npm, npx, pip, or automatic self-modifying engine
+- Clarified Xskill as a portable task compiler, not a prompt pack
+- Made the compiled Execution Brief the primary output
+- Upgraded optimize-path to compile upstream Xskill outputs into the final brief
+- Added compiled-execution-brief template
+- Added password-reset compiled execution brief JSON example
+- Updated README, AGENTS.md, xskill README, design docs, examples, and validation
+- Kept Xskill portable: no CLI, runtime, npm, npx, pip, database, graph engine, or automatic executor
 ```

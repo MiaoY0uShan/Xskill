@@ -27,6 +27,7 @@ jobs:
           test -f xskill/templates/optimize-path-report.md
           test -f xskill/templates/shorten-iteration-report.md
           test -f xskill/templates/execution-brief.md
+          test -f xskill/templates/compiled-execution-brief.md
           test -f xskill/templates/context-budget.md
           test -f xskill/templates/evidence-ledger.md
           test -f xskill/templates/adaptive-improvement-report.md
@@ -37,6 +38,8 @@ jobs:
           test -f xskill/examples/xskill.semantic-architecture.md
           test -f xskill/examples/password-reset.optimize-path.md
           test -f xskill/examples/password-reset.shorten-iteration.md
+          test -f xskill/examples/password-reset.execution-brief.md
+          test -f xskill/examples/password-reset.compiled-execution-brief.json
           test -f xskill/examples/password-reset.evidence-ledger.md
           test -f xskill/examples/password-reset.adaptive-improvement.md
           test -f xskill/examples/validation-bug.schema-memory-card.md
@@ -57,3 +60,8 @@ jobs:
             grep -q '^name:' "$f"
             grep -q '^description:' "$f"
           done
+      - name: Check compiler language
+        run: |
+          grep -q 'portable task compiler' README.md
+          grep -q 'compiled Execution Brief' README.md
+          grep -q 'Compiled Execution Brief' xskill/optimize-path/SKILL.md

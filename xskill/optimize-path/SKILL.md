@@ -1,21 +1,46 @@
 ---
 name: xskill-optimize-path
-description: Use after MVP scope is defined to choose the smallest stable implementation path, small-batch slice, verification strategy, and minimal safety buffer before coding.
+description: Use after MVP scope and module boundaries are defined to choose the smallest stable path and compile upstream Xskill outputs into the final Execution Brief.
 ---
 
 # Xskill: Optimize Path
 
 Choose the smallest stable path that can produce verified progress.
 
-This skill converts the MVP nucleus and semantic architecture into an execution path. It does not write code. It does not expand the MVP. It selects the route that should be implemented next.
+Then compile the selected route into the final **Execution Brief**.
+
+This skill does not write code. It does not expand the MVP. It converts upstream Xskill reports into a short execution contract that a coding agent can follow.
+
+---
+
+## Primary output
+
+The primary output of this skill is not a long plan.
+
+The primary output is a compiled Execution Brief:
+
+```text
+question-requirements output
++ delete-scope output
++ semantic-architecture output
++ optimize-path selected route
++ shorten-iteration TDD loops, if needed
+= compiled Execution Brief
+```
+
+The brief is the contract for execution.
+
+---
 
 ## Use when
+
+Use this skill when:
 
 - `question-requirements` has identified the real goal.
 - `delete-scope` has defined the MVP nucleus and scope boundary.
 - `semantic-architecture` has defined module boundaries for larger tasks, if needed.
-- The agent is ready to choose a coding path, checks, and evidence requirements.
-- The task needs a bounded route before implementation.
+- The agent is ready to choose a bounded coding path.
+- The final deliverable should be an Execution Brief.
 
 Do not use this skill to redesign the product goal or expand the MVP.
 
@@ -25,7 +50,14 @@ Do not use this skill to redesign the product goal or expand the MVP.
 
 > Choose the smallest stable path that can produce verified progress.
 
-The best path is not the biggest plan. It is the path with the smallest useful batch, clear verification, low waste, acceptable risk, and a safe stop condition.
+A good path is:
+
+- small enough to execute safely
+- stable enough to avoid avoidable failure
+- easy to verify
+- reversible where possible
+- free of unnecessary scope
+- clear enough to compile into a brief
 
 ---
 
@@ -59,7 +91,7 @@ Prefer a working increment over a comprehensive plan.
 For Xskill, this means:
 
 - The selected path should produce something observable.
-- Progress should be measured by working behavior or verified artifact, not by explanation length.
+- Progress should be measured by working behavior or verified artifact, not explanation length.
 - The path should allow early feedback.
 
 Ask:
@@ -124,13 +156,14 @@ How can we make this reversible without overbuilding?
 
 ## Procedure
 
-### 1. Read the upstream reports
+### 1. Read upstream reports
 
 Use the latest available outputs from:
 
 - Question Requirements Report
 - Delete Scope Report
 - Semantic Architecture Report, if the task is multi-module
+- Shorten Iteration Report, if TDD micro-loops were already produced
 
 If the MVP nucleus is missing, stop and ask to run `delete-scope` first.
 
@@ -141,11 +174,12 @@ Generate 2-4 candidate paths.
 Each path should have:
 
 - scope
-- touched modules
+- modules/files likely involved
 - expected evidence
 - risk
 - reversibility
 - waste risk
+- context cost
 
 Do not generate paths that violate explicit non-goals.
 
@@ -163,9 +197,9 @@ Compare paths using:
 
 Prefer paths that are smaller, more reversible, and easier to verify.
 
-### 4. Select one path
+### 4. Select exactly one path
 
-Choose exactly one selected path.
+Choose one selected path.
 
 If no path is safe, return `Decision: ask_user` or recommend `shorten-iteration`.
 
@@ -180,34 +214,7 @@ It should include:
 - what is explicitly excluded
 - how feedback will be collected
 
-### 6. Define the working increment
-
-Describe what will exist after the slice is complete.
-
-It must be observable through:
-
-- a test
-- a check
-- a generated artifact
-- a manual review
-- a reproducible command
-
-### 7. Remove lean waste
-
-List what was removed from the path because it does not help the current verification target.
-
-### 8. Define the minimal safety buffer
-
-Define only the required safety measures.
-
-Examples:
-
-- rollback note
-- stop condition
-- compatibility check
-- one fallback verification
-
-### 9. Define verification strategy
+### 6. Define verification strategy
 
 Choose one:
 
@@ -235,9 +242,18 @@ Do not force TDD for:
 - exploratory spikes
 - simple UI text changes
 
-### 10. Define refactor boundary
+### 7. Define context budget
 
-Specify whether refactoring is allowed.
+Set explicit limits:
+
+- max files to read
+- max files to touch
+- files to read first
+- files to avoid
+- forbidden context
+- max notes or summary size
+
+### 8. Define refactor boundary
 
 Use:
 
@@ -246,19 +262,38 @@ Use:
 - `supporting`: allowed only to make the selected path testable
 - `defer`: refactor should become a separate task
 
-### 11. Recommend next skill
+### 9. Decide whether `shorten-iteration` is needed
 
-Use:
+Use `shorten-iteration` if:
 
-- `shorten-iteration` if the selected path is still too large or needs multiple TDD loops
-- `evidence-ledger` after execution
-- `learn-after-run` after evidence is collected
+- the selected path includes more than one behavior
+- the path touches multiple risk areas
+- TDD is required and there are multiple cases
+- the task has already failed once
+- the path is still too large for one safe pass
+
+If `shorten-iteration` is needed, ask for TDD micro-loops before producing the final compiled brief.
+
+### 10. Compile the Execution Brief
+
+Create one short final brief that integrates:
+
+- real goal from `question-requirements`
+- MVP scope from `delete-scope`
+- module boundaries from `semantic-architecture`
+- selected route from `optimize-path`
+- TDD micro-loops from `shorten-iteration`, if used
+- evidence requirements and stop condition
+
+The final brief must be executable by an agent without rereading all previous reports.
 
 ---
 
 ## Output contract
 
-Return this structure:
+Return two sections.
+
+First, the path reasoning:
 
 ```md
 # Optimize Path Report
@@ -268,6 +303,7 @@ Return this structure:
 - MVP nucleus:
 - Scope boundary:
 - Semantic architecture used: yes / no
+- Shorten iteration used: yes / no
 
 ## Candidate Paths
 
@@ -279,6 +315,7 @@ Return this structure:
 - Risk:
 - Reversibility:
 - Waste risk:
+- Context cost:
 
 ### Path B
 - Summary:
@@ -288,13 +325,14 @@ Return this structure:
 - Risk:
 - Reversibility:
 - Waste risk:
+- Context cost:
 
 ## Path Evaluation
 
-| Path | Batch size | Stability | Verification clarity | Waste removed | Reversibility | Coupling risk | Decision |
-|---|---|---|---|---|---|---|---|
-| A | small/medium/large | low/medium/high | low/medium/high | low/medium/high | low/medium/high | low/medium/high | keep/reject |
-| B | small/medium/large | low/medium/high | low/medium/high | low/medium/high | low/medium/high | low/medium/high | keep/reject |
+| Path | Batch size | Stability | Verification clarity | Waste removed | Reversibility | Coupling risk | Context cost | Decision |
+|---|---|---|---|---|---|---|---|---|
+| A | small/medium/large | low/medium/high | low/medium/high | low/medium/high | low/medium/high | low/medium/high | low/medium/high | keep/reject |
+| B | small/medium/large | low/medium/high | low/medium/high | low/medium/high | low/medium/high | low/medium/high | low/medium/high | keep/reject |
 
 ## Selected Path
 
@@ -308,31 +346,56 @@ Return this structure:
 
 ## Verification Strategy
 
-## Context Budget
-- Max files to read:
-- Max files to touch:
-- Files to avoid:
-- Forbidden context:
-
-## Implementation Path
-1.
-2.
-3.
-
 ## Refactor Boundary
 none / local / supporting / defer
 
+## Decision
+continue | reduce_scope | ask_user | stop
+```
+
+Second, the compiled Execution Brief:
+
+```md
+# Compiled Execution Brief
+
+## Task
+
+## Real Goal
+
+## MVP Scope
+
+## Must Not Do
+
+## Module Boundaries
+
+## Files To Read
+
+## Files To Touch
+
+## Files To Avoid
+
+## Context Budget
+- Max files to read:
+- Max files to touch:
+- Max notes:
+
+## Selected Path
+
+## TDD Micro-Loops
+
+## Checks
+
 ## Evidence Required
--
+
+## Max Scope
 
 ## Stop Condition
 
-## Decision
-continue | reduce_scope | ask_user | stop
-
-## Recommended Next Skill
-shorten-iteration | evidence-ledger | learn-after-run
+## Handoff
+Execute this brief. After execution, produce an Evidence Ledger.
 ```
+
+Also include a machine-readable JSON block when useful.
 
 ---
 
@@ -344,4 +407,6 @@ shorten-iteration | evidence-ledger | learn-after-run
 - Do not choose the fastest path if it is not reversible or testable.
 - Do not add just-in-case systems. Add only minimal safety buffers.
 - Prefer small-batch, working, low-waste increments.
-- If the path is still too large, send it to `shorten-iteration`.
+- The final Execution Brief must be short enough to execute without reloading the full reasoning chain.
+- If the path is still too large, send it to `shorten-iteration` before final compilation.
+- After execution, use `evidence-ledger`, then `adaptive-improvement` only if evidence shows a reusable pattern.

@@ -2,42 +2,35 @@
 
 Xskill does not require npm, npx, pip, Python, or a command-line tool.
 
-## Install
+## Install globally
 
-1. Download the latest release zip.
+1. Download the latest `xskill-v*.zip` from GitHub Releases.
 2. Unzip it.
-3. Copy the `xskill/` folder into your agent skills directory.
-
-Recommended global location:
+3. Copy `xskill/` to:
 
 ```text
 ~/.agents/skills/xskill
 ```
 
-Recommended project-local location:
+4. Restart your coding agent.
+
+## Install inside one project
+
+Copy `xskill/` to:
 
 ```text
 your-project/.agents/skills/xskill
 ```
 
-Optional: copy `AGENTS.md` into your project root.
+Optionally copy `AGENTS.md` into the project root.
 
-## Validate
+## First use
 
-Your final folder should include:
+Ask your agent:
 
 ```text
-xskill/
-  question-requirements/SKILL.md
-  delete-scope/SKILL.md
-  semantic-architecture/SKILL.md
-  optimize-path/SKILL.md
-  shorten-iteration/SKILL.md
-  evidence-ledger/SKILL.md
-  adaptive-improvement/SKILL.md
-  schema-memory/SKILL.md
-  templates/
-  examples/
+Use Xskill to compile this task into an Execution Brief before editing code:
+<task>
 ```
 
-Restart your coding agent after copying.
+The final output should be a compiled Execution Brief, not a long prompt.

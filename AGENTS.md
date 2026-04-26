@@ -2,53 +2,54 @@
 
 This repository uses Xskill.
 
-Xskill is a portable skill bundle for context-budgeted AI coding.
-
-Default rule:
-
-> Less context. Smaller changes. Verified progress.
+Xskill is a portable task compiler for AI coding agents. Its primary output is a compiled Execution Brief, not a long prompt.
 
 Before non-trivial coding tasks:
 
-1. Run `question-requirements` when the request is vague, large, or risky. Use Five Whys and inversion to identify the real goal and likely failure paths.
-2. Run `delete-scope` after requirements are clarified. Use first-principles reasoning and Occam's Razor to cut the request down to the smallest verifiable MVP.
-3. For project, system, feature, refactor, workflow, or multi-module tasks, run `semantic-architecture` after `delete-scope` to define module boundaries and decoupling rules from the MVP.
-4. Run `optimize-path` to select the smallest stable route using small-batch, agile, lean waste-removal, and minimal safety-buffer filters.
-5. If the selected path is too large or has failed, run `shorten-iteration` to split it into TDD micro-loops.
-6. Create or load an Xskill execution brief.
-7. Respect the context budget.
-8. Do not read or modify files outside the declared scope unless necessary.
-9. Run the required checks.
-10. Record an `evidence-ledger` before claiming completion.
-11. If blocked, split the task into a smaller follow-up task instead of retrying blindly.
-12. After a non-trivial run, use `adaptive-improvement` only if there is evidence.
-13. Use `schema-memory` to store reusable patterns, not raw context.
+1. Use `question-requirements` to identify the real goal, Five Whys, failure paths, assumptions, success criteria, and non-goals.
+2. Use `delete-scope` to reduce the request to the smallest necessary MVP using first-principles reasoning and Occam's Razor.
+3. Use `semantic-architecture` only when the task spans multiple modules or needs MVP-based module boundaries.
+4. Use `optimize-path` to select the smallest stable implementation route and compile the final Execution Brief.
+5. Use `shorten-iteration` if the selected route is too large or needs multiple TDD micro-loops.
+6. Execute only the compiled Execution Brief.
+7. Use `evidence-ledger` after execution.
+8. Use `adaptive-improvement` and `schema-memory` only when evidence shows a reusable pattern.
 
-Available Xskill steps:
+Core rule:
 
-- `question-requirements`: use Five Whys and inversion to question the request, reveal the real goal, define success criteria, and decide continue/reduce/ask/stop.
-- `delete-scope`: after requirements are clarified, use first principles and Occam's Razor to define the MVP nucleus, delete/defer non-essential entities, and prepare module candidates.
-- `semantic-architecture`: after scope is deleted, sketch the MVP module map, coupling risks, dependency direction, and decoupling rules for larger tasks.
-- `optimize-path`: choose the smallest stable implementation path using small-batch quick response, agile working increments, lean waste removal, and a minimal safety buffer.
-- `shorten-iteration`: split large or failed selected paths into TDD micro-loops with RED/GREEN/REFACTOR/EVIDENCE and evidence handoff.
-- `evidence-ledger`: record files touched, checks run, verified claims, unverified claims, remaining risk, and scope violations.
-- `adaptive-improvement`: turn evidence into feedback, schema updates, checklist improvements, or automation candidates. Do not auto-modify skills.
-- `schema-memory`: store reusable task patterns, failure modes, context budget patterns, verification patterns, and stop conditions.
+> Xskill compiles vague tasks into bounded, verifiable Execution Briefs.
 
-Adaptive improvement rules:
+The Execution Brief is the contract. Respect:
 
-- Xskill learns from evidence, not confidence.
-- Do not promote a lesson after one run unless it clearly reduces context, narrows scope, improves verification, or prevents a repeated failure.
-- Do not automate confusion.
-- Automation is only a candidate after repeated, stable manual behavior.
-- Prefer schema memory over raw memory.
-- Prefer small checklist changes over new skills.
+- real goal
+- MVP scope
+- must-not-do list
+- files to read
+- files to touch
+- files to avoid
+- context budget
+- checks
+- TDD micro-loops
+- stop condition
+- evidence required
 
-When work is complete, record:
+Do not:
 
-- files touched
-- checks run
-- verified claims
-- unverified claims
-- scope violations
-- remaining risk
+- expand the MVP
+- read broad context by default
+- touch unrelated files
+- refactor outside the declared boundary
+- claim completion without evidence
+- turn one run into a permanent rule
+- automate before the process is stable
+
+If blocked:
+
+1. Stop.
+2. Record the blocker.
+3. Split the task smaller.
+4. Produce a narrower Execution Brief.
+
+If there is no evidence, the task is not done.
+
+Xskill learns from evidence, not confidence.

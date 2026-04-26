@@ -1,20 +1,38 @@
-# Execution Brief
+# Compiled Execution Brief
 
 ## Task
 
-Fix password reset bug.
+Add password reset flow.
 
-## Goal
+## Real Goal
 
-Fix reset token expiry validation without touching OAuth or billing behavior.
+Allow users to reset passwords safely without refactoring auth provider internals.
 
-## Context Budget
+## MVP Scope
 
-- Max files to read: 4
-- Max files to touch: 2
-- Max skill/context notes: 500 words
+Reset token generation, expiry validation, and consumed-token prevention only.
 
-## Files To Read First
+## Must Not Do
+
+- Do not rewrite the auth provider.
+- Do not touch OAuth login.
+- Do not build admin password reset.
+- Do not add a full email delivery abstraction.
+
+## Module Boundaries
+
+| Module | Responsibility | Must Not Own |
+|---|---|---|
+| reset-token | Generate, validate, expire, and consume reset tokens | OAuth provider behavior |
+| password-reset-endpoint | Expose the minimum API surface for reset requests | Email provider orchestration |
+
+## Files To Read
+
+- src/auth/reset.ts
+- src/auth/token.ts
+- tests/auth/test_reset.ts
+
+## Files To Touch
 
 - src/auth/reset.ts
 - tests/auth/test_reset.ts
@@ -25,16 +43,34 @@ Fix reset token expiry validation without touching OAuth or billing behavior.
 - src/billing/**
 - src/auth/provider/**
 
-## Implementation Path
+## Context Budget
 
-1. Reproduce the bug with a focused failing test for expired reset tokens.
-2. Implement the smallest validation fix in the reset token path.
-3. Run the targeted auth reset tests.
-4. Record evidence before claiming completion.
+- Max files to read: 4
+- Max files to touch: 2
+- Max notes: 500 words
+- Forbidden context: OAuth login internals, billing flows, admin reset workflows
 
-## Test Strategy
+## Selected Path
 
-TDD required
+1. Write a focused failing test for expired reset tokens.
+2. Implement minimal expiry validation in the reset-token path.
+3. Add a focused regression test for consumed tokens.
+4. Run targeted reset-token tests.
+5. Record evidence before claiming completion.
+
+## TDD Micro-Loops
+
+### Loop 1
+- RED: Expired reset token is rejected.
+- GREEN: Implement minimal expiry validation.
+- REFACTOR boundary: local only inside reset-token module.
+- EVIDENCE: focused expiry test passes.
+
+### Loop 2
+- RED: Used reset token cannot be reused.
+- GREEN: Mark token as consumed after successful reset.
+- REFACTOR boundary: local only inside reset-token module.
+- EVIDENCE: reuse regression test passes.
 
 ## Checks
 
@@ -44,14 +80,16 @@ TDD required
 
 - Failing test before fix
 - Passing test after fix
-- No unrelated files modified
+- No unrelated files touched
 
-## Review Lenses
+## Max Scope
 
-- Logic
-- Security
-- Backward compatibility
+One validation module and one focused test file.
 
 ## Stop Condition
 
-Stop if the fix requires refactoring the auth provider internals.
+Stop if implementation requires auth provider refactor.
+
+## Handoff
+
+Execute only this brief. After execution, produce an Evidence Ledger.

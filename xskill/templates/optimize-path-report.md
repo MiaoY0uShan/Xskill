@@ -5,6 +5,7 @@
 - MVP nucleus:
 - Scope boundary:
 - Semantic architecture used: yes / no
+- Shorten iteration used: yes / no
 
 ## Candidate Paths
 
@@ -16,6 +17,7 @@
 - Risk:
 - Reversibility:
 - Waste risk:
+- Context cost:
 
 ### Path B
 - Summary:
@@ -25,13 +27,14 @@
 - Risk:
 - Reversibility:
 - Waste risk:
+- Context cost:
 
 ## Path Evaluation
 
-| Path | Batch size | Stability | Verification clarity | Waste removed | Reversibility | Coupling risk | Decision |
-|---|---|---|---|---|---|---|---|
-| A |  |  |  |  |  |  |  |
-| B |  |  |  |  |  |  |  |
+| Path | Batch size | Stability | Verification clarity | Waste removed | Reversibility | Coupling risk | Context cost | Decision |
+|---|---|---|---|---|---|---|---|---|
+| A |  |  |  |  |  |  |  |  |
+| B |  |  |  |  |  |  |  |  |
 
 ## Selected Path
 
@@ -45,27 +48,12 @@
 
 ## Verification Strategy
 
-## Context Budget
-- Max files to read:
-- Max files to touch:
-- Files to avoid:
-- Forbidden context:
-
-## Implementation Path
-1.
-2.
-3.
-
 ## Refactor Boundary
 none / local / supporting / defer
 
-## Evidence Required
--
+## Compiled Execution Brief
 
-## Stop Condition
+Use `xskill/templates/compiled-execution-brief.md`.
 
 ## Decision
 continue | reduce_scope | ask_user | stop
-
-## Recommended Next Skill
-shorten-iteration | evidence-ledger | learn-after-run

@@ -1,20 +1,34 @@
 # Execution Brief
 
+Use this as the final contract before code editing.
+
 ## Task
 
 ...
 
-## Goal
+## Real Goal
 
 ...
 
-## Context Budget
+## MVP Scope
 
-- Max files to read: ...
-- Max files to touch: ...
-- Max skill/context notes: ...
+...
 
-## Files To Read First
+## Must Not Do
+
+- ...
+
+## Module Boundaries
+
+| Module | Responsibility | Must Not Own |
+|---|---|---|
+| ... | ... | ... |
+
+## Files To Read
+
+- ...
+
+## Files To Touch
 
 - ...
 
@@ -22,15 +36,26 @@
 
 - ...
 
-## Implementation Path
+## Context Budget
+
+- Max files to read: ...
+- Max files to touch: ...
+- Max notes: ...
+- Forbidden context: ...
+
+## Selected Path
 
 1. ...
 2. ...
 3. ...
 
-## Test Strategy
+## TDD Micro-Loops
 
-None | Smoke | Unit | Integration | E2E | TDD required
+### Loop 1
+- RED:
+- GREEN:
+- REFACTOR boundary:
+- EVIDENCE:
 
 ## Checks
 
@@ -40,14 +65,14 @@ None | Smoke | Unit | Integration | E2E | TDD required
 
 - ...
 
-## Review Lenses
+## Max Scope
 
-- Logic
-- Security
-- Performance
-- UX
-- Backward compatibility
+...
 
 ## Stop Condition
 
 ...
+
+## Handoff
+
+Execute only this brief. After execution, produce an Evidence Ledger.

@@ -2,102 +2,89 @@
 
 This folder is the portable Xskill skill bundle.
 
-Copy this `xskill/` folder into your agent skills directory.
+Xskill is a task compiler for AI coding agents. Its primary output is a compiled **Execution Brief**.
 
-Recommended locations:
-
-```text
-~/.agents/skills/xskill
-```
-
-or project-local:
+The brief tells the agent:
 
 ```text
-your-project/.agents/skills/xskill
+what to do
+why it matters
+what not to do
+which files to read
+which files to touch
+which files to avoid
+how to verify
+when to stop
+what evidence is required
 ```
 
 ## Skills
 
-- `question-requirements`: run Five Whys and inversion before coding to reveal the real goal, failure paths, success criteria, and a continue/reduce/ask/stop decision.
-- `delete-scope`: after requirements are clarified, use first-principles reasoning and Occam's Razor to cut the request down to the smallest verifiable MVP.
-- `semantic-architecture`: after scope is deleted, sketch the MVP module map, coupling risks, and decoupling rules for larger tasks.
-- `optimize-path`: select the smallest stable route using small-batch, agile, lean, and minimal safety-buffer filters, then create an execution brief.
-- `shorten-iteration`: split large or failed selected paths into TDD micro-loops.
-- `evidence-ledger`: record what actually happened, what was verified, what remains unverified, and whether scope was violated.
-- `adaptive-improvement`: turn post-run evidence into feedback, schema updates, checklist improvements, or automation candidates.
-- `schema-memory`: store reusable task patterns, failure modes, context budget patterns, verification patterns, and stop conditions.
+```text
+question-requirements/     find the real goal, Five Whys, failure paths
+delete-scope/              reduce to MVP using first principles and Occam's Razor
+semantic-architecture/     sketch MVP module boundaries and coupling risks
+optimize-path/             select the smallest stable route and compile the brief
+shorten-iteration/         split large or failed routes into TDD micro-loops
+evidence-ledger/           record proof after execution
+adaptive-improvement/      improve only from evidence-backed patterns
+schema-memory/             store reusable work schemas, not raw context
+```
 
-## Templates
+## Main workflow
 
-- `templates/question-requirements-report.md`
-- `templates/delete-scope-report.md`
-- `templates/semantic-architecture-report.md`
-- `templates/optimize-path-report.md`
-- `templates/shorten-iteration-report.md`
-- `templates/execution-brief.md`
-- `templates/context-budget.md`
-- `templates/evidence-ledger.md`
-- `templates/adaptive-improvement-report.md`
-- `templates/schema-memory-card.md`
-- `templates/automation-candidate.md`
+```text
+user task
+  ↓
+question-requirements
+  ↓
+delete-scope
+  ↓
+semantic-architecture, when needed
+  ↓
+optimize-path
+  ↓
+shorten-iteration, when needed
+  ↓
+compiled execution brief
+  ↓
+agent execution
+  ↓
+evidence-ledger
+  ↓
+adaptive-improvement
+  ↓
+schema-memory
+```
 
-## Use
+## Primary templates
+
+```text
+templates/compiled-execution-brief.md
+templates/execution-brief.md
+templates/context-budget.md
+templates/evidence-ledger.md
+templates/adaptive-improvement-report.md
+templates/schema-memory-card.md
+```
+
+## Recommended use
 
 Ask your agent:
 
 ```text
-Use Xskill question-requirements for:
+Use Xskill to compile this task into an Execution Brief before editing code:
 <task>
 ```
 
-Then cut scope:
+The agent should produce one final brief before touching code.
+
+If the task is large, ask:
 
 ```text
-Use Xskill delete-scope after question-requirements for:
-<task>
+Use Xskill end to end: question, delete, architecture if needed, optimize, shorten if needed, then produce one compiled Execution Brief.
 ```
 
-For a project, system, feature, refactor, workflow, or multi-module MVP, ask:
+## Rule
 
-```text
-Use Xskill semantic-architecture after delete-scope for:
-<task>
-```
-
-Then ask:
-
-```text
-Use Xskill optimize-path after scope and architecture are clear for:
-<task>
-```
-
-If the selected path is still too large or a previous attempt failed, ask:
-
-```text
-Use Xskill shorten-iteration to split the selected path into TDD micro-loops:
-<task>
-```
-
-After execution, ask:
-
-```text
-Use Xskill evidence-ledger to record what changed and what was verified.
-```
-
-After a non-trivial run with evidence, ask:
-
-```text
-Use Xskill adaptive-improvement to extract reusable improvement from the evidence ledger.
-```
-
-If a repeated task pattern emerges, ask:
-
-```text
-Use Xskill schema-memory to create or update a schema memory card.
-```
-
-## Adaptive improvement
-
-Xskill learns from evidence, not confidence.
-
-Do not promote a lesson into a schema, checklist, template, or automation candidate unless it reduces context, narrows scope, improves verification, prevents a repeated failure, or stabilizes a repeated workflow.
+Do not use Xskill to create long planning documents. Use it to create the shortest safe execution contract.

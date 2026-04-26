@@ -1,108 +1,122 @@
 # Xskill Design
 
-Xskill is a portable skill bundle for context-budgeted AI coding.
+Xskill is a portable task compiler for AI coding agents.
 
-It is intentionally not a CLI, package manager workflow, autonomous runtime, database, or multi-agent system.
+It is not a CLI, runtime, database, graph engine, or autonomous agent. It is a folder of `SKILL.md` files and templates that help an agent compile a vague request into a bounded, verifiable Execution Brief.
 
-## Core thesis
+## Design goal
 
-AI coding agents usually fail by expanding context, expanding scope, and claiming completion without evidence.
+```text
+vague task
+  ↓
+reasoning gates
+  ↓
+one short execution contract
+```
 
-Xskill counters this with:
-
-- requirement challenge
-- first-principles scope deletion
-- MVP semantic architecture
-- small-batch implementation path
-- TDD micro-loops
-- evidence ledger
-- adaptive improvement
-- schema memory
+The Execution Brief is the primary output.
 
 ## Workflow
 
 ```text
 question-requirements
 → delete-scope
-→ semantic-architecture
+→ semantic-architecture, when needed
 → optimize-path
-→ shorten-iteration
+→ shorten-iteration, when needed
+→ compiled execution brief
+→ agent execution
 → evidence-ledger
 → adaptive-improvement
 → schema-memory
 ```
 
-Small tasks do not need the full chain.
-
 ## Skill boundaries
 
 ### question-requirements
 
-Find the real goal with Five Whys and inversion. Do not plan implementation.
+Find the real goal before planning. Uses Five Whys and inversion. Produces real goal, assumptions, risks, failure paths, success criteria, and non-goals.
 
 ### delete-scope
 
-Use first principles and Occam's Razor to reduce the real goal to an MVP nucleus. Do not design the full system.
+Use first-principles reasoning and Occam's Razor to reduce the real goal into the smallest necessary MVP. Produces MVP nucleus, entity inventory, scope boundary, minimum evidence, and module candidates.
 
 ### semantic-architecture
 
-Sketch module boundaries from the MVP. Do not expand scope or build a graph database.
+Used only when the MVP spans multiple modules. Produces module boundaries, relationships, coupling risks, decoupling rules, and MVP-first build order.
 
 ### optimize-path
 
-Select the smallest stable implementation path using small-batch, agile, lean, and minimal safety-buffer filters. Do not slice every task.
+Select the smallest stable route using small-batch quick response, agile increments, lean waste removal, and minimal safety buffers. Then compile upstream outputs into the final Execution Brief.
 
 ### shorten-iteration
 
-Split large or failed selected paths into TDD micro-loops. Do not redefine product goals.
+If the route is too large or has failed, split it into TDD micro-loops: RED → GREEN → REFACTOR → EVIDENCE.
 
 ### evidence-ledger
 
-Record what happened. It is the source of truth for completion and later learning.
+After execution, record proof. No evidence means the task is not complete.
 
 ### adaptive-improvement
 
-Turn evidence into feedback, schema updates, checklist improvements, or automation candidates. Do not modify skills automatically.
+Promote learning only when evidence shows a reusable pattern. Do not self-improve from confidence.
 
 ### schema-memory
 
-Store reusable task patterns, not raw context. Schema memory should make future work smaller, safer, and easier to verify.
+Store reusable work schemas: triggers, failure modes, context budget patterns, verification patterns, stop conditions. Do not store raw conversation memory.
 
-## Adaptive improvement loop
+## Core artifacts
+
+### Compiled Execution Brief
+
+The execution contract.
+
+It contains:
 
 ```text
-evidence ledger
-→ adaptive improvement report
-→ schema memory card
-→ future execution brief
+task
+real goal
+MVP scope
+must-not-do list
+module boundaries
+files to read
+files to touch
+files to avoid
+context budget
+selected path
+TDD micro-loops
+checks
+evidence required
+stop condition
 ```
 
-Promotion requires evidence.
+### Context Budget
 
-Rules:
+Prevents context bloat and unrelated changes.
 
-1. No evidence, no learning.
-2. One run is usually not enough to promote a rule.
-3. Repetition before automation.
-4. Stability before automation.
-5. Prefer schema memory over raw memory.
-6. Prefer small checklist improvements over new skills.
-7. Do not add process unless it reduces context, narrows scope, improves verification, or prevents repeated failure.
+### Evidence Ledger
 
-## Memory model
+Makes completion auditable.
 
-Xskill uses schema memory instead of semantic memory.
+### Schema Memory
 
-Semantic memory stores facts and context.
+Turns repeated evidence into reusable patterns.
 
-Schema memory stores reusable patterns:
+## Non-goals
 
-- task trigger
-- common failure modes
-- recommended path
-- context budget pattern
-- verification pattern
-- files or modules usually avoided
-- stop conditions
+Xskill should not become:
 
-This keeps Xskill aligned with its main goal: less context, smaller changes, verified progress.
+```text
+CLI
+npm package
+Python package
+runtime
+database
+automatic graph system
+auto-coding loop
+auto self-modifying system
+```
+
+## Core principle
+
+Xskill deletes process until only the executable contract remains.
