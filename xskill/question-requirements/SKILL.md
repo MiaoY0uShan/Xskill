@@ -7,7 +7,7 @@ description: Use before coding when a task is vague, risky, large, product-facin
 
 Question requirements before execution.
 
-This skill is the first gate in the Xskill loop. Its job is to stop the agent from confidently building the wrong thing.
+This skill stops the agent from confidently building the wrong thing.
 
 ## Use when
 

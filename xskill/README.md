@@ -25,6 +25,12 @@ your-project/.agents/skills/xskill
 - `automate-after-stable`: automate only repeated stable workflows.
 - `semantic-memory`: select relevant context and files to avoid.
 
+## Templates
+
+- `templates/execution-brief.md`
+- `templates/context-budget.md`
+- `templates/evidence-ledger.md`
+
 ## Use
 
 Ask your agent:

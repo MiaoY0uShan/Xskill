@@ -1,4 +1,4 @@
-name: Validate bundle
+name: Validate portable bundle
 
 on:
   push:
@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check required skill files
+      - name: Check required files
         run: |
+          test -f README.md
           test -f AGENTS.md
           test -f xskill/question-requirements/SKILL.md
           test -f xskill/delete-scope/SKILL.md
@@ -21,3 +22,15 @@ jobs:
           test -f xskill/templates/execution-brief.md
           test -f xskill/templates/context-budget.md
           test -f xskill/templates/evidence-ledger.md
+      - name: Check portable scope
+        run: |
+          test ! -f pyproject.toml
+          test ! -d musk_skills
+          test ! -d tests
+      - name: Check skill front matter
+        run: |
+          for f in xskill/*/SKILL.md; do
+            grep -q '^---$' "$f"
+            grep -q '^name:' "$f"
+            grep -q '^description:' "$f"
+          done

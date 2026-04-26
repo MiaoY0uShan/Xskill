@@ -32,6 +32,24 @@ Produce an execution brief with context budget, implementation path, verificatio
 8. Define evidence required before completion.
 9. Define stop conditions.
 
+## TDD rule
+
+Use TDD when the task involves:
+
+- bug fixes
+- core logic
+- public APIs
+- security-sensitive behavior
+- data migration or validation
+
+Do not force TDD for:
+
+- documentation
+- copy changes
+- tiny config edits
+- exploratory spikes
+- simple UI text changes
+
 ## Output contract
 
 Return this structure:
@@ -83,20 +101,8 @@ None | Smoke | Unit | Integration | E2E | TDD required
 
 ## Rules
 
-- Prefer the smallest correct change.
-- High-risk logic, bug fixes, and public APIs should use test-first or reproduction-first workflow.
-- Do not refactor unrelated code.
-- Do not claim completion without evidence.
-- If checks are unavailable, state the manual verification plan.
-
-## Failure mode
-
-If no safe path exists, output:
-
-```md
-# Path Blocked
-
-Reason: ...
-Risk: ...
-Smallest investigation task: ...
-```
+- Do the smallest correct thing that can be verified.
+- Do not expand the task during implementation.
+- Do not modify files outside the budget unless the agent first explains why.
+- Prefer targeted checks over broad checks when possible.
+- Never claim completion without evidence.

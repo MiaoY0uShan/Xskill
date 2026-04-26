@@ -2,7 +2,7 @@
 
 **Context diet for AI coding agents.**
 
-Xskill is a portable skill bundle that turns vague coding tasks into small, bounded, verifiable execution briefs.
+Xskill is a portable skill bundle that helps coding agents read less context, touch fewer files, and prove what changed.
 
 Most agent workflows add more context.
 
@@ -48,9 +48,9 @@ Stop if the fix requires rewriting auth provider internals.
 
 ## What Xskill is
 
-Xskill is **not** a CLI, npm package, Python package, or full agent framework.
+Xskill is **not** a CLI, npm package, Python package, autonomous agent, or full runtime.
 
-It is a **portable skill bundle**:
+Xskill is a **portable skill bundle**:
 
 ```text
 Download zip.
@@ -59,9 +59,7 @@ Copy the xskill/ folder into your agent skills directory.
 Use it with your coding agent.
 ```
 
-Xskill works best with AI coding agents that can read `SKILL.md` files, project-level instructions, or an `AGENTS.md` file.
-
-If your agent does not support skills directly, you can still open the relevant `SKILL.md` file and paste it into the agent before a task.
+It works best with agents that can read `SKILL.md` files or repository instructions such as `AGENTS.md`. If your agent does not support skills directly, open the relevant `SKILL.md` file and paste it into the agent before a task.
 
 ---
 
@@ -79,110 +77,91 @@ AI coding agents are powerful, but they often fail in predictable ways:
 
 Xskill focuses on one job:
 
-> Turn open-ended agent work into bounded, evidence-backed execution.
+> Turn vague agent work into bounded, verifiable execution.
 
 ---
 
-## Installation
+## Install
 
-Xskill does not require npm, pip, npx, or a command-line installer.
+Xskill does not require npm, npx, pip, Python, or a command-line tool.
 
-### Option A: Project-local installation
-
-Use this when you want Xskill available only inside one repository.
-
-1. Download the latest `xskill-v0.1.0.zip` from GitHub Releases.
+1. Download the latest `xskill-v*.zip` from GitHub Releases.
 2. Unzip it.
-3. Copy the `xskill/` folder into your project’s agent skills directory.
-4. Optionally copy the root `AGENTS.md` template into your project root.
-5. Restart your coding agent.
+3. Copy the `xskill/` folder into your agent skills directory.
 
-Recommended structure:
+Recommended global location:
 
 ```text
-your-project/
-  AGENTS.md
-  .agents/
-    skills/
-      xskill/
-        question-requirements/SKILL.md
-        delete-scope/SKILL.md
-        optimize-path/SKILL.md
-        shorten-iteration/SKILL.md
-        automate-after-stable/SKILL.md
-        semantic-memory/SKILL.md
+~/.agents/skills/xskill
 ```
 
-If your agent uses a different skills directory, place the `xskill/` folder there instead.
-
-### Option B: Global installation
-
-Use this when you want Xskill available across projects.
+Recommended project-local location:
 
 ```text
-~/.agents/skills/xskill/
+your-project/.agents/skills/xskill
+```
+
+Optional: copy `AGENTS.md` into your project root.
+
+Final structure:
+
+```text
+.agents/skills/xskill/
   question-requirements/SKILL.md
   delete-scope/SKILL.md
   optimize-path/SKILL.md
   shorten-iteration/SKILL.md
   automate-after-stable/SKILL.md
   semantic-memory/SKILL.md
+  templates/
+  examples/
 ```
 
-Then restart your coding agent.
+Restart your coding agent after copying the files.
 
 ---
 
-## First use
+## Quick use
 
-After installation, ask your agent:
+For most non-trivial coding tasks, ask:
 
 ```text
 Use Xskill to create an execution brief before editing code:
 <your task>
 ```
 
-For example:
+For unclear tasks:
 
 ```text
-Use Xskill to create an execution brief before editing code:
-Fix password reset bug.
+Use Xskill question-requirements for:
+<your task>
 ```
 
-For a larger task:
+For broad tasks:
 
 ```text
-Use Xskill question-requirements, then delete-scope, then optimize-path for:
-Add password reset flow.
+Use Xskill delete-scope for:
+<your task>
 ```
 
-For a failed attempt:
+For implementation:
 
 ```text
-Use Xskill shorten-iteration to split this failure into smaller verifiable tasks.
+Use Xskill optimize-path for:
+<your task>
 ```
 
-For completed work:
+After completion:
 
 ```text
-Use Xskill to produce an evidence ledger for the completed change.
+Use Xskill to produce an evidence ledger for what changed.
 ```
 
----
+If the task fails:
 
-## The five-step system
-
-Xskill adapts a five-step engineering loop into agent skills.
-
-| Step | Skill | Use it for | Output |
-|---|---|---|---|
-| Question | `question-requirements` | vague or risky tasks | assumptions, risks, success criteria |
-| Delete | `delete-scope` | broad scope | minimum slice, files to avoid |
-| Optimize | `optimize-path` | pre-coding plan | execution brief, checks, evidence |
-| Iterate | `shorten-iteration` | failed or oversized tasks | atomic tasks, stop conditions |
-| Automate | `automate-after-stable` | repeated stable work | repeatable commands and guardrails |
-
-A supporting skill, `semantic-memory`, keeps long-term project context lightweight.
+```text
+Use Xskill shorten-iteration to split this failed task into smaller verified work.
+```
 
 ---
 
@@ -192,241 +171,165 @@ Xskill is built around three artifacts.
 
 ### 1. Execution Brief
 
-A short plan the agent must follow before editing code.
+A compact task plan that tells the agent what to do, what not to do, and how success will be verified.
 
-```md
-# Execution Brief
-
-## Task
-...
-
-## Goal
-...
-
-## Context Budget
-- Max files to read: ...
-- Max files to touch: ...
-- Files to avoid: ...
-
-## Checks
-...
-
-## Evidence Required
-...
-
-## Stop Condition
-...
-```
+See: [`xskill/templates/execution-brief.md`](xskill/templates/execution-brief.md)
 
 ### 2. Context Budget
 
-A hard boundary for agent behavior.
+A boundary contract for the agent.
 
-```md
-# Context Budget
+It defines:
 
-- Max files to read: 5
-- Max files to touch: 3
-- Forbidden context:
-  - unrelated migrations
-  - auth provider internals
-- Scope boundary:
-  - implement reset-token validation only
-```
+- max files to read
+- max files to touch
+- files to avoid
+- allowed context
+- forbidden context
+- stop condition
 
-Most agent workflows add context.
-
-Xskill defines what the agent should not read, not touch, and not claim.
+See: [`xskill/templates/context-budget.md`](xskill/templates/context-budget.md)
 
 ### 3. Evidence Ledger
 
-A record of what changed and what proves it.
+A record of what actually happened.
 
-```md
-# Evidence Ledger
+It captures:
 
-## Files touched
-- src/auth/reset.ts
-- tests/auth/test_reset.ts
+- files touched
+- checks run
+- verified claims
+- unverified claims
+- scope violations
+- remaining risk
 
-## Commands run
-- pytest tests/auth/test_reset.py — pass
-
-## Verified claims
-- Expired reset tokens are rejected.
-
-## Unverified claims
-- None.
-
-## Scope violations
-- None.
-```
+See: [`xskill/templates/evidence-ledger.md`](xskill/templates/evidence-ledger.md)
 
 If there is no evidence, the task is not done.
 
 ---
 
-## Folder structure
+## The Xskill steps
+
+| Step | Skill | Purpose |
+|---|---|---|
+| Question | `question-requirements` | Challenge assumptions, risks, and success criteria |
+| Delete | `delete-scope` | Remove unnecessary work and define scope boundaries |
+| Optimize | `optimize-path` | Create the smallest correct execution path |
+| Shorten | `shorten-iteration` | Split large or failed work into smaller verified tasks |
+| Automate | `automate-after-stable` | Automate only stable repeated work |
+| Support | `semantic-memory` | Select only the context needed for this task |
+
+These are not always-on rules. Load only the skill that matches the current task.
+
+---
+
+## When to use Xskill
+
+Use Xskill when:
+
+- the task is vague
+- the task may touch many files
+- the agent may over-read context
+- the change affects logic, APIs, data, security, or architecture
+- verification matters
+- a previous agent run failed or drifted
+
+Do not use the full workflow for:
+
+- typo fixes
+- simple copy edits
+- tiny config changes
+- obvious one-line fixes
+
+For small changes, use only the relevant skill or skip Xskill entirely.
+
+---
+
+## Design rules
+
+Xskill should stay small.
+
+1. Do not load long context by default.
+2. Create an execution brief before non-trivial edits.
+3. Respect the context budget.
+4. Touch the smallest possible set of files.
+5. Verify with evidence.
+6. If blocked, split the task smaller.
+7. Do not claim completion without an evidence ledger.
+
+---
+
+## Project structure
 
 ```text
-xskill/
-  question-requirements/
-    SKILL.md
-  delete-scope/
-    SKILL.md
-  optimize-path/
-    SKILL.md
-  shorten-iteration/
-    SKILL.md
-  automate-after-stable/
-    SKILL.md
-  semantic-memory/
-    SKILL.md
-  templates/
-    execution-brief.md
-    context-budget.md
-    evidence-ledger.md
-  examples/
-    password-reset.execution-brief.md
-    password-reset.evidence-ledger.md
+Xskill/
+  README.md
+  AGENTS.md
+  xskill/
+    question-requirements/SKILL.md
+    delete-scope/SKILL.md
+    optimize-path/SKILL.md
+    shorten-iteration/SKILL.md
+    automate-after-stable/SKILL.md
+    semantic-memory/SKILL.md
+    templates/
+      execution-brief.md
+      context-budget.md
+      evidence-ledger.md
+    examples/
+      password-reset.execution-brief.md
+      password-reset.evidence-ledger.md
+  docs/
+    portable-install.md
+    design.md
+    release-checklist.md
 ```
 
 ---
 
-## AGENTS.md
+## Example
 
-Xskill includes a root `AGENTS.md` template.
-
-Use it as the always-on router for a project.
-
-It should stay short:
-
-```md
-# AGENTS.md
-
-This project uses Xskill.
-
-Before non-trivial coding tasks:
-1. Create or load an Xskill execution brief.
-2. Respect the context budget.
-3. Do not read or modify files outside the declared scope unless necessary.
-4. Run the required checks.
-5. Do not claim completion without evidence.
-6. If blocked, split the task into a smaller task instead of retrying blindly.
-```
-
-The detailed procedures live in the skill files and should be loaded only when needed.
+See [`xskill/examples/password-reset.execution-brief.md`](xskill/examples/password-reset.execution-brief.md) and [`xskill/examples/password-reset.evidence-ledger.md`](xskill/examples/password-reset.evidence-ledger.md).
 
 ---
 
-## Design principles
+## Non-goals
 
-### Keep the always-on layer small
+Xskill is intentionally not:
 
-Do not paste the full system into every agent instruction file.
+- a CLI-first tool
+- a package manager installation flow
+- a multi-agent framework
+- a semantic graph database
+- an autonomous coding loop
+- a replacement for your coding agent
 
-`AGENTS.md` should route behavior. Skills should contain the workflow.
-
-### Prefer boundaries over advice
-
-Weak instruction:
-
-```text
-Be careful not to change too much.
-```
-
-Xskill instruction:
-
-```text
-Max files to touch: 2.
-Files to avoid: src/oauth/**.
-Stop if auth provider refactor is required.
-```
-
-### Evidence over claims
-
-The agent should not claim completion without evidence.
-
-Tests, typechecks, lint results, screenshots, manual verification notes, or explicit acceptance checks count as evidence.
-
-### Failure should shrink scope
-
-A failed task should produce a smaller follow-up task instead of an unbounded retry.
-
----
-
-## Example workflow
-
-```text
-User task
-  ↓
-question-requirements
-  ↓
-delete-scope
-  ↓
-optimize-path
-  ↓
-Execution Brief
-  ↓
-Agent edits code within the Context Budget
-  ↓
-Checks run
-  ↓
-Evidence Ledger
-  ↓
-Done, blocked, or split into a smaller task
-```
-
----
-
-## When not to use Xskill
-
-Do not use Xskill when the task is already trivial.
-
-Examples:
-
-- Fixing a typo
-- Renaming a heading
-- Formatting a small snippet
-- Answering a question without editing code
-
-Use Xskill when scope, risk, context size, or verification matters.
-
----
-
-## Roadmap
-
-- [x] Portable skill bundle
-- [x] Five core skills
-- [x] Semantic memory support skill
-- [x] Execution brief template
-- [x] Context budget template
-- [x] Evidence ledger template
-- [x] AGENTS.md template
-- [ ] Better install examples for specific agents
-- [ ] More real-world execution brief examples
-- [ ] More evidence ledger examples
-- [ ] Optional adapters for common agent folders
+Future automation may exist, but only after the manual skill workflow is proven stable.
 
 ---
 
 ## Influences
 
-Xskill is influenced by ideas from AI coding workflow projects such as GSD, Superpowers, Ralph, gstack, Karpathy-style coding principles, Graphify, and agent harness projects.
+Xskill is influenced by ideas from AI coding workflow projects such as Superpowers, GSD, Ralph, gstack, Karpathy-style coding principles, Graphify, and agent harness projects.
 
-It does not copy their prompts or workflows.
-
-It extracts general execution mechanisms and compresses them into a smaller skill bundle.
+It does not copy their prompts or workflows. It extracts general execution mechanisms and compresses them into a smaller portable skill system.
 
 ---
 
-## Disclaimer
+## Description
 
-Xskill is inspired by the five-step engineering method popularized by Elon Musk.
+Recommended GitHub description:
 
-It is not affiliated with Elon Musk, Tesla, SpaceX, X, xAI, or any referenced open-source project.
+```text
+Context diet for AI coding agents. Less context, smaller changes, verified progress.
+```
 
-All skill text and implementation in this repository are original unless otherwise stated.
+Recommended topics:
+
+```text
+ai-agents, coding-agents, agent-skills, agents-md, context-engineering, claude-code, codex, cursor, developer-tools
+```
 
 ---
 

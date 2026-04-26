@@ -6,7 +6,7 @@ For `v0.1.0`:
 - [ ] Confirm no Quick Start depends on npm, npx, pip, or CLI.
 - [ ] Confirm every skill folder has `SKILL.md`.
 - [ ] Confirm each `SKILL.md` has `name` and `description` front matter.
-- [ ] Zip the `xskill/` folder as `xskill-v0.1.0.zip`.
+- [ ] Zip the `xskill/` folder with `AGENTS.md`, `README.md`, and `LICENSE` as `xskill-v0.1.0.zip`.
 - [ ] Create GitHub Release `v0.1.0`.
 - [ ] Upload `xskill-v0.1.0.zip`.
 - [ ] Add repository description and topics.
@@ -14,7 +14,7 @@ For `v0.1.0`:
 Recommended repository description:
 
 ```text
-Context diet for AI coding agents.
+Context diet for AI coding agents. Less context, smaller changes, verified progress.
 ```
 
 Recommended topics:

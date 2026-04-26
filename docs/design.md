@@ -24,12 +24,18 @@ Most agent workflows add context.
 
 Xskill removes context until the task becomes safe to execute.
 
-## Non-goals
+## Current scope
 
-- Xskill is not a CLI-first tool.
-- Xskill is not a multi-agent framework.
-- Xskill is not a memory database.
-- Xskill is not a prompt dump.
+Xskill currently provides skills and templates only.
+
+It does not provide:
+
+- CLI runtime
+- npm or pip install
+- state database
+- automatic semantic graph
+- autonomous loop runner
+- multi-agent orchestration
 
 ## Core artifacts
 

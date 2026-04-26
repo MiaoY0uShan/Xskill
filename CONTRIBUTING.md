@@ -9,9 +9,7 @@ Before adding a new file or workflow, ask:
 3. Does this improve evidence quality?
 4. Can this be expressed as a smaller skill or template?
 
-## Contribution types
-
-Good contributions:
+## Good contributions
 
 - Shorter skill instructions.
 - Better trigger descriptions.
@@ -19,9 +17,10 @@ Good contributions:
 - Better evidence ledger examples.
 - Real before/after examples.
 
-Avoid:
+## Avoid
 
 - Large always-on prompts.
 - Full agent frameworks.
 - Complex installation flows.
 - Premature automation.
+- CLI-first product direction.

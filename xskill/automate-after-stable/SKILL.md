@@ -7,29 +7,34 @@ description: Use only after a workflow has been repeated manually and is stable.
 
 Automate last.
 
-This skill prevents premature automation of unclear or unstable work.
+This skill prevents the agent from automating a workflow that is still unclear.
 
 ## Use when
 
-- A manual workflow has repeated successfully.
-- The user wants to convert repeated steps into a script, command, hook, checklist, or template.
-- The workflow has clear inputs, outputs, and failure modes.
-- Verification is already known.
+- A manual workflow has succeeded repeatedly.
+- The steps are stable and predictable.
+- The failure modes are understood.
+- The automation can be guarded and reversed.
+
+## Do not use when
+
+- The workflow has not been run manually.
+- Requirements are still changing.
+- Failures are not understood.
+- The automation would hide important judgment.
 
 ## Goal
 
-Determine whether a repeated workflow is safe to automate and define the automation boundary.
+Identify whether automation is justified and define its guardrails.
 
 ## Procedure
 
 1. List the manual steps observed.
-2. Identify which steps repeated without variation.
-3. Identify which steps still require judgment.
-4. Confirm that success and failure are detectable.
-5. Define the automation candidate.
-6. Define guardrails and stop conditions.
-7. Define recovery steps.
-8. Decide automate, keep manual, or delay.
+2. Confirm the workflow is stable.
+3. Identify repetitive steps that can be automated safely.
+4. Define guardrails and failure recovery.
+5. Define what evidence must be recorded after automation runs.
+6. Reject automation if the process is still unstable.
 
 ## Output contract
 
@@ -47,40 +52,22 @@ Yes | No
 ## Automation Candidate
 ...
 
-## Keep Manual
-- ...
-
 ## Guardrails
 - ...
 
-## Failure Detection
+## Failure Recovery
 - ...
 
-## Recovery Plan
+## Evidence To Record
 - ...
 
 ## Decision
-Automate | Keep manual | Delay
-
-## Proposed Artifact
-Script | Command | Hook | Template | Checklist | None
+Automate | Keep manual | Revisit later
 ```
 
 ## Rules
 
 - Do not automate confusion.
-- Do not automate a workflow that has not succeeded manually.
-- Keep judgment-heavy steps manual.
-- Automation must have a safe failure mode.
-
-## Failure mode
-
-If automation is premature, output:
-
-```md
-# Automation Delayed
-
-Reason: ...
-Manual repetitions still needed: ...
-Next observation to record: ...
-```
+- Automation should reduce repeated work, not remove judgment.
+- Every automation must have a stop condition.
+- If the automation cannot be verified, do not automate it.

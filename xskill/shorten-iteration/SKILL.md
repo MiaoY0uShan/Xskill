@@ -20,7 +20,7 @@ This skill prevents long, drifting agent runs by creating atomic tasks with clea
 
 ## Goal
 
-Produce small tasks where each task has one goal, one context slice, one verification path, and one state update.
+Produce small tasks where each task has one goal, one context slice, one verification path, and one stop condition.
 
 ## Procedure
 
@@ -78,15 +78,4 @@ Return this structure:
 - Each task must have a verification method.
 - If a task fails, split it again instead of retrying blindly.
 - Do not create parallel tasks that touch the same files.
-
-## Failure mode
-
-If the task cannot be split, output:
-
-```md
-# Iteration Blocked
-
-Reason: ...
-Smallest investigation task: ...
-Evidence needed: ...
-```
+- Do not hide failure behind a vague summary.
