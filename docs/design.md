@@ -35,6 +35,7 @@ It does not provide:
 - state database
 - automatic semantic graph
 - autonomous loop runner
+- automatic self-improvement engine
 - multi-agent orchestration
 
 ## Core artifacts
@@ -42,5 +43,22 @@ It does not provide:
 - Execution Brief
 - Context Budget
 - Evidence Ledger
+- Iteration Learning Note
 
 These artifacts are more important than the five-step naming.
+
+## Self-iteration boundary
+
+Xskill supports post-run learning, not autonomous mutation.
+
+The `learn-after-run` skill turns evidence into a learning note and may propose a rule or skill patch. It must not modify skills blindly.
+
+A lesson should be promoted only when it:
+
+- repeats across runs,
+- reduces context,
+- narrows scope,
+- improves verification, or
+- prevents a known class of failure.
+
+The default action is to keep learning as a local note.

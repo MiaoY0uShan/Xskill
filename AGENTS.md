@@ -21,6 +21,7 @@ Available Xskill steps:
 - `shorten-iteration`: split large or failed work into atomic tasks.
 - `automate-after-stable`: automate only stable repeated work.
 - `semantic-memory`: keep project context lightweight through relevant context slices.
+- `learn-after-run`: convert post-run evidence into reusable learning without blindly modifying skills.
 
 Default rule:
 
@@ -33,3 +34,6 @@ When work is complete, record:
 - verified claims
 - unverified claims
 - scope violations
+
+After any non-trivial task, create a short learning note if the run produced reusable information.
+Do not modify skills immediately unless the same issue has repeated or the improvement clearly reduces context, scope, or verification risk.

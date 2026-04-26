@@ -33,3 +33,13 @@ Fix password reset bug.
 - Failing test before fix
 - Passing test after fix
 ```
+
+## Post-run learning
+
+After the task is complete, ask:
+
+```text
+Use Xskill learn-after-run to extract reusable learning from the evidence ledger.
+```
+
+Keep the learning as a note unless the same issue repeats or the improvement clearly reduces context, scope, or verification risk.

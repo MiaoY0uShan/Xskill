@@ -157,6 +157,12 @@ After completion:
 Use Xskill to produce an evidence ledger for what changed.
 ```
 
+After a non-trivial run:
+
+```text
+Use Xskill learn-after-run to extract reusable learning from the evidence.
+```
+
 If the task fails:
 
 ```text
@@ -207,6 +213,22 @@ See: [`xskill/templates/evidence-ledger.md`](xskill/templates/evidence-ledger.md
 
 If there is no evidence, the task is not done.
 
+### 4. Iteration Learning Note
+
+A short post-run note that turns evidence into reusable learning.
+
+It captures:
+
+- what worked
+- what failed or drifted
+- which context was wasted
+- a reusable rule candidate
+- whether the rule should be promoted
+
+See: [`xskill/templates/iteration-learning-note.md`](xskill/templates/iteration-learning-note.md)
+
+Xskill does not auto-improve blindly. It learns only from evidence.
+
 ---
 
 ## The Xskill steps
@@ -219,6 +241,7 @@ If there is no evidence, the task is not done.
 | Shorten | `shorten-iteration` | Split large or failed work into smaller verified tasks |
 | Automate | `automate-after-stable` | Automate only stable repeated work |
 | Support | `semantic-memory` | Select only the context needed for this task |
+| Learning | `learn-after-run` | Extract reusable learning after a run without blindly modifying skills |
 
 These are not always-on rules. Load only the skill that matches the current task.
 
@@ -273,13 +296,16 @@ Xskill/
     shorten-iteration/SKILL.md
     automate-after-stable/SKILL.md
     semantic-memory/SKILL.md
+    learn-after-run/SKILL.md
     templates/
       execution-brief.md
       context-budget.md
       evidence-ledger.md
+      iteration-learning-note.md
     examples/
       password-reset.execution-brief.md
       password-reset.evidence-ledger.md
+      password-reset.iteration-learning-note.md
   docs/
     portable-install.md
     design.md
@@ -303,15 +329,16 @@ Xskill is intentionally not:
 - a multi-agent framework
 - a semantic graph database
 - an autonomous coding loop
+- an automatic self-improvement engine
 - a replacement for your coding agent
 
-Future automation may exist, but only after the manual skill workflow is proven stable.
+Future automation or deeper self-iteration may exist, but only after the manual skill workflow is proven stable.
 
 ---
 
 ## Influences
 
-Xskill is influenced by ideas from AI coding workflow projects such as Superpowers, GSD, Ralph, gstack, Karpathy-style coding principles, Graphify, and agent harness projects.
+Xskill is influenced by ideas from AI coding workflow projects such as Superpowers, GSD, Ralph, gstack, Karpathy-style coding principles, Graphify, Hermes Agent, and agent harness projects.
 
 It does not copy their prompts or workflows. It extracts general execution mechanisms and compresses them into a smaller portable skill system.
 

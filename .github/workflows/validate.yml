@@ -19,9 +19,11 @@ jobs:
           test -f xskill/shorten-iteration/SKILL.md
           test -f xskill/automate-after-stable/SKILL.md
           test -f xskill/semantic-memory/SKILL.md
+          test -f xskill/learn-after-run/SKILL.md
           test -f xskill/templates/execution-brief.md
           test -f xskill/templates/context-budget.md
           test -f xskill/templates/evidence-ledger.md
+          test -f xskill/templates/iteration-learning-note.md
       - name: Check portable scope
         run: |
           test ! -f pyproject.toml

@@ -1,13 +1,17 @@
 # Changelog
 
-## v0.1.0
+## v0.1.1 — Self-iteration layer
 
-Portable skill bundle release.
+- Added `learn-after-run` skill.
+- Added `iteration-learning-note` template.
+- Added password-reset learning note example.
+- Updated README, AGENTS.md, xskill README, and design docs.
+- Kept Xskill portable: no CLI, npm, npx, pip, runtime, or automatic self-improvement engine.
 
-- Removed CLI-first positioning.
-- Added root `AGENTS.md` template.
-- Added portable `xskill/` skill bundle.
-- Added five Xskill step skills.
-- Added `semantic-memory` support skill.
+## v0.1.0 — Portable skill bundle
+
+- Initial portable Xskill bundle.
+- Added five core Xskill step skills.
+- Added semantic-memory support skill.
 - Added execution brief, context budget, and evidence ledger templates.
-- Added password reset example brief and evidence ledger.
+- Added AGENTS.md template.
