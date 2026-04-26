@@ -12,6 +12,9 @@ jobs:
       - name: Check required portable bundle files
         run: |
           test -f README.md
+          test -f START_HERE.md
+          test -f INSTALL.md
+          test -f install/README.md
           test -f xskill/AGENTS.md
           test -f xskill/question-requirements/SKILL.md
           test -f xskill/delete-scope/SKILL.md
@@ -29,6 +32,7 @@ jobs:
           test -f xskill/templates/metrics-report.md
           test -f adapters/README.md
           test -f docs/execution-protocol.md
+          test -f docs/case-studies.md
           test -f install/codex/.agents/skills/xskill/SKILL.md
           test -f install/claude-code/.claude/skills/xskill/SKILL.md
           test -f install/gemini-cli/xskill/gemini-extension.json

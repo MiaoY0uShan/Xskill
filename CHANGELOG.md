@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.0 — Dumb-simple install
+
+- Added `START_HERE.md` for the shortest possible install path.
+- Added `INSTALL.md` with copy-only instructions for Codex, Claude Code, Gemini CLI, and GitHub Copilot CLI.
+- Added `install/README.md` so release users can pick one folder and start.
+- Simplified README around a 30-second start path.
+- Moved complex protocol details lower in the README.
+- Clarified the single usage sentence: `Use Xskill to compile this task before editing code: <task>`.
+- Kept Xskill portable: no CLI, npm, npx, pip, database, runtime, or automatic executor.
+
 ## v0.1.11 — Self-use evidence case studies
 
 - Added preliminary self-use evidence to README.

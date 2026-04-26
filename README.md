@@ -6,11 +6,48 @@ AI coding agents do not need more context.
 
 They need a smaller task, a harder boundary, and proof that the work is done.
 
-Xskill is an **agent-agnostic execution discipline layer**.
+Xskill is an **agent-agnostic execution discipline layer** that turns vague coding requests into **bounded, verifiable Execution Briefs**.
 
-It turns vague coding requests into **bounded, verifiable Execution Briefs** for Codex, Claude Code, Gemini CLI, GitHub Copilot CLI, Cursor, OpenCode, or any agent that can read Markdown instructions.
+**Install it. Ask your agent to use Xskill. Get an Execution Brief.**
 
-**Less context. Smaller changes. Verified progress.**
+---
+
+## 30-second start
+
+1. Download the latest release zip.
+2. Unzip it.
+3. Open `install/`.
+4. Copy the folder for your agent.
+5. Restart your agent.
+6. Say:
+
+```text
+Use Xskill to compile this task before editing code:
+<your task>
+```
+
+That is the default user interface.
+
+No Xskill CLI. No npm. No npx. No pip. No database. No runtime.
+
+Start here:
+
+- [`START_HERE.md`](START_HERE.md)
+- [`INSTALL.md`](INSTALL.md)
+- [`install/README.md`](install/README.md)
+
+---
+
+## Pick your agent
+
+| Agent | Copy / install this | Then say |
+|---|---|---|
+| Codex | `install/codex/.agents` → your repo root | `Use Xskill to compile this task before editing code: <task>` |
+| Claude Code | `install/claude-code/.claude` → your repo root | `/xskill Compile this task before editing code: <task>` |
+| Gemini CLI | `install/gemini-cli/xskill` → `~/.gemini/extensions/xskill` | `Use Xskill to compile this task before editing code: <task>` |
+| GitHub Copilot CLI | `install/github-copilot-cli/.github` and `install/github-copilot-cli/xskill` → your repo root | `Use the Xskill agent to compile this task: <task>` |
+
+If your agent is not listed, use [`adapters/generic.md`](adapters/generic.md): copy `xskill/` into the project and paste `xskill/AGENTS.md` or the relevant `SKILL.md` into your agent.
 
 ---
 
@@ -19,7 +56,7 @@ It turns vague coding requests into **bounded, verifiable Execution Briefs** for
 Tell your coding agent:
 
 ```text
-Use Xskill to compile this task into an Execution Brief before editing code:
+Use Xskill to compile this task before editing code:
 Add password reset flow.
 ```
 
@@ -41,27 +78,15 @@ Expected output:
     "max_files_to_touch": 3,
     "max_skill_tokens": 900,
     "max_execution_notes": 500,
-    "required_semantic_nodes": ["auth.reset-token", "tests.auth.reset"],
-    "required_schema_cards": ["validation-bug"],
     "forbidden_context": ["src/oauth/**", "src/billing/**", "src/auth/provider/**"],
     "scope_boundary": "Do not modify auth provider internals",
     "violation_handling": "Stop and split smaller before exceeding the contract"
   },
   "context_diet_map": {
-    "relevant_nodes": ["auth.reset-token", "tests.auth.reset"],
-    "irrelevant_nodes": ["oauth.provider", "billing", "admin.reset"],
     "files_to_read": ["src/auth/reset.ts", "src/auth/token.ts", "tests/auth/test_reset.ts"],
     "files_to_avoid": ["src/oauth/**", "src/billing/**", "src/auth/provider/**"],
     "reason": "Task only touches reset-token validation, not OAuth provider internals"
   },
-  "tdd_micro_loops": [
-    {
-      "loop": 1,
-      "red": "Expired reset token is rejected",
-      "green": "Implement minimal expiry validation",
-      "evidence": "Focused test passes"
-    }
-  ],
   "checks": ["pytest tests/auth/test_reset.py"],
   "evidence_required": [
     "failing test before fix",
@@ -78,7 +103,7 @@ Xskill is not a longer prompt. It is a portable task compiler.
 
 ---
 
-## Problem
+## Why agents run off track
 
 AI coding agents are powerful, but they often fail in predictable ways.
 
@@ -99,13 +124,19 @@ The failure mode is that they are unconstrained.
 
 ---
 
-## Solution
+## What Xskill produces
 
-Xskill gives each non-trivial task four hard artifacts.
+For non-trivial work, Xskill produces a short task contract.
 
-### 1. Context Budget Contract
+### 1. Compiled Execution Brief
 
-A task starts with a budget.
+The final handoff before code is edited.
+
+It says what to do, what not to do, which files to read, which files to touch, which checks to run, and when to stop.
+
+### 2. Context Budget Contract
+
+A hard boundary for the run.
 
 ```json
 {
@@ -113,19 +144,14 @@ A task starts with a budget.
   "max_files_to_touch": 3,
   "max_skill_tokens": 900,
   "max_execution_notes": 500,
-  "required_semantic_nodes": [],
-  "required_schema_cards": [],
   "forbidden_context": [],
-  "scope_boundary": "Do not modify auth provider internals",
-  "violation_handling": "Stop and split smaller before exceeding the contract"
+  "scope_boundary": "Do not modify auth provider internals"
 }
 ```
 
-If the agent needs to exceed the contract, it must stop.
+If the agent needs to exceed the contract, it must stop and revise the brief.
 
-It should not silently expand the task.
-
-### 2. Context Diet Map
+### 3. Context Diet Map
 
 Most memory systems add context.
 
@@ -145,7 +171,7 @@ The goal is not to remember everything.
 
 The goal is to decide what does not belong in this run.
 
-### 3. Evidence Ledger
+### 4. Evidence Ledger
 
 Every agent claim needs evidence.
 
@@ -174,7 +200,7 @@ Every agent claim needs evidence.
 
 No evidence means the task is not done.
 
-### 4. Failure-to-Smaller-Task Protocol
+### 5. Failure-to-Smaller-Task Protocol
 
 Failed runs should shrink the work.
 
@@ -192,157 +218,6 @@ Failed runs should shrink the work.
 ```
 
 Xskill turns failed agent runs into smaller verified work.
-
----
-
-## Quickstart
-
-Xskill does not require an Xskill CLI, npm package, npx command, pip package, database, or runtime.
-
-Download the release zip, unzip it, then choose the ready-made install pack for your agent.
-
-```text
-install/
-  codex/.agents/skills/xskill/
-  claude-code/.claude/skills/xskill/
-  gemini-cli/xskill/
-  github-copilot-cli/.github/agents/xskill.agent.md
-
-xskill/
-  AGENTS.md
-  question-requirements/
-  delete-scope/
-  semantic-architecture/
-  optimize-path/
-  shorten-iteration/
-  evidence-ledger/
-  metrics/
-  adaptive-improvement/
-  schema-memory/
-  templates/
-  examples/
-```
-
-You no longer need to copy a separate root `AGENTS.md` into your project.
-
-The agent contract is bundled inside:
-
-```text
-xskill/AGENTS.md
-```
-
----
-
-## Install by agent
-
-### Codex
-
-Copy the ready-made folder into your repository root:
-
-```text
-install/codex/.agents
-```
-
-Your repository should contain:
-
-```text
-.agents/skills/xskill/SKILL.md
-.agents/skills/xskill/references/xskill/...
-```
-
-Then ask:
-
-```text
-Use Xskill to compile this task into a bounded Execution Brief before editing code:
-<task>
-```
-
-### Claude Code
-
-Copy the ready-made folder into your repository root:
-
-```text
-install/claude-code/.claude
-```
-
-Your repository should contain:
-
-```text
-.claude/skills/xskill/SKILL.md
-.claude/skills/xskill/references/xskill/...
-```
-
-Then ask:
-
-```text
-/xskill Compile this task into a bounded Execution Brief before editing code: <task>
-```
-
-Or:
-
-```text
-Use Xskill before editing code: <task>
-```
-
-### Gemini CLI
-
-Copy the ready-made extension folder to:
-
-```text
-~/.gemini/extensions/xskill
-```
-
-Use this source folder:
-
-```text
-install/gemini-cli/xskill
-```
-
-It already contains:
-
-```text
-gemini-extension.json
-GEMINI.md
-xskill/...
-```
-
-Restart Gemini CLI.
-
-Then ask:
-
-```text
-Use Xskill to compile this task into a bounded Execution Brief before editing code:
-<task>
-```
-
-Optional Gemini CLI install command:
-
-```bash
-gemini extensions install install/gemini-cli/xskill
-```
-
-### GitHub Copilot CLI
-
-Copy the ready-made project pack into your repository root:
-
-```text
-install/github-copilot-cli/.github
-install/github-copilot-cli/xskill
-```
-
-Your repository should contain:
-
-```text
-.github/agents/xskill.agent.md
-xskill/...
-```
-
-Then use the `xskill` custom agent and ask:
-
-```text
-Compile this task into a bounded Execution Brief before editing code:
-<task>
-```
 
 ---
 
@@ -379,9 +254,10 @@ The bundle includes examples under:
 
 ```text
 xskill/examples/
+examples/case-studies/
 ```
 
-Examples include:
+Main example files:
 
 ```text
 password-reset.question-requirements.md
@@ -396,8 +272,6 @@ password-reset.metrics-report.md
 password-reset.failure-to-smaller-task.md
 validation-bug.schema-memory-card.md
 ```
-
-The main before/after is simple.
 
 Before Xskill:
 
@@ -423,17 +297,15 @@ Produce evidence before claiming completion.
 
 These are **self-use case studies** from building Xskill itself. They are not yet an external benchmark across unrelated repositories.
 
-The goal is to test whether Xskill can reduce prompt/context volume, reduce scope drift, and turn failures into smaller verified work.
+Token numbers are approximate. They are estimated with a simple `characters / 4` rule and rounded to the nearest token. The baseline is a monolithic-agent setup that loads the README, `xskill/AGENTS.md`, all `SKILL.md` files, and all templates. In this repository, that baseline is about **19,562 tokens**.
 
-Token numbers below are approximate. They are estimated with a simple `characters / 4` rule, rounded to the nearest token. The baseline is a monolithic-agent setup that loads the README, `xskill/AGENTS.md`, all `SKILL.md` files, and all templates. In this repository, that baseline is about **19,562 tokens**.
-
-| Case | Real task | Baseline context | Xskill loaded context | Reduction | Drift control | Verification / failure result |
-|---|---|---:|---:|---:|---|---|
-| 1 | Rewrite install docs so users no longer copy a root `AGENTS.md` | 19,562 | 7,120 | 63.6% | Limited to README/install wording | Required evidence: docs updated, no runtime added |
-| 2 | Add Codex adapter guidance without binding Xskill to Codex | 19,562 | 8,112 | 58.5% | Adapter-only boundary | Required evidence: Codex path documented, generic protocol unchanged |
-| 3 | Add JSON Evidence Ledger audit example | 19,562 | 6,808 | 65.2% | Evidence files only | Required evidence: verified/unverified claims represented explicitly |
-| 4 | Split a failed password-reset flow into smaller TDD work | 19,562 | 7,520 | 61.6% | No full auth rewrite | Failure converted into smaller tasks and focused checks |
-| 5 | Add metrics report for TVP, scope creep, verification, and rework | 19,562 | 8,365 | 57.2% | Metrics-only addition | Required evidence: TVP proxy and supporting metrics recorded |
+| Case | Real task | Baseline context | Xskill loaded context | Reduction | Result |
+|---|---|---:|---:|---:|---|
+| 1 | Rewrite install docs so users no longer copy a root `AGENTS.md` | 19,562 | 7,120 | 63.6% | Docs updated, no runtime added |
+| 2 | Add Codex adapter guidance without binding Xskill to Codex | 19,562 | 8,112 | 58.5% | Adapter-only boundary kept |
+| 3 | Add JSON Evidence Ledger audit example | 19,562 | 6,808 | 65.2% | Claims/evidence made explicit |
+| 4 | Split a failed password-reset flow into smaller TDD work | 19,562 | 7,520 | 61.6% | Failure converted into smaller tasks |
+| 5 | Add TVP / scope creep / verification / rework metrics report | 19,562 | 8,365 | 57.2% | Metrics report added |
 
 Average context reduction across these five self-use cases: **61.2%**.
 
@@ -441,25 +313,20 @@ What this proves so far:
 
 - Xskill can keep task-specific loaded context under the 50% reduction target for these repository-maintenance tasks.
 - Xskill can express scope boundaries before execution.
-- Xskill can require checks and evidence instead of accepting "done" as a claim.
+- Xskill can require checks and evidence instead of accepting “done” as a claim.
 - Xskill can turn at least one failure scenario into smaller TDD micro-loops.
 
-What this does **not** prove yet:
+What this does not prove yet:
 
 - It does not prove performance across 10 unrelated external repositories.
 - It does not prove exact model token savings from hosted agent APIs.
 - It does not prove lower bug rate without a controlled before/after benchmark.
 
-Next benchmark target:
+See [`docs/case-studies.md`](docs/case-studies.md).
 
-- Run 10 external tasks with and without Xskill.
-- Record irrelevant file edits, skipped verification, scope expansion, misunderstood requirements, and rework.
-- Publish the raw Evidence Ledgers and Metrics Reports.
-
+---
 
 ## Metrics
-
-Xskill is designed to reduce context load, scope creep, and unverifiable work.
 
 Primary metric:
 
@@ -467,7 +334,7 @@ Primary metric:
 TVP = total_context_tokens / verified_tasks_completed
 ```
 
-When exact token counts are unavailable, use a portable proxy:
+Portable proxy when exact token counts are unavailable:
 
 ```text
 Context Load Proxy = files_read + skills_loaded + reports_generated
@@ -484,13 +351,7 @@ Context Load Size    = files_loaded_per_task
 Iteration Half-life  = time_to_first_verified_slice
 ```
 
-Metrics live in:
-
-```text
-xskill/metrics/
-xskill/templates/metrics-report.md
-docs/metrics.md
-```
+See [`docs/metrics.md`](docs/metrics.md).
 
 ---
 
@@ -499,12 +360,11 @@ docs/metrics.md
 Xskill has three layers.
 
 ```text
-1. Agent adapters
+1. Agent install packs
    install/codex/
    install/claude-code/
    install/gemini-cli/
    install/github-copilot-cli/
-   adapters/
 
 2. Portable skill bundle
    xskill/AGENTS.md
@@ -541,8 +401,9 @@ adapters/README.md
 
 ### Current
 
+- Dumb-simple install path
 - Portable Xskill bundle
-- Agent-agnostic adapters
+- Agent-agnostic install packs
 - Compiled Execution Brief
 - Context Budget Contract
 - Context Diet Map
@@ -554,11 +415,11 @@ adapters/README.md
 
 ### Next
 
+- Validate install packs on real agent environments
 - More real examples
 - Better adapter documentation
-- Optional Cursor rules pack
+- Optional Cursor pack
 - Optional OpenCode pack
-- More schema memory cards
 - More before/after runs with metrics
 
 ### Not planned for now

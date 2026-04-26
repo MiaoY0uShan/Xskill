@@ -1,3 +1,19 @@
+# Xskill adapters
+
+Use adapters only if the simple install path is not enough.
+
+For most users:
+
+1. Open `install/`.
+2. Pick your agent.
+3. Copy one folder.
+4. Restart the agent.
+5. Say: `Use Xskill to compile this task before editing code: <task>`.
+
+See `START_HERE.md` and `INSTALL.md` first.
+
+---
+
 # Xskill Adapters
 
 Xskill is agent-agnostic.
