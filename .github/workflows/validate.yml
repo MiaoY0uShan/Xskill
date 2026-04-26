@@ -14,16 +14,21 @@ jobs:
           test -f README.md
           test -f AGENTS.md
           test -f xskill/question-requirements/SKILL.md
+          test -f xskill/semantic-architecture/SKILL.md
           test -f xskill/delete-scope/SKILL.md
           test -f xskill/optimize-path/SKILL.md
           test -f xskill/shorten-iteration/SKILL.md
           test -f xskill/automate-after-stable/SKILL.md
           test -f xskill/semantic-memory/SKILL.md
           test -f xskill/learn-after-run/SKILL.md
+          test -f xskill/templates/question-requirements-report.md
+          test -f xskill/templates/semantic-architecture-report.md
           test -f xskill/templates/execution-brief.md
           test -f xskill/templates/context-budget.md
           test -f xskill/templates/evidence-ledger.md
           test -f xskill/templates/iteration-learning-note.md
+          test -f xskill/examples/password-reset.question-requirements.md
+          test -f xskill/examples/xskill.semantic-architecture.md
       - name: Check portable scope
         run: |
           test ! -f pyproject.toml

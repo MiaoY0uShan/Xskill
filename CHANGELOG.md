@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.1.3 — Semantic architecture sketch
+
+- Added `semantic-architecture` skill.
+- Added `semantic-architecture-report` template.
+- Added Xskill semantic architecture example.
+- Updated README, AGENTS.md, xskill README, design docs, examples, and validation.
+- Kept Xskill portable: no graph database, no runtime, no CLI, no npm, no npx, no pip, and no automatic architecture engine.
+
+## v0.1.2 — Five Whys requirement challenge
+
+- Upgraded `question-requirements` with Five Whys and inversion thinking.
+- Added `question-requirements-report` template.
+- Added password-reset requirement challenge example.
+- Updated README, AGENTS.md, xskill README, design docs, and examples.
+- Kept Xskill portable: no CLI, runtime, npm, npx, pip, or automatic execution loop.
+
 ## v0.1.1 — Self-iteration layer
 
 - Added `learn-after-run` skill.

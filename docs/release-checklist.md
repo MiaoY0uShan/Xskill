@@ -22,3 +22,11 @@ Recommended topics:
 ```text
 ai-agents, coding-agents, agent-skills, agents-md, context-engineering, claude-code, codex, cursor, developer-tools
 ```
+
+## v0.1.3 checklist
+
+- [ ] Confirm `xskill/semantic-architecture/SKILL.md` exists.
+- [ ] Confirm `xskill/templates/semantic-architecture-report.md` exists.
+- [ ] Confirm `xskill/examples/xskill.semantic-architecture.md` exists.
+- [ ] Confirm README shows semantic architecture as optional for multi-module work.
+- [ ] Confirm no CLI, npm, npx, pip, graph database, or runtime was added.

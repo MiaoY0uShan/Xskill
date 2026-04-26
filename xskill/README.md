@@ -18,7 +18,8 @@ your-project/.agents/skills/xskill
 
 ## Skills
 
-- `question-requirements`: challenge assumptions before coding.
+- `question-requirements`: run Five Whys and inversion before coding to reveal the real goal, failure paths, success criteria, and a continue/reduce/ask/stop decision.
+- `semantic-architecture`: after requirements are clarified, sketch the MVP slice, module map, coupling risks, and decoupling rules for larger tasks.
 - `delete-scope`: remove unnecessary work and define boundaries.
 - `optimize-path`: create an execution brief.
 - `shorten-iteration`: split large or failed work into smaller tasks.
@@ -28,6 +29,8 @@ your-project/.agents/skills/xskill
 
 ## Templates
 
+- `templates/question-requirements-report.md`
+- `templates/semantic-architecture-report.md`
 - `templates/execution-brief.md`
 - `templates/context-budget.md`
 - `templates/evidence-ledger.md`
@@ -36,6 +39,20 @@ your-project/.agents/skills/xskill
 ## Use
 
 Ask your agent:
+
+```text
+Use Xskill question-requirements for:
+<task>
+```
+
+For a project, system, feature, refactor, workflow, or multi-module task, ask:
+
+```text
+Use Xskill semantic-architecture after question-requirements for:
+<task>
+```
+
+Then ask:
 
 ```text
 Use Xskill to create an execution brief before editing code:

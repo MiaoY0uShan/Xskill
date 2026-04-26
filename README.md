@@ -8,6 +8,10 @@ Most agent workflows add more context.
 
 Xskill removes context until the task becomes safe to execute.
 
+Before planning, Xskill can run a lightweight Five Whys and inversion pass: what is the real goal, and how could this fail?
+
+For project, system, feature, refactor, workflow, or multi-module tasks, Xskill can then create a lightweight semantic architecture sketch: what is the MVP slice, how do modules relate, and where could coupling make the work fragile?
+
 ```text
 Use Xskill to create an execution brief before editing code:
 Fix password reset bug.
@@ -108,11 +112,13 @@ Final structure:
 ```text
 .agents/skills/xskill/
   question-requirements/SKILL.md
+  semantic-architecture/SKILL.md
   delete-scope/SKILL.md
   optimize-path/SKILL.md
   shorten-iteration/SKILL.md
   automate-after-stable/SKILL.md
   semantic-memory/SKILL.md
+  learn-after-run/SKILL.md
   templates/
   examples/
 ```
@@ -130,14 +136,23 @@ Use Xskill to create an execution brief before editing code:
 <your task>
 ```
 
-For unclear tasks:
+For unclear or risky tasks:
 
 ```text
 Use Xskill question-requirements for:
 <your task>
 ```
 
-For broad tasks:
+The agent should first run Five Whys and inversion before proposing an implementation.
+
+For broad or multi-module tasks:
+
+```text
+Use Xskill semantic-architecture after question-requirements for:
+<your task>
+```
+
+Then reduce scope:
 
 ```text
 Use Xskill delete-scope for:
@@ -173,15 +188,39 @@ Use Xskill shorten-iteration to split this failed task into smaller verified wor
 
 ## Core artifacts
 
-Xskill is built around three artifacts.
+Xskill is built around six lightweight artifacts.
 
-### 1. Execution Brief
+### 1. Question Requirements Report
+
+A pre-planning challenge that uses Five Whys and inversion to identify the real goal, likely failure paths, assumptions, success criteria, non-goals, and a continue/reduce/ask/stop decision.
+
+See: [`xskill/templates/question-requirements-report.md`](xskill/templates/question-requirements-report.md)
+
+### 2. Semantic Architecture Report
+
+A lightweight module map used after requirements are clarified and before implementation planning.
+
+It captures:
+
+- MVP slice
+- modules
+- module relationships
+- coupling risks
+- decoupling rules
+- MVP-first build order
+- deferred modules
+
+See: [`xskill/templates/semantic-architecture-report.md`](xskill/templates/semantic-architecture-report.md)
+
+This is not a graph database or runtime. It is a short planning artifact for larger tasks.
+
+### 3. Execution Brief
 
 A compact task plan that tells the agent what to do, what not to do, and how success will be verified.
 
 See: [`xskill/templates/execution-brief.md`](xskill/templates/execution-brief.md)
 
-### 2. Context Budget
+### 4. Context Budget
 
 A boundary contract for the agent.
 
@@ -196,7 +235,7 @@ It defines:
 
 See: [`xskill/templates/context-budget.md`](xskill/templates/context-budget.md)
 
-### 3. Evidence Ledger
+### 5. Evidence Ledger
 
 A record of what actually happened.
 
@@ -213,7 +252,7 @@ See: [`xskill/templates/evidence-ledger.md`](xskill/templates/evidence-ledger.md
 
 If there is no evidence, the task is not done.
 
-### 4. Iteration Learning Note
+### 6. Iteration Learning Note
 
 A short post-run note that turns evidence into reusable learning.
 
@@ -235,7 +274,8 @@ Xskill does not auto-improve blindly. It learns only from evidence.
 
 | Step | Skill | Purpose |
 |---|---|---|
-| Question | `question-requirements` | Challenge assumptions, risks, and success criteria |
+| Question | `question-requirements` | Run Five Whys and inversion to reveal the real goal, failure paths, assumptions, and decision |
+| Architecture | `semantic-architecture` | Sketch the MVP slice, module map, coupling risks, and decoupling rules for larger tasks |
 | Delete | `delete-scope` | Remove unnecessary work and define scope boundaries |
 | Optimize | `optimize-path` | Create the smallest correct execution path |
 | Shorten | `shorten-iteration` | Split large or failed work into smaller verified tasks |
@@ -274,12 +314,14 @@ For small changes, use only the relevant skill or skip Xskill entirely.
 Xskill should stay small.
 
 1. Do not load long context by default.
-2. Create an execution brief before non-trivial edits.
-3. Respect the context budget.
-4. Touch the smallest possible set of files.
-5. Verify with evidence.
-6. If blocked, split the task smaller.
-7. Do not claim completion without an evidence ledger.
+2. Question vague or risky requests with Five Whys and inversion before planning.
+3. For multi-module work, sketch semantic architecture before deleting scope.
+4. Create an execution brief before non-trivial edits.
+5. Respect the context budget.
+6. Touch the smallest possible set of files.
+7. Verify with evidence.
+8. If blocked, split the task smaller.
+9. Do not claim completion without an evidence ledger.
 
 ---
 
@@ -291,6 +333,7 @@ Xskill/
   AGENTS.md
   xskill/
     question-requirements/SKILL.md
+    semantic-architecture/SKILL.md
     delete-scope/SKILL.md
     optimize-path/SKILL.md
     shorten-iteration/SKILL.md
@@ -298,11 +341,15 @@ Xskill/
     semantic-memory/SKILL.md
     learn-after-run/SKILL.md
     templates/
+      question-requirements-report.md
+      semantic-architecture-report.md
       execution-brief.md
       context-budget.md
       evidence-ledger.md
       iteration-learning-note.md
     examples/
+      password-reset.question-requirements.md
+      xskill.semantic-architecture.md
       password-reset.execution-brief.md
       password-reset.evidence-ledger.md
       password-reset.iteration-learning-note.md
@@ -316,7 +363,7 @@ Xskill/
 
 ## Example
 
-See [`xskill/examples/password-reset.execution-brief.md`](xskill/examples/password-reset.execution-brief.md) and [`xskill/examples/password-reset.evidence-ledger.md`](xskill/examples/password-reset.evidence-ledger.md).
+See [`xskill/examples/password-reset.question-requirements.md`](xskill/examples/password-reset.question-requirements.md), [`xskill/examples/xskill.semantic-architecture.md`](xskill/examples/xskill.semantic-architecture.md), [`xskill/examples/password-reset.execution-brief.md`](xskill/examples/password-reset.execution-brief.md), and [`xskill/examples/password-reset.evidence-ledger.md`](xskill/examples/password-reset.evidence-ledger.md).
 
 ---
 

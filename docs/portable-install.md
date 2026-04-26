@@ -25,11 +25,13 @@ Then copy `AGENTS.md` to your project root if your coding agent supports it.
 ```text
 .agents/skills/xskill/
   question-requirements/SKILL.md
+  semantic-architecture/SKILL.md
   delete-scope/SKILL.md
   optimize-path/SKILL.md
   shorten-iteration/SKILL.md
   automate-after-stable/SKILL.md
   semantic-memory/SKILL.md
+  learn-after-run/SKILL.md
 ```
 
 Restart your coding agent after copying files.

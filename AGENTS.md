@@ -6,16 +6,19 @@ Xskill is a portable skill bundle for context-budgeted AI coding.
 
 Before non-trivial coding tasks:
 
-1. Create or load an Xskill execution brief.
-2. Respect the context budget.
-3. Do not read or modify files outside the declared scope unless necessary.
-4. Run the required checks.
-5. Do not claim completion without an evidence ledger.
-6. If blocked, split the task into a smaller follow-up task instead of retrying blindly.
+1. Run `question-requirements` when the request is vague, large, or risky. Use Five Whys and inversion to identify the real goal and likely failure paths.
+2. For project, system, feature, refactor, workflow, or multi-module tasks, run `semantic-architecture` after requirements are clarified and before deleting scope.
+3. Create or load an Xskill execution brief.
+4. Respect the context budget.
+5. Do not read or modify files outside the declared scope unless necessary.
+6. Run the required checks.
+7. Do not claim completion without an evidence ledger.
+8. If blocked, split the task into a smaller follow-up task instead of retrying blindly.
 
 Available Xskill steps:
 
-- `question-requirements`: question assumptions, risks, and success criteria.
+- `question-requirements`: use Five Whys and inversion to question the request, reveal the real goal, define success criteria, and decide continue/reduce/ask/stop.
+- `semantic-architecture`: after requirements are clarified, sketch the MVP slice, module map, coupling risks, and decoupling rules for larger tasks.
 - `delete-scope`: remove unnecessary work and define files to avoid.
 - `optimize-path`: choose the smallest correct implementation path.
 - `shorten-iteration`: split large or failed work into atomic tasks.
