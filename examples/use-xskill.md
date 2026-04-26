@@ -10,9 +10,10 @@ Fix password reset bug.
 Agent should produce:
 
 1. Question Requirements Report if the task is unclear, risky, or broad. This should include Five Whys and inversion.
-2. Scope cut if the task is broad.
-3. Execution brief before editing.
-4. Evidence ledger after completion.
+2. Delete Scope Report after the real goal is clear. This should cut the task down to the smallest verifiable MVP using first principles and Occam's Razor.
+3. Semantic Architecture Report if the scoped MVP crosses modules or has coupling risk.
+4. Execution brief before editing.
+5. Evidence ledger after completion.
 
 Minimum requirement challenge before code:
 
@@ -30,6 +31,35 @@ Failure path: the agent rewrites auth provider internals or skips a failing test
 
 ## Decision
 reduce_scope
+```
+
+Minimum scope deletion before architecture:
+
+```md
+# Delete Scope Report
+
+## First-Principles Core
+Required user outcome: expired reset tokens are rejected.
+Irreducible capability: reset-token validation checks expiry.
+Required evidence: failing test before fix, passing test after fix.
+
+## Occam Filter
+Keep:
+- reset-token validation fix
+- focused unit test
+
+Delete now:
+- OAuth provider refactor
+- mailer redesign
+- new token abstraction
+
+## MVP Nucleus
+One user outcome: expired reset tokens are rejected.
+One primary workflow: validate an expired reset token and receive rejection.
+Minimum verification: focused regression test passes.
+
+## Recommended Next Skill
+optimize-path
 ```
 
 Minimum execution brief before code:
@@ -52,29 +82,25 @@ Fix password reset bug.
 - Passing test after fix
 ```
 
-## Post-run learning
-
-After the task is complete, ask:
-
-```text
-Use Xskill learn-after-run to extract reusable learning from the evidence ledger.
-```
-
-Keep the learning as a note unless the same issue repeats or the improvement clearly reduces context, scope, or verification risk.
-
 ## Multi-module or architecture-sensitive task
 
-After `question-requirements` clarifies the real goal, ask:
+After `question-requirements` clarifies the real goal, cut scope first:
 
 ```text
-Use Xskill semantic-architecture after question-requirements for:
+Use Xskill delete-scope after question-requirements for:
+<task>
+```
+
+If the scoped MVP still crosses modules, ask:
+
+```text
+Use Xskill semantic-architecture after delete-scope for:
 <task>
 ```
 
 The agent should produce:
 
-- MVP slice,
-- module map,
+- MVP module map,
 - module relationships,
 - coupling risks,
 - decoupling rules,
@@ -84,6 +110,16 @@ The agent should produce:
 Then continue with:
 
 ```text
-Use Xskill delete-scope for:
+Use Xskill optimize-path for:
 <task>
 ```
+
+## Post-run learning
+
+After the task is complete, ask:
+
+```text
+Use Xskill learn-after-run to extract reusable learning from the evidence ledger.
+```
+
+Keep the learning as a note unless the same issue repeats or the improvement clearly reduces context, scope, or verification risk.

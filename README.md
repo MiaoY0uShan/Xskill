@@ -10,7 +10,7 @@ Xskill removes context until the task becomes safe to execute.
 
 Before planning, Xskill can run a lightweight Five Whys and inversion pass: what is the real goal, and how could this fail?
 
-For project, system, feature, refactor, workflow, or multi-module tasks, Xskill can then create a lightweight semantic architecture sketch: what is the MVP slice, how do modules relate, and where could coupling make the work fragile?
+After the real goal is clear, Xskill uses first-principles reasoning and Occam's Razor to cut the request down to the smallest necessary MVP. Only then should larger tasks get a lightweight semantic architecture sketch for module boundaries, coupling risks, and decoupling rules.
 
 ```text
 Use Xskill to create an execution brief before editing code:
@@ -112,8 +112,8 @@ Final structure:
 ```text
 .agents/skills/xskill/
   question-requirements/SKILL.md
-  semantic-architecture/SKILL.md
   delete-scope/SKILL.md
+  semantic-architecture/SKILL.md
   optimize-path/SKILL.md
   shorten-iteration/SKILL.md
   automate-after-stable/SKILL.md
@@ -145,17 +145,17 @@ Use Xskill question-requirements for:
 
 The agent should first run Five Whys and inversion before proposing an implementation.
 
-For broad or multi-module tasks:
+After requirements are clear, cut scope first:
 
 ```text
-Use Xskill semantic-architecture after question-requirements for:
+Use Xskill delete-scope after question-requirements for:
 <your task>
 ```
 
-Then reduce scope:
+For broad or multi-module MVPs, sketch architecture after scope deletion:
 
 ```text
-Use Xskill delete-scope for:
+Use Xskill semantic-architecture after delete-scope for:
 <your task>
 ```
 
@@ -186,7 +186,35 @@ Use Xskill shorten-iteration to split this failed task into smaller verified wor
 
 ---
 
+## First-principles scope deletion
+
+After the real goal is clear, Xskill does not design the full system immediately.
+
+It first asks:
+
+```text
+What is the irreducible user outcome?
+What capability is truly required?
+What evidence proves the MVP works?
+Which entities can be deleted or deferred?
+```
+
+The rule is simple:
+
+> Do not add entities without necessity.
+
+`delete-scope` produces an MVP nucleus before architecture:
+
+- one user outcome
+- one primary workflow
+- minimum artifacts
+- minimum verification
+- explicit non-goals
+
+Then `semantic-architecture` can use that MVP nucleus to define module boundaries and decoupling rules.
+
 ## Core artifacts
+
 
 Xskill is built around six lightweight artifacts.
 
@@ -315,7 +343,7 @@ Xskill should stay small.
 
 1. Do not load long context by default.
 2. Question vague or risky requests with Five Whys and inversion before planning.
-3. For multi-module work, sketch semantic architecture before deleting scope.
+3. For multi-module work, sketch semantic architecture after deleting scope.
 4. Create an execution brief before non-trivial edits.
 5. Respect the context budget.
 6. Touch the smallest possible set of files.

@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.4 - First-principles scope deletion
+
+- Upgraded `delete-scope` with first-principles reasoning and Occam's Razor.
+- Added MVP nucleus output.
+- Added entity inventory and Occam filter.
+- Added MVP module candidates for later semantic architecture.
+- Added `delete-scope-report` template.
+- Added password-reset delete-scope example.
+- Updated workflow order: `question-requirements` -> `delete-scope` -> `semantic-architecture` -> `optimize-path`.
+- Kept Xskill portable: no CLI, runtime, npm, npx, pip, graph system, or automatic architecture engine.
+
+
 ## v0.1.3 — Semantic architecture sketch
 
 - Added `semantic-architecture` skill.

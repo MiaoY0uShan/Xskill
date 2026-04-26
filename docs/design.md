@@ -41,6 +41,7 @@ It does not provide:
 ## Core artifacts
 
 - Question Requirements Report
+- Delete Scope Report
 - Semantic Architecture Report
 - Execution Brief
 - Context Budget
@@ -74,14 +75,47 @@ It should reveal the real goal and likely failure paths before planning. It must
 
 Outputs from this skill should feed later skills:
 
-- real goal -> `semantic-architecture`, `delete-scope`, and `optimize-path`
+- real goal -> `delete-scope`, `semantic-architecture`, and `optimize-path`
 - failure paths -> context budget and stop condition
 - things to avoid -> files to avoid and non-goals
 - success criteria -> evidence ledger
 
+## Scope deletion boundary
+
+`delete-scope` runs after `question-requirements` and before `semantic-architecture`.
+
+It uses first-principles reasoning and Occam's Razor to reduce the real goal into the smallest verifiable MVP.
+
+It should produce:
+
+- first-principles core,
+- entity inventory,
+- Occam filter,
+- MVP nucleus,
+- scope boundary,
+- minimum evidence,
+- MVP module candidates,
+- decoupling notes.
+
+It must not become:
+
+- an implementation plan,
+- a full architecture design,
+- a justification for future-proofing,
+- a reason to add automation,
+- a runtime dependency.
+
+The output should feed later skills:
+
+- MVP nucleus -> `semantic-architecture` or `optimize-path`
+- delete/defer lists -> non-goals and files to avoid
+- module candidates -> decoupling analysis
+- minimum evidence -> evidence ledger
+- stop condition -> context budget
+
 ## Semantic architecture boundary
 
-`semantic-architecture` is an optional planning skill used after `question-requirements` and before `delete-scope` for project, system, feature, refactor, workflow, or multi-module tasks.
+`semantic-architecture` is an optional planning skill used after `delete-scope` for project, system, feature, refactor, workflow, or multi-module MVPs.
 
 It should produce:
 
@@ -103,7 +137,7 @@ It must not become:
 
 The output should feed later skills:
 
-- MVP slice -> `delete-scope`
+- MVP module map -> `optimize-path`
 - coupling risks -> context budget and stop condition
 - decoupling rules -> `optimize-path`
 - deferred modules -> non-goals

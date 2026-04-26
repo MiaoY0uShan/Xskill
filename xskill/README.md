@@ -19,8 +19,8 @@ your-project/.agents/skills/xskill
 ## Skills
 
 - `question-requirements`: run Five Whys and inversion before coding to reveal the real goal, failure paths, success criteria, and a continue/reduce/ask/stop decision.
-- `semantic-architecture`: after requirements are clarified, sketch the MVP slice, module map, coupling risks, and decoupling rules for larger tasks.
-- `delete-scope`: remove unnecessary work and define boundaries.
+- `delete-scope`: after requirements are clarified, use first-principles reasoning and Occam's Razor to cut the request down to the smallest verifiable MVP.
+- `semantic-architecture`: after scope is deleted, sketch the MVP module map, coupling risks, and decoupling rules for larger tasks.
 - `optimize-path`: create an execution brief.
 - `shorten-iteration`: split large or failed work into smaller tasks.
 - `automate-after-stable`: automate only repeated stable workflows.
@@ -30,6 +30,7 @@ your-project/.agents/skills/xskill
 ## Templates
 
 - `templates/question-requirements-report.md`
+- `templates/delete-scope-report.md`
 - `templates/semantic-architecture-report.md`
 - `templates/execution-brief.md`
 - `templates/context-budget.md`
@@ -45,10 +46,17 @@ Use Xskill question-requirements for:
 <task>
 ```
 
-For a project, system, feature, refactor, workflow, or multi-module task, ask:
+Then cut scope:
 
 ```text
-Use Xskill semantic-architecture after question-requirements for:
+Use Xskill delete-scope after question-requirements for:
+<task>
+```
+
+For a project, system, feature, refactor, workflow, or multi-module MVP, ask:
+
+```text
+Use Xskill semantic-architecture after delete-scope for:
 <task>
 ```
 

@@ -1,23 +1,23 @@
 ---
 name: xskill-semantic-architecture
-description: Use after requirements are clarified and before scope deletion or implementation when a task is a project, system, feature, architecture change, or multi-module workflow. Produces a lightweight semantic architecture sketch, MVP slice, module map, coupling risks, and decoupling rules without building a graph runtime.
+description: Use after delete-scope when the scoped MVP crosses modules or has coupling risk. Produces a lightweight semantic architecture sketch, module map, coupling risks, and decoupling rules without building a graph runtime.
 ---
 
 # Xskill: Semantic Architecture
 
-Create a lightweight architecture sketch before planning multi-module work.
+Create a lightweight architecture sketch after MVP scope is deleted.
 
-This skill turns clarified requirements into a small module map so the agent can build the MVP first and avoid accidental coupling.
+This skill turns a scoped MVP into a small module map so the agent can build the MVP first and avoid accidental coupling.
 
 Do not write code while using this skill.
 
 ## Use when
 
-Use this skill after `question-requirements` when:
+Use this skill after `delete-scope` when:
 
 - The task describes a project, system, new feature, refactor, workflow, or automation.
 - The work may span multiple modules, files, skills, templates, or docs.
-- The MVP is not obvious.
+- The MVP nucleus is clear but module boundaries are not obvious.
 - Scope could expand quickly.
 - Coupling risk matters.
 - The agent is tempted to plan implementation without first identifying module boundaries.
@@ -56,7 +56,7 @@ The report should make the next task smaller, safer, and easier to verify.
 Use available context from:
 
 - the user request,
-- `question-requirements` output,
+- `delete-scope` output,
 - stated goal,
 - likely real goal,
 - success criteria,
@@ -70,10 +70,10 @@ If project structure is unknown, infer a minimal module map and label it as an a
 
 ### 1. Restate the clarified goal
 
-Use the real goal from `question-requirements` if available.
+Use the MVP nucleus from `delete-scope` if available.
 
 ```text
-Clarified goal:
+Scoped MVP:
 ...
 ```
 
@@ -143,8 +143,8 @@ Example:
 
 ```text
 [question-requirements]
-  -> [semantic-architecture]
   -> [delete-scope]
+  -> [semantic-architecture]
   -> [optimize-path]
   -> [execution-brief]
 
@@ -215,7 +215,7 @@ Typical deferrals:
 
 Usually choose:
 
-- `delete-scope` if the architecture has too many modules,
+- `delete-scope` if the MVP scope is still too large,
 - `optimize-path` if the MVP is clear,
 - `shorten-iteration` if the work is still too large,
 - `semantic-memory` if the next task requires a narrow context slice.
@@ -263,7 +263,7 @@ stop
 
 Use:
 
-- `mvp_ready` when the module map is clear enough for `delete-scope` or `optimize-path`.
+- `mvp_ready` when the module map is clear enough for `optimize-path`.
 - `reduce_scope` when too many modules are being pulled into the first version.
 - `needs_context` when basic project structure is unknown and blocks the module map.
 - `stop` when the architecture would violate the project's non-goals or make the workflow too heavy.
@@ -290,5 +290,5 @@ Recommended Next Skill: semantic-memory
 - Do not require this skill for small tasks.
 - Do not turn optional modules into hard dependencies.
 - Do not expand the MVP.
-- Do not replace `delete-scope`; this skill should feed it.
+- Do not replace `delete-scope`; this skill should consume its MVP nucleus.
 - Do not produce architecture that cannot be verified by the next task.
