@@ -2,60 +2,38 @@
 
 **Context diet for AI coding agents.**
 
-Xskill is a portable task compiler for AI coding agents.
+AI coding agents do not need more context.
 
-It does not give agents a longer prompt. It helps them compile a vague coding task into a short, bounded, verifiable **Execution Brief**.
+They need a smaller task, a harder boundary, and proof that the work is done.
 
-```text
-user task
-  ↓
-question requirements
-  ↓
-delete scope
-  ↓
-semantic architecture
-  ↓
-optimize path
-  ↓
-shorten iteration
-  ↓
-compiled execution brief
-  ↓
-agent execution
-  ↓
-evidence ledger
-  ↓
-metrics report
-  ↓
-adaptive improvement
-  ↓
-schema memory
-```
-
-Most agent workflows add more context.
-
-Xskill removes context until the task becomes safe to execute.
+Xskill turns vague coding requests into **bounded, verifiable Execution Briefs**.
 
 **Less context. Smaller changes. Verified progress.**
 
 ---
 
-## 10-second demo
+## Demo
 
-Ask your coding agent:
+Tell your coding agent:
 
 ```text
 Use Xskill to compile this task into an Execution Brief before editing code:
 Add password reset flow.
 ```
 
-Expected compiled output:
+Expected output:
 
 ```json
 {
   "task": "Add password reset flow",
   "real_goal": "Allow users to reset passwords safely without refactoring auth provider internals",
   "mvp_scope": "Reset token generation and validation only",
+  "must_not_do": [
+    "Do not rewrite the auth provider",
+    "Do not touch OAuth login",
+    "Do not build admin reset",
+    "Do not add a full email abstraction yet"
+  ],
   "context_budget_contract": {
     "max_files_to_read": 5,
     "max_files_to_touch": 3,
@@ -74,42 +52,58 @@ Expected compiled output:
     "files_to_avoid": ["src/oauth/**", "src/billing/**", "src/auth/provider/**"],
     "reason": "Task only touches reset-token validation, not OAuth provider internals"
   },
+  "tdd_micro_loops": [
+    {
+      "loop": 1,
+      "red": "Expired reset token is rejected",
+      "green": "Implement minimal expiry validation",
+      "evidence": "Focused test passes"
+    }
+  ],
   "checks": ["pytest tests/auth/test_reset.py"],
-  "evidence_required": ["failing test before fix", "passing focused test after fix", "no unrelated files touched"],
-  "failure_to_smaller_task_protocol": {
-    "failure_split_rule": "If implementation requires auth provider refactor, stop and split into a smaller seam task"
-  }
+  "evidence_required": [
+    "failing test before fix",
+    "passing focused test after fix",
+    "no unrelated files touched"
+  ],
+  "stop_condition": "Stop if implementation requires auth provider refactor"
 }
 ```
 
 That JSON is the product moment.
 
-Xskill is not just a prompt pack. The primary output is a compiled Execution Brief that a coding agent can execute.
+Xskill is not a longer prompt. It is a task compiler.
 
 ---
 
-## What Xskill is
+## Problem
 
-Xskill is **not** a CLI, npm package, Python package, autonomous agent, database, or full runtime.
+AI coding agents are powerful, but they often fail in predictable ways.
 
-Xskill is a **portable skill bundle**:
+| Without Xskill | With Xskill |
+|---|---|
+| Reads too much context | Reads only the relevant slice |
+| Touches unrelated files | Gets a context contract |
+| Accepts the first request literally | Questions the real goal first |
+| Builds the full idea too early | Deletes scope down to MVP |
+| Creates a big plan | Compiles a small execution brief |
+| Says “done” without proof | Produces an evidence ledger |
+| Retries failed work blindly | Splits failure into smaller verified work |
+| Stores vague memory | Stores reusable task schemas |
 
-```text
-Download zip.
-Unzip.
-Copy the xskill/ folder into your agent skills directory.
-Use it with your coding agent.
-```
+The failure mode is not that agents are lazy.
 
-It works best with agents that can read `SKILL.md` files or repository instructions such as `AGENTS.md`. If your agent does not support skills directly, open the relevant `SKILL.md` file and paste it into the agent before a task.
+The failure mode is that they are unconstrained.
 
 ---
 
-## The four differentiators
+## Solution
+
+Xskill gives each non-trivial task four hard artifacts.
 
 ### 1. Context Budget Contract
 
-Every non-trivial task should produce a hard context contract:
+A task starts with a budget.
 
 ```json
 {
@@ -120,27 +114,67 @@ Every non-trivial task should produce a hard context contract:
   "required_semantic_nodes": [],
   "required_schema_cards": [],
   "forbidden_context": [],
-  "scope_boundary": "Do not modify auth provider internals"
+  "scope_boundary": "Do not modify auth provider internals",
+  "violation_handling": "Stop and split smaller before exceeding the contract"
 }
 ```
 
-If the agent needs to exceed the contract, it must stop and ask for a revised contract or split the task smaller.
+If the agent needs to exceed the contract, it must stop.
 
-### 2. Evidence Ledger
+It should not silently expand the task.
+
+### 2. Context Diet Map
+
+Most memory systems add context.
+
+Xskill removes context.
+
+```json
+{
+  "relevant_nodes": [],
+  "irrelevant_nodes": [],
+  "files_to_read": [],
+  "files_to_avoid": [],
+  "reason": "Task only touches reset-token validation, not OAuth provider internals"
+}
+```
+
+The goal is not to remember everything.
+
+The goal is to decide what does not belong in this run.
+
+### 3. Evidence Ledger
 
 Every agent claim needs evidence.
 
-A completed task records files read, files touched, commands run, verified claims, unverified claims, scope violations, and next action.
+```json
+{
+  "task_id": "T001",
+  "files_read": [],
+  "files_touched": [],
+  "commands_run": [
+    {
+      "command": "pytest tests/auth/test_reset.py",
+      "result": "pass"
+    }
+  ],
+  "claims": [
+    {
+      "claim": "Expired reset tokens are rejected",
+      "evidence": "Focused test passed"
+    }
+  ],
+  "unverified_claims": [],
+  "scope_violations": [],
+  "next_action": "Merge or run integration test"
+}
+```
 
 No evidence means the task is not done.
 
-### 3. Failure-to-Smaller-Task Protocol
+### 4. Failure-to-Smaller-Task Protocol
 
 Failed runs should shrink the work.
-
-Do not blindly retry the same task.
-
-A failed or blocked run should produce:
 
 ```json
 {
@@ -155,115 +189,253 @@ A failed or blocked run should produce:
 }
 ```
 
-### 4. Context Diet Map
+Xskill turns failed agent runs into smaller verified work.
 
-Xskill is not generic memory.
+---
 
-It uses context only to decide what does and does not belong in the current task.
+## Quickstart
 
-A Context Diet Map says:
+Xskill does not require npm, npx, pip, a CLI, a database, or a runtime.
 
-```json
-{
-  "relevant_nodes": [],
-  "irrelevant_nodes": [],
-  "files_to_read": [],
-  "files_to_avoid": [],
-  "reason": "Task only touches reset-token validation, not OAuth provider internals"
-}
+### 1. Download
+
+Download the latest release zip from GitHub Releases.
+
+### 2. Unzip
+
+You should see:
+
+```text
+xskill/
+  question-requirements/
+  delete-scope/
+  semantic-architecture/
+  optimize-path/
+  shorten-iteration/
+  evidence-ledger/
+  metrics/
+  adaptive-improvement/
+  schema-memory/
+  templates/
+  examples/
 ```
 
-Other memory systems add context. Xskill removes context.
+### 3. Copy
 
----
+Copy the `xskill/` folder into your agent skills directory.
 
-## Why this exists
-
-AI coding agents are powerful, but they often fail in predictable ways:
-
-| Without Xskill | With Xskill |
-|---|---|
-| Reads too much context | Gets a Context Budget Contract |
-| Touches unrelated files | Gets files to read, touch, and avoid |
-| Starts from a vague request | Compiles the request into an Execution Brief |
-| Builds too much | Deletes scope down to MVP |
-| Says “done” without proof | Produces an Evidence Ledger |
-| Retries failed tasks blindly | Uses a Failure-to-Smaller-Task Protocol |
-| Uses memory to add context | Uses Context Diet Maps to remove context |
-| Learns from vibes | Learns from evidence-backed schemas |
-
-Xskill focuses on one job:
-
-> Turn vague agent work into bounded, verifiable execution.
-
----
-
-## Install
-
-Xskill does not require npm, npx, pip, Python, or a command-line tool.
-
-1. Download the latest `xskill-v*.zip` from GitHub Releases.
-2. Unzip it.
-3. Copy the `xskill/` folder into your agent skills directory.
-
-Recommended global location:
+Common locations:
 
 ```text
 ~/.agents/skills/xskill
 ```
 
-Recommended project-local location:
+or inside a project:
 
 ```text
 your-project/.agents/skills/xskill
 ```
 
-Optionally copy `AGENTS.md` into your project root.
+### 4. Add AGENTS.md
 
----
+Copy the included `AGENTS.md` into the root of your project if your agent supports repository instructions.
 
-## Skills
+### 5. Use
+
+Ask your agent:
 
 ```text
-question-requirements     Five Whys, inversion, real goal, failure paths
-delete-scope              first principles, Occam filter, MVP nucleus
-semantic-architecture     MVP module boundaries and decoupling rules
-optimize-path             small-batch route and compiled Execution Brief
-shorten-iteration         TDD micro-loops and failure split protocol
-evidence-ledger           evidence-first audit record
-metrics                   TVP, scope creep, verification, rework, context load
-adaptive-improvement      evidence-backed improvement decisions
-schema-memory             reusable task schemas, not raw context
+Use Xskill to compile this task into an Execution Brief before editing code:
+<your task>
 ```
 
+If your agent does not support skills directly, open the relevant `SKILL.md` file and paste it into the agent before starting the task.
+
 ---
 
-## Primary artifacts
+## Workflow
+
+Xskill is a portable task compiler.
 
 ```text
-Compiled Execution Brief
-Context Budget Contract
-Context Diet Map
-Failure-to-Smaller-Task Protocol
-Evidence Ledger
-Metrics Report
-Adaptive Improvement Report
-Schema Memory Card
+user task
+  ↓
+question-requirements
+  ↓
+delete-scope
+  ↓
+semantic-architecture
+  ↓
+optimize-path
+  ↓
+shorten-iteration
+  ↓
+compiled execution brief
+  ↓
+agent execution
+  ↓
+evidence-ledger
+  ↓
+metrics
+  ↓
+adaptive-improvement
+  ↓
+schema-memory
+```
+
+### 1. Question requirements
+
+Use Five Whys and inversion to find the real goal.
+
+The agent asks:
+
+```text
+What is the stated goal?
+What is the likely real goal?
+Why does this need to exist?
+How would this fail?
+Should we continue, reduce scope, ask the user, or stop?
+```
+
+### 2. Delete scope
+
+Use first principles and Occam’s Razor.
+
+Keep only what is necessary for the smallest useful MVP.
+
+```text
+凡无必要，勿增实体。
+```
+
+### 3. Sketch semantic architecture
+
+Only for multi-module tasks.
+
+Generate a lightweight module map, coupling risks, decoupling rules, and MVP-first build order.
+
+No graph database. No architecture engine.
+
+### 4. Optimize path
+
+Choose the smallest stable route.
+
+Xskill uses:
+
+- small-batch quick response
+- agile working increments
+- lean waste removal
+- minimal just-in-case safety buffers
+
+The result is a selected path that can be verified.
+
+### 5. Shorten iteration
+
+Large or failed tasks become TDD micro-loops.
+
+```text
+RED → GREEN → REFACTOR → EVIDENCE
+```
+
+### 6. Compile Execution Brief
+
+The upstream outputs are compressed into one short artifact.
+
+The brief tells the agent:
+
+- what to do
+- why it matters
+- what not to do
+- what files to read
+- what files to avoid
+- how to verify
+- when to stop
+
+### 7. Record evidence
+
+After execution, the agent must produce an Evidence Ledger.
+
+### 8. Measure
+
+The Metrics Report records context load, verification, rework, and scope creep.
+
+### 9. Improve only from evidence
+
+Adaptive improvement can update schema memory, templates, checklists, or automation candidates.
+
+It does not auto-modify skills blindly.
+
+Xskill learns from evidence, not confidence.
+
+---
+
+## Examples
+
+### Before Xskill
+
+```text
+Task: Add password reset flow.
+
+Agent reads auth, OAuth, billing, user profile, email, admin tools.
+Agent rewrites the auth provider.
+Agent adds three abstractions.
+Agent says “done”.
+No focused test proves token expiry.
+```
+
+### After Xskill
+
+```text
+Task: Add password reset flow.
+
+Real goal:
+Reset token generation and validation only.
+
+MVP scope:
+No OAuth refactor. No admin reset. No full email abstraction.
+
+Context budget:
+Read at most 5 files. Touch at most 3 files.
+
+Context diet:
+Avoid src/oauth/** and src/billing/**.
+
+TDD micro-loop:
+Expired token rejected → minimal expiry validation → focused test passes.
+
+Evidence:
+Failing test before fix. Passing test after fix. No unrelated files touched.
+```
+
+### Included examples
+
+```text
+xskill/examples/password-reset.question-requirements.md
+xskill/examples/password-reset.delete-scope.md
+xskill/examples/xskill.semantic-architecture.md
+xskill/examples/password-reset.optimize-path.md
+xskill/examples/password-reset.shorten-iteration.md
+xskill/examples/password-reset.compiled-execution-brief.json
+xskill/examples/password-reset.context-budget-contract.json
+xskill/examples/password-reset.context-diet-map.md
+xskill/examples/password-reset.evidence-ledger.json
+xskill/examples/password-reset.metrics-report.md
+xskill/examples/password-reset.failure-to-smaller-task.md
+xskill/examples/password-reset.adaptive-improvement.md
 ```
 
 ---
 
 ## Metrics
 
-Xskill is designed to reduce context load, scope creep, and unverifiable work.
-
-Primary metric:
+The primary metric is **TVP**.
 
 ```text
 TVP = total_context_tokens / verified_tasks_completed
 ```
 
-When exact token counts are unavailable:
+Lower is better.
+
+When exact token counts are unavailable, use a proxy:
 
 ```text
 Context Load Proxy = files_read + skills_loaded + reports_generated
@@ -272,43 +444,189 @@ Proxy TVP = context_load_proxy / verified_tasks_completed
 
 Supporting metrics:
 
-```text
-Scope Creep Rate     = touched_unplanned_files / touched_files
-Verification Rate    = tasks_with_checks / completed_tasks
-Rework Rate          = failed_or_reopened_tasks / completed_tasks
-Context Load Size    = files_loaded_per_task
-Iteration Half-life  = time_to_first_verified_slice
-```
+| Metric | Formula | What it catches |
+|---|---|---|
+| Scope Creep Rate | `touched_unplanned_files / touched_files` | Agent touched files outside the brief |
+| Verification Rate | `tasks_with_checks / completed_tasks` | Agent claimed completion without checks |
+| Rework Rate | `failed_or_reopened_tasks / completed_tasks` | Work had to be redone |
+| Context Load Size | `files_loaded_per_task` | Agent read too much |
+| Iteration Half-life | `time_to_first_verified_slice` | Agent took too long to produce verified progress |
+
+Xskill is not just a methodology.
+
+It is designed to be measured.
 
 ---
 
-## When not to use Xskill
+## Architecture
+
+Xskill has no runtime state by default.
+
+It is a portable folder of skills, templates, and examples.
+
+```text
+xskill/
+  question-requirements/
+    SKILL.md
+  delete-scope/
+    SKILL.md
+  semantic-architecture/
+    SKILL.md
+  optimize-path/
+    SKILL.md
+  shorten-iteration/
+    SKILL.md
+  evidence-ledger/
+    SKILL.md
+  metrics/
+    SKILL.md
+  adaptive-improvement/
+    SKILL.md
+  schema-memory/
+    SKILL.md
+  templates/
+    compiled-execution-brief.md
+    context-budget-contract.md
+    context-budget-contract.json
+    context-diet-map.md
+    evidence-ledger.md
+    failure-to-smaller-task-protocol.md
+    metrics-report.md
+    schema-memory-card.md
+  examples/
+    password-reset.compiled-execution-brief.json
+    password-reset.context-budget-contract.json
+    password-reset.evidence-ledger.json
+```
+
+### Optional artifact state
+
+If you want to keep task artifacts inside your project, use a lightweight folder such as:
+
+```text
+.xskill/
+  runs/
+    T001/
+      compiled-execution-brief.json
+      context-budget-contract.json
+      context-diet-map.md
+      evidence-ledger.json
+      metrics-report.md
+      adaptive-improvement.md
+```
+
+This folder is optional.
+
+Xskill does not require a database, daemon, CLI, or background process.
+
+---
+
+## When to use Xskill
+
+Use Xskill for:
+
+- unclear requirements
+- new features
+- refactors
+- bug fixes with risk
+- auth, billing, data, permissions, or security work
+- tasks that may touch multiple modules
+- tasks where agent scope creep would be expensive
 
 Do not use the full workflow for:
 
-- tiny typo fixes;
-- trivial formatting;
-- one-line copy edits;
-- tasks whose scope and verification are already obvious.
+- typo fixes
+- formatting
+- trivial copy changes
+- obvious one-line edits
 
-Use Xskill when scope, context, verification, or failure risk matters.
+For small tasks, use only the relevant skill or just the compiled Execution Brief template.
+
+---
+
+## Roadmap
+
+### Current
+
+- Portable skill bundle
+- Compiled Execution Brief
+- Context Budget Contract
+- Context Diet Map
+- Evidence Ledger
+- Failure-to-Smaller-Task Protocol
+- Metrics Layer
+- Adaptive Improvement
+- Schema Memory
+
+### Next
+
+- More real examples
+- More before/after task comparisons
+- Agent-specific installation notes
+- Stronger schema memory examples
+- Better metrics examples with real token data
+
+### Later
+
+- Optional adapter docs for Claude Code, Codex, Cursor, Copilot, and OpenCode
+- Optional report packs for teams
+- Optional benchmark dataset
+
+### Not planned for now
+
+- CLI
+- npm package
+- npx command
+- pip package
+- database
+- daemon
+- automatic executor
+- graph engine
+- self-modifying runtime
 
 ---
 
 ## Philosophy
 
-```text
-Question first.
-Delete aggressively.
-Design only the MVP.
-Choose the smallest stable path.
-Split failure into smaller verified work.
-Demand evidence.
-Measure the result.
-Learn only from evidence.
-```
+Most agent systems try to become smarter by adding more context.
 
-Xskill learns from evidence, not confidence.
+Xskill tries to become safer by removing context.
+
+Most agents say they are done.
+
+Xskill asks for evidence.
+
+Most failed loops retry.
+
+Xskill splits the work smaller.
+
+Most memory systems store more.
+
+Xskill stores reusable schemas.
+
+**Think smaller. Execute tighter. Prove progress.**
+
+---
+
+## Influences
+
+Xskill is influenced by ideas from:
+
+- Five-step engineering methods
+- Toyota Five Whys
+- Occam’s Razor
+- first-principles reasoning
+- small-batch quick response
+- agile development
+- lean software development
+- TDD
+- context engineering
+- evidence-based review
+- adaptive learning loops
+
+Xskill does not copy prompts or workflows from other projects.
+
+It compresses general execution mechanisms into a smaller portable skill system.
 
 ---
 
