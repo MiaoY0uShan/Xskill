@@ -38,3 +38,11 @@ Suggested notes:
 - Added GitHub Copilot CLI custom agent pack
 - Kept Xskill portable: no Xskill CLI, npm, npx, pip, database, runtime, or automatic executor
 ```
+
+## v0.1.11 self-use evidence checklist
+
+- [ ] README includes Preliminary self-use evidence section.
+- [ ] `docs/case-studies.md` explains measurement method.
+- [ ] Five case-study files exist in `examples/case-studies/`.
+- [ ] The results are described as preliminary, not as a full external benchmark.
+- [ ] Release notes do not claim exact hosted-agent token savings.

@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.1.11 — Self-use evidence case studies
+
+- Added preliminary self-use evidence to README.
+- Added five repository-maintenance case studies.
+- Added docs/case-studies.md with token reduction method and results.
+- Added case-study examples under examples/case-studies and xskill/examples/case-studies.
+- Clarified that these are preliminary self-use cases, not an external 10-task benchmark.
+
+
 ## v0.1.11 — Agent-agnostic adapters
 
 - Added ready-made install packs for Codex, Claude Code, Gemini CLI, and GitHub Copilot CLI.

@@ -419,6 +419,44 @@ Produce evidence before claiming completion.
 
 ---
 
+## Preliminary self-use evidence
+
+These are **self-use case studies** from building Xskill itself. They are not yet an external benchmark across unrelated repositories.
+
+The goal is to test whether Xskill can reduce prompt/context volume, reduce scope drift, and turn failures into smaller verified work.
+
+Token numbers below are approximate. They are estimated with a simple `characters / 4` rule, rounded to the nearest token. The baseline is a monolithic-agent setup that loads the README, `xskill/AGENTS.md`, all `SKILL.md` files, and all templates. In this repository, that baseline is about **19,562 tokens**.
+
+| Case | Real task | Baseline context | Xskill loaded context | Reduction | Drift control | Verification / failure result |
+|---|---|---:|---:|---:|---|---|
+| 1 | Rewrite install docs so users no longer copy a root `AGENTS.md` | 19,562 | 7,120 | 63.6% | Limited to README/install wording | Required evidence: docs updated, no runtime added |
+| 2 | Add Codex adapter guidance without binding Xskill to Codex | 19,562 | 8,112 | 58.5% | Adapter-only boundary | Required evidence: Codex path documented, generic protocol unchanged |
+| 3 | Add JSON Evidence Ledger audit example | 19,562 | 6,808 | 65.2% | Evidence files only | Required evidence: verified/unverified claims represented explicitly |
+| 4 | Split a failed password-reset flow into smaller TDD work | 19,562 | 7,520 | 61.6% | No full auth rewrite | Failure converted into smaller tasks and focused checks |
+| 5 | Add metrics report for TVP, scope creep, verification, and rework | 19,562 | 8,365 | 57.2% | Metrics-only addition | Required evidence: TVP proxy and supporting metrics recorded |
+
+Average context reduction across these five self-use cases: **61.2%**.
+
+What this proves so far:
+
+- Xskill can keep task-specific loaded context under the 50% reduction target for these repository-maintenance tasks.
+- Xskill can express scope boundaries before execution.
+- Xskill can require checks and evidence instead of accepting "done" as a claim.
+- Xskill can turn at least one failure scenario into smaller TDD micro-loops.
+
+What this does **not** prove yet:
+
+- It does not prove performance across 10 unrelated external repositories.
+- It does not prove exact model token savings from hosted agent APIs.
+- It does not prove lower bug rate without a controlled before/after benchmark.
+
+Next benchmark target:
+
+- Run 10 external tasks with and without Xskill.
+- Record irrelevant file edits, skipped verification, scope expansion, misunderstood requirements, and rework.
+- Publish the raw Evidence Ledgers and Metrics Reports.
+
+
 ## Metrics
 
 Xskill is designed to reduce context load, scope creep, and unverifiable work.
