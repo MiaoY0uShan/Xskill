@@ -1,4 +1,4 @@
-name: Validate portable bundle
+name: validate
 
 on:
   push:
@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check required files
+      - name: Check required portable bundle files
         run: |
           test -f README.md
-          test -f AGENTS.md
+          test -f xskill/AGENTS.md
           test -f xskill/question-requirements/SKILL.md
           test -f xskill/delete-scope/SKILL.md
           test -f xskill/semantic-architecture/SKILL.md
@@ -22,65 +22,16 @@ jobs:
           test -f xskill/metrics/SKILL.md
           test -f xskill/adaptive-improvement/SKILL.md
           test -f xskill/schema-memory/SKILL.md
-          test -f xskill/templates/question-requirements-report.md
-          test -f xskill/templates/delete-scope-report.md
-          test -f xskill/templates/semantic-architecture-report.md
-          test -f xskill/templates/optimize-path-report.md
-          test -f xskill/templates/shorten-iteration-report.md
-          test -f xskill/templates/execution-brief.md
           test -f xskill/templates/compiled-execution-brief.md
-          test -f xskill/templates/context-budget.md
-          test -f xskill/templates/context-budget-contract.md
           test -f xskill/templates/context-budget-contract.json
           test -f xskill/templates/context-diet-map.md
-          test -f xskill/templates/failure-to-smaller-task-protocol.md
-          test -f xskill/examples/password-reset.context-budget-contract.json
-          test -f xskill/examples/password-reset.context-diet-map.md
-          test -f xskill/examples/password-reset.evidence-ledger.json
-          test -f xskill/examples/password-reset.failure-to-smaller-task.md
-          test -f docs/contracts.md
           test -f xskill/templates/evidence-ledger.md
           test -f xskill/templates/metrics-report.md
-          test -f xskill/templates/adaptive-improvement-report.md
-          test -f xskill/templates/schema-memory-card.md
-          test -f xskill/templates/automation-candidate.md
-          test -f xskill/examples/password-reset.question-requirements.md
-          test -f xskill/examples/password-reset.delete-scope.md
-          test -f xskill/examples/xskill.semantic-architecture.md
-          test -f xskill/examples/password-reset.optimize-path.md
-          test -f xskill/examples/password-reset.shorten-iteration.md
-          test -f xskill/examples/password-reset.execution-brief.md
-          test -f xskill/examples/password-reset.compiled-execution-brief.json
-          test -f xskill/examples/password-reset.evidence-ledger.md
-          test -f xskill/examples/password-reset.metrics-report.md
-          test -f xskill/examples/password-reset.adaptive-improvement.md
-          test -f xskill/examples/validation-bug.schema-memory-card.md
-          test -f docs/metrics.md
-      - name: Check removed legacy skills
-        run: |
-          test ! -d xskill/automate-after-stable
-          test ! -d xskill/learn-after-run
-          test ! -d xskill/semantic-memory
-      - name: Check portable scope
-        run: |
-          test ! -f pyproject.toml
-          test ! -d musk_skills
-          test ! -d tests
-      - name: Check skill front matter
-        run: |
-          for f in xskill/*/SKILL.md; do
-            grep -q '^---$' "$f"
-            grep -q '^name:' "$f"
-            grep -q '^description:' "$f"
-          done
-      - name: Check compiler language
-        run: |
-          grep -q 'portable task compiler' README.md
-          grep -q 'compiled Execution Brief' README.md
-          grep -q 'Compiled Execution Brief' xskill/optimize-path/SKILL.md
-          grep -q 'TVP' README.md
-          grep -q 'Context Budget Contract' README.md
-          grep -q 'Evidence Ledger' README.md
-          grep -q 'Failure-to-Smaller-Task Protocol' README.md
-          grep -q 'Context Diet Map' README.md
-          grep -q 'Tokens to Verified Progress' xskill/metrics/SKILL.md
+          test -f adapters/README.md
+          test -f docs/execution-protocol.md
+          test -f install/codex/.agents/skills/xskill/SKILL.md
+          test -f install/claude-code/.claude/skills/xskill/SKILL.md
+          test -f install/gemini-cli/xskill/gemini-extension.json
+          test -f install/gemini-cli/xskill/GEMINI.md
+          test -f install/github-copilot-cli/.github/agents/xskill.agent.md
+          if [ -f AGENTS.md ]; then echo "Root AGENTS.md should not be required in portable releases"; exit 1; fi

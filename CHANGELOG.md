@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.11 — Agent-agnostic adapters
+
+- Added ready-made install packs for Codex, Claude Code, Gemini CLI, and GitHub Copilot CLI.
+- Moved the agent contract into `xskill/AGENTS.md` so users do not need to copy a separate root `AGENTS.md`.
+- Added `adapters/` documentation.
+- Added `docs/execution-protocol.md`.
+- Added single-folder `xskill` skill packs for Codex and Claude Code.
+- Added Gemini CLI extension pack.
+- Added GitHub Copilot CLI custom agent pack.
+- Kept Xskill portable: no Xskill CLI, npm, npx, pip, database, runtime, token tracker, graph engine, or automatic executor.
+
+
 ## v0.1.9 — Contracts layer
 
 - Added Context Budget Contract template and JSON contract.

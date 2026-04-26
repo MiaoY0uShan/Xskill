@@ -1,48 +1,61 @@
 # Portable Install
 
-Xskill does not require npm, npx, pip, Python, or a command-line tool.
+Xskill does not require an Xskill CLI, npm package, npx command, pip package, database, or runtime.
 
-## Install globally
+Download the release zip and choose the ready-made install pack for your agent.
 
-1. Download the latest `xskill-v*.zip` from GitHub Releases.
-2. Unzip it.
-3. Copy `xskill/` to:
+## Codex
+
+Copy:
 
 ```text
-~/.agents/skills/xskill
+install/codex/.agents
 ```
 
-4. Restart your coding agent.
+Into your repository root.
 
-## Install inside one project
+## Claude Code
 
-Copy `xskill/` to:
+Copy:
 
 ```text
-your-project/.agents/skills/xskill
+install/claude-code/.claude
 ```
 
-Optionally copy `AGENTS.md` into the project root.
+Into your repository root.
 
-## First use
+## Gemini CLI
 
-Ask your agent:
+Copy:
 
 ```text
-Use Xskill to compile this task into an Execution Brief before editing code:
+install/gemini-cli/xskill
+```
+
+To:
+
+```text
+~/.gemini/extensions/xskill
+```
+
+Restart Gemini CLI.
+
+## GitHub Copilot CLI
+
+Copy:
+
+```text
+install/github-copilot-cli/.github
+install/github-copilot-cli/xskill
+```
+
+Into your repository root.
+
+## Generic agents
+
+Keep `xskill/` in your project and ask the agent:
+
+```text
+Use the Xskill protocol in xskill/AGENTS.md. Read only the relevant Xskill module files. Compile this task into a bounded Execution Brief before editing code:
 <task>
 ```
-
-The final output should be a compiled Execution Brief, not a long prompt.
-
-
-## v0.1.9 contracts layer
-
-Xskill now treats four artifacts as core differentiators:
-
-- Context Budget Contract;
-- Evidence Ledger;
-- Failure-to-Smaller-Task Protocol;
-- Context Diet Map.
-
-These keep the bundle portable while making each run bounded, auditable, failure-shrinking, and context-reducing.

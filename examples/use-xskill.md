@@ -1,95 +1,39 @@
-# Example: Using Xskill
+# Use Xskill
 
-## Goal
+Use Xskill with any coding agent that can read Markdown files, skills, extensions, or custom agent profiles.
 
-Use Xskill to compile a vague coding task into one bounded Execution Brief.
-
-## User prompt
+## Prompt
 
 ```text
-Use Xskill to compile this task into an Execution Brief before editing code:
-Fix password reset bug.
+Use Xskill to compile this task into a bounded Execution Brief before editing code:
+<task>
 ```
 
-## Expected agent behavior
+## Expected result
 
-The agent should not edit code immediately.
+The agent should produce:
 
-It should run the Xskill gates:
+- Compiled Execution Brief
+- Context Budget Contract
+- Context Diet Map
+- Evidence requirements
+- Stop condition
+
+After execution, the agent should produce:
+
+- Evidence Ledger
+- Metrics Report, when measurement matters
+- Adaptive Improvement Report, when reusable learning appears
+- Schema Memory Card, only after repeated evidence
+```
+
+## Install packs
+
+Use one of:
 
 ```text
-question-requirements
-→ delete-scope
-→ semantic-architecture if needed
-→ optimize-path
-→ shorten-iteration if needed
-→ compiled execution brief
+install/codex/
+install/claude-code/
+install/gemini-cli/
+install/github-copilot-cli/
 ```
-
-## Final output
-
-The final output should be a short brief, not a long planning essay.
-
-It should include:
-
-```text
-Task
-Real Goal
-MVP Scope
-Must Not Do
-Files To Read
-Files To Touch
-Files To Avoid
-Context Budget
-Selected Path
-TDD Micro-Loops
-Checks
-Evidence Required
-Stop Condition
-```
-
-## Execution
-
-After producing the brief, the agent may execute only within the brief.
-
-If the agent needs to exceed the brief, it must stop and create a new narrower brief.
-
-## After execution
-
-The agent should create an Evidence Ledger:
-
-```text
-files touched
-commands run
-verified claims
-unverified claims
-scope violations
-remaining risk
-```
-
-If the run produced reusable evidence, the agent may create an Adaptive Improvement Report or Schema Memory Card.
-
-Do not update skills from one run.
-
-
-## Measure the run
-
-After the evidence ledger, ask:
-
-```text
-Use Xskill metrics to calculate TVP, proxy TVP, scope creep rate, verification rate, rework rate, context load size, and iteration half-life from the evidence ledger.
-```
-
-If exact token counts are unavailable, ask the agent to use proxy TVP and label it clearly.
-
-
-## v0.1.9 contracts layer
-
-Xskill now treats four artifacts as core differentiators:
-
-- Context Budget Contract;
-- Evidence Ledger;
-- Failure-to-Smaller-Task Protocol;
-- Context Diet Map.
-
-These keep the bundle portable while making each run bounded, auditable, failure-shrinking, and context-reducing.
