@@ -4,6 +4,10 @@ This repository uses Xskill.
 
 Xskill is a portable skill bundle for context-budgeted AI coding.
 
+Default rule:
+
+> Less context. Smaller changes. Verified progress.
+
 Before non-trivial coding tasks:
 
 1. Run `question-requirements` when the request is vague, large, or risky. Use Five Whys and inversion to identify the real goal and likely failure paths.
@@ -15,8 +19,10 @@ Before non-trivial coding tasks:
 7. Respect the context budget.
 8. Do not read or modify files outside the declared scope unless necessary.
 9. Run the required checks.
-10. Do not claim completion without an evidence ledger.
+10. Record an `evidence-ledger` before claiming completion.
 11. If blocked, split the task into a smaller follow-up task instead of retrying blindly.
+12. After a non-trivial run, use `adaptive-improvement` only if there is evidence.
+13. Use `schema-memory` to store reusable patterns, not raw context.
 
 Available Xskill steps:
 
@@ -25,13 +31,18 @@ Available Xskill steps:
 - `semantic-architecture`: after scope is deleted, sketch the MVP module map, coupling risks, dependency direction, and decoupling rules for larger tasks.
 - `optimize-path`: choose the smallest stable implementation path using small-batch quick response, agile working increments, lean waste removal, and a minimal safety buffer.
 - `shorten-iteration`: split large or failed selected paths into TDD micro-loops with RED/GREEN/REFACTOR/EVIDENCE and evidence handoff.
-- `automate-after-stable`: automate only stable repeated work.
-- `semantic-memory`: keep project context lightweight through relevant context slices.
-- `learn-after-run`: convert post-run evidence into reusable learning without blindly modifying skills.
+- `evidence-ledger`: record files touched, checks run, verified claims, unverified claims, remaining risk, and scope violations.
+- `adaptive-improvement`: turn evidence into feedback, schema updates, checklist improvements, or automation candidates. Do not auto-modify skills.
+- `schema-memory`: store reusable task patterns, failure modes, context budget patterns, verification patterns, and stop conditions.
 
-Default rule:
+Adaptive improvement rules:
 
-> Less context. Smaller changes. Verified progress.
+- Xskill learns from evidence, not confidence.
+- Do not promote a lesson after one run unless it clearly reduces context, narrows scope, improves verification, or prevents a repeated failure.
+- Do not automate confusion.
+- Automation is only a candidate after repeated, stable manual behavior.
+- Prefer schema memory over raw memory.
+- Prefer small checklist changes over new skills.
 
 When work is complete, record:
 
@@ -40,6 +51,4 @@ When work is complete, record:
 - verified claims
 - unverified claims
 - scope violations
-
-After any non-trivial task, create a short learning note if the run produced reusable information.
-Do not modify skills immediately unless the same issue has repeated or the improvement clearly reduces context, scope, or verification risk.
+- remaining risk

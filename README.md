@@ -12,6 +12,8 @@ Before planning, Xskill can run a lightweight Five Whys and inversion pass: what
 
 After the real goal is clear, Xskill uses first-principles reasoning and Occam's Razor to cut the request down to the smallest necessary MVP. Larger tasks then get a lightweight semantic architecture sketch for module boundaries, coupling risks, and decoupling rules. Implementation planning uses a small-batch path: smallest useful slice, working increment, lean waste removal, minimal safety buffer, then TDD micro-loops when the route is still too large.
 
+After execution, Xskill records evidence and can improve from evidence-backed patterns through adaptive improvement and schema memory.
+
 ```text
 Use Xskill to create an execution brief before editing code:
 Fix password reset bug.
@@ -52,7 +54,7 @@ Stop if the fix requires rewriting auth provider internals.
 
 ## What Xskill is
 
-Xskill is **not** a CLI, npm package, Python package, autonomous agent, or full runtime.
+Xskill is **not** a CLI, npm package, Python package, autonomous agent, database, or full runtime.
 
 Xskill is a **portable skill bundle**:
 
@@ -77,7 +79,8 @@ AI coding agents are powerful, but they often fail in predictable ways:
 | Touches unrelated files | Gets a context budget |
 | Says “done” without proof | Produces an evidence ledger |
 | Retries failed tasks blindly | Splits failure into smaller work |
-| Accumulates huge rule files | Loads one skill at a time |
+| Learns from vibes | Learns from evidence-backed schemas |
+| Automates confusion | Only marks stable repetition as automation candidate |
 
 Xskill focuses on one job:
 
@@ -116,9 +119,9 @@ Final structure:
   semantic-architecture/SKILL.md
   optimize-path/SKILL.md
   shorten-iteration/SKILL.md
-  automate-after-stable/SKILL.md
-  semantic-memory/SKILL.md
-  learn-after-run/SKILL.md
+  evidence-ledger/SKILL.md
+  adaptive-improvement/SKILL.md
+  schema-memory/SKILL.md
   templates/
   examples/
 ```
@@ -143,8 +146,6 @@ Use Xskill question-requirements for:
 <your task>
 ```
 
-The agent should first run Five Whys and inversion before proposing an implementation.
-
 After requirements are clear, cut scope first:
 
 ```text
@@ -162,80 +163,56 @@ Use Xskill semantic-architecture after delete-scope for:
 For implementation:
 
 ```text
-Use Xskill optimize-path after semantic-architecture or delete-scope for:
+Use Xskill optimize-path after scope and architecture are clear for:
 <your task>
 ```
 
-After completion:
+If the selected route is too large or a previous attempt failed:
 
 ```text
-Use Xskill to produce an evidence ledger for what changed.
+Use Xskill shorten-iteration to split this selected path into TDD micro-loops.
 ```
 
-After a non-trivial run:
+After execution:
 
 ```text
-Use Xskill learn-after-run to extract reusable learning from the evidence.
+Use Xskill evidence-ledger to record what changed, what was verified, and what remains unverified.
 ```
 
-If the task fails:
+After a non-trivial run with evidence:
 
 ```text
-Use Xskill shorten-iteration to split this selected path or failed task into TDD micro-loops.
+Use Xskill adaptive-improvement to extract reusable improvement from the evidence ledger.
+```
+
+If a repeated task pattern emerges:
+
+```text
+Use Xskill schema-memory to create or update a schema memory card.
 ```
 
 ---
 
-## First-principles scope deletion
-
-After the real goal is clear, Xskill does not design the full system immediately.
-
-It first asks:
+## Workflow
 
 ```text
-What is the irreducible user outcome?
-What capability is truly required?
-What evidence proves the MVP works?
-Which entities can be deleted or deferred?
+question-requirements
+→ delete-scope
+→ semantic-architecture
+→ optimize-path
+→ shorten-iteration
+→ evidence-ledger
+→ adaptive-improvement
+→ schema-memory
 ```
 
-The rule is simple:
+Small tasks can skip most of this. Load only the relevant skill.
 
-> Do not add entities without necessity.
-
-`delete-scope` produces an MVP nucleus before architecture:
-
-- one user outcome
-- one primary workflow
-- minimum artifacts
-- minimum verification
-- explicit non-goals
-
-Then `semantic-architecture` can use that MVP nucleus to define module boundaries and decoupling rules.
-
-## Small-batch optimize path
-
-After MVP scope and module boundaries are clear, Xskill does not jump into a large implementation plan.
-
-`optimize-path` selects one route using four filters:
-
-- **Small-batch quick response**: start with the smallest slice that can produce feedback.
-- **Agile working increment**: prefer something observable and reviewable over a broad plan.
-- **Lean waste removal**: delete steps that do not produce verified learning.
-- **Minimal safety buffer**: keep rollback, stop conditions, and fallback checks without building just-in-case systems.
-
-If the selected route is still too large, `shorten-iteration` breaks it into TDD micro-loops:
-
-```text
-RED -> GREEN -> REFACTOR -> EVIDENCE
-```
-
-Each loop should have one goal, one verification point, one small implementation boundary, and one evidence handoff.
+---
 
 ## Core artifacts
 
-
-Xskill is built around eight lightweight artifacts.
+Xskill is built around lightweight artifacts.
 
 ### 1. Question Requirements Report
 
@@ -243,147 +220,113 @@ A pre-planning challenge that uses Five Whys and inversion to identify the real 
 
 See: [`xskill/templates/question-requirements-report.md`](xskill/templates/question-requirements-report.md)
 
-### 2. Semantic Architecture Report
+### 2. Delete Scope Report
 
-A lightweight module map used after requirements are clarified and before implementation planning.
+A first-principles and Occam's Razor pass that cuts the real goal down to the smallest verifiable MVP nucleus before architecture.
 
-It captures:
+See: [`xskill/templates/delete-scope-report.md`](xskill/templates/delete-scope-report.md)
 
-- MVP slice
-- modules
-- module relationships
-- coupling risks
-- decoupling rules
-- MVP-first build order
-- deferred modules
+### 3. Semantic Architecture Report
+
+A lightweight module map used after scope deletion and before implementation planning.
+
+It captures MVP slice, modules, module relationships, coupling risks, decoupling rules, MVP-first build order, and deferred modules.
 
 See: [`xskill/templates/semantic-architecture-report.md`](xskill/templates/semantic-architecture-report.md)
 
 This is not a graph database or runtime. It is a short planning artifact for larger tasks.
 
-### 3. Optimize Path Report
+### 4. Optimize Path Report
 
 A small-batch implementation route that selects the smallest stable path that can produce verified progress.
 
-It captures:
-
-- candidate paths
-- small-batch slice
-- working increment
-- lean waste removed
-- minimal safety buffer
-- verification strategy
-- context budget
-
 See: [`xskill/templates/optimize-path-report.md`](xskill/templates/optimize-path-report.md)
 
-### 4. Shorten Iteration Report
+### 5. Shorten Iteration Report
 
 A TDD micro-loop plan used when the selected path is too large or a previous attempt failed.
 
-It captures:
+It uses:
 
-- iteration budget
-- RED/GREEN/REFACTOR/EVIDENCE loops
-- files per loop
-- stop conditions
-- failure split rules
-- evidence ledger handoff
+```text
+RED -> GREEN -> REFACTOR -> EVIDENCE
+```
 
 See: [`xskill/templates/shorten-iteration-report.md`](xskill/templates/shorten-iteration-report.md)
 
-### 5. Execution Brief
+### 6. Execution Brief
 
 A compact task plan that tells the agent what to do, what not to do, and how success will be verified.
 
 See: [`xskill/templates/execution-brief.md`](xskill/templates/execution-brief.md)
 
-### 6. Context Budget
+### 7. Context Budget
 
-A boundary contract for the agent.
-
-It defines:
-
-- max files to read
-- max files to touch
-- files to avoid
-- allowed context
-- forbidden context
-- stop condition
+A boundary contract for the agent: max files to read, max files to touch, files to avoid, allowed context, forbidden context, and stop condition.
 
 See: [`xskill/templates/context-budget.md`](xskill/templates/context-budget.md)
 
-### 7. Evidence Ledger
+### 8. Evidence Ledger
 
-A record of what actually happened.
-
-It captures:
-
-- files touched
-- checks run
-- verified claims
-- unverified claims
-- scope violations
-- remaining risk
+A record of what actually happened: files touched, checks run, verified claims, unverified claims, scope violations, and remaining risk.
 
 See: [`xskill/templates/evidence-ledger.md`](xskill/templates/evidence-ledger.md)
 
 If there is no evidence, the task is not done.
 
-### 8. Iteration Learning Note
+### 9. Adaptive Improvement Report
 
-A short post-run note that turns evidence into reusable learning.
+A post-run feedback report that decides whether evidence should become a local note, schema memory update, template improvement, checklist improvement, automation candidate, or no action.
 
-It captures:
+See: [`xskill/templates/adaptive-improvement-report.md`](xskill/templates/adaptive-improvement-report.md)
 
-- what worked
-- what failed or drifted
-- which context was wasted
-- a reusable rule candidate
-- whether the rule should be promoted
+### 10. Schema Memory Card
 
-See: [`xskill/templates/iteration-learning-note.md`](xskill/templates/iteration-learning-note.md)
+A reusable task-pattern card. It stores how a class of work should be handled: trigger, failure modes, context budget pattern, verification pattern, and stop conditions.
 
-Xskill does not auto-improve blindly. It learns only from evidence.
+See: [`xskill/templates/schema-memory-card.md`](xskill/templates/schema-memory-card.md)
+
+Xskill stores patterns, not raw memory.
 
 ---
 
-## The Xskill steps
+## Adaptive improvement
 
-| Step | Skill | Purpose |
-|---|---|---|
-| Question | `question-requirements` | Run Five Whys and inversion to reveal the real goal, failure paths, assumptions, and decision |
-| Architecture | `semantic-architecture` | Sketch the MVP slice, module map, coupling risks, and decoupling rules for larger tasks |
-| Delete | `delete-scope` | Remove unnecessary work and define scope boundaries |
-| Optimize | `optimize-path` | Select the smallest stable route using small-batch, agile, lean, and minimal safety-buffer filters |
-| Shorten | `shorten-iteration` | Split large or failed routes into TDD micro-loops with evidence handoff |
-| Automate | `automate-after-stable` | Automate only stable repeated work |
-| Support | `semantic-memory` | Select only the context needed for this task |
-| Learning | `learn-after-run` | Extract reusable learning after a run without blindly modifying skills |
+Xskill does not auto-improve blindly.
+
+It uses this chain:
+
+```text
+evidence ledger
+→ adaptive improvement report
+→ schema memory card
+→ future execution brief
+```
+
+Rules:
+
+- Xskill learns from evidence, not confidence.
+- One run is usually not enough to promote a rule.
+- Schema memory stores reusable task patterns, not raw context.
+- Automation is only a candidate after repeated stable manual behavior.
+- Do not add process unless it reduces context, narrows scope, improves verification, or prevents repeated failure.
+
+---
+
+## The Xskill skills
+
+| Skill | Purpose |
+|---|---|
+| `question-requirements` | Run Five Whys and inversion to reveal the real goal, failure paths, assumptions, and decision |
+| `delete-scope` | Use first principles and Occam's Razor to remove unnecessary entities and define the MVP nucleus |
+| `semantic-architecture` | Sketch the MVP slice, module map, coupling risks, and decoupling rules for larger tasks |
+| `optimize-path` | Select the smallest stable route using small-batch, agile, lean, and minimal safety-buffer filters |
+| `shorten-iteration` | Split large or failed routes into TDD micro-loops with evidence handoff |
+| `evidence-ledger` | Record what changed, what was verified, what remains unverified, and whether scope was violated |
+| `adaptive-improvement` | Convert evidence into schema updates, checklist improvements, or automation candidates |
+| `schema-memory` | Store reusable work patterns, failure modes, context budget patterns, and verification patterns |
 
 These are not always-on rules. Load only the skill that matches the current task.
-
----
-
-## When to use Xskill
-
-Use Xskill when:
-
-- the task is vague
-- the task may touch many files
-- the agent may over-read context
-- the change affects logic, APIs, data, security, or architecture
-- verification matters
-- a previous agent run failed or drifted
-
-Do not use the full workflow for:
-
-- typo fixes
-- simple copy edits
-- tiny config changes
-- obvious one-line fixes
-
-For small changes, use only the relevant skill or skip Xskill entirely.
 
 ---
 
@@ -393,15 +336,17 @@ Xskill should stay small.
 
 1. Do not load long context by default.
 2. Question vague or risky requests with Five Whys and inversion before planning.
-3. For multi-module work, sketch semantic architecture after deleting scope.
-4. Select the smallest stable implementation path before editing.
-5. Prefer small-batch working increments over broad plans.
-6. Respect the context budget.
-7. Touch the smallest possible set of files.
-8. Split large or failed work into TDD micro-loops.
-9. Verify with evidence.
-10. If blocked, split the task smaller.
-11. Do not claim completion without an evidence ledger.
+3. Delete scope with first principles and Occam's Razor before architecture.
+4. For multi-module work, sketch semantic architecture after deleting scope.
+5. Select the smallest stable implementation path before editing.
+6. Prefer small-batch working increments over broad plans.
+7. Respect the context budget.
+8. Touch the smallest possible set of files.
+9. Split large or failed work into TDD micro-loops.
+10. Verify with evidence.
+11. Learn only from evidence.
+12. Store schemas, not raw memory.
+13. Do not claim completion without an evidence ledger.
 
 ---
 
@@ -413,26 +358,34 @@ Xskill/
   AGENTS.md
   xskill/
     question-requirements/SKILL.md
-    semantic-architecture/SKILL.md
     delete-scope/SKILL.md
+    semantic-architecture/SKILL.md
     optimize-path/SKILL.md
     shorten-iteration/SKILL.md
-    automate-after-stable/SKILL.md
-    semantic-memory/SKILL.md
-    learn-after-run/SKILL.md
+    evidence-ledger/SKILL.md
+    adaptive-improvement/SKILL.md
+    schema-memory/SKILL.md
     templates/
       question-requirements-report.md
+      delete-scope-report.md
       semantic-architecture-report.md
+      optimize-path-report.md
+      shorten-iteration-report.md
       execution-brief.md
       context-budget.md
       evidence-ledger.md
-      iteration-learning-note.md
+      adaptive-improvement-report.md
+      schema-memory-card.md
+      automation-candidate.md
     examples/
       password-reset.question-requirements.md
+      password-reset.delete-scope.md
       xskill.semantic-architecture.md
-      password-reset.execution-brief.md
+      password-reset.optimize-path.md
+      password-reset.shorten-iteration.md
       password-reset.evidence-ledger.md
-      password-reset.iteration-learning-note.md
+      password-reset.adaptive-improvement.md
+      validation-bug.schema-memory-card.md
   docs/
     portable-install.md
     design.md
@@ -443,7 +396,16 @@ Xskill/
 
 ## Example
 
-See [`xskill/examples/password-reset.question-requirements.md`](xskill/examples/password-reset.question-requirements.md), [`xskill/examples/xskill.semantic-architecture.md`](xskill/examples/xskill.semantic-architecture.md), [`xskill/examples/password-reset.execution-brief.md`](xskill/examples/password-reset.execution-brief.md), and [`xskill/examples/password-reset.evidence-ledger.md`](xskill/examples/password-reset.evidence-ledger.md).
+See:
+
+- [`xskill/examples/password-reset.question-requirements.md`](xskill/examples/password-reset.question-requirements.md)
+- [`xskill/examples/password-reset.delete-scope.md`](xskill/examples/password-reset.delete-scope.md)
+- [`xskill/examples/xskill.semantic-architecture.md`](xskill/examples/xskill.semantic-architecture.md)
+- [`xskill/examples/password-reset.optimize-path.md`](xskill/examples/password-reset.optimize-path.md)
+- [`xskill/examples/password-reset.shorten-iteration.md`](xskill/examples/password-reset.shorten-iteration.md)
+- [`xskill/examples/password-reset.evidence-ledger.md`](xskill/examples/password-reset.evidence-ledger.md)
+- [`xskill/examples/password-reset.adaptive-improvement.md`](xskill/examples/password-reset.adaptive-improvement.md)
+- [`xskill/examples/validation-bug.schema-memory-card.md`](xskill/examples/validation-bug.schema-memory-card.md)
 
 ---
 
@@ -456,10 +418,10 @@ Xskill is intentionally not:
 - a multi-agent framework
 - a semantic graph database
 - an autonomous coding loop
-- an automatic self-improvement engine
+- an automatic self-modifying engine
 - a replacement for your coding agent
 
-Future automation or deeper self-iteration may exist, but only after the manual skill workflow is proven stable.
+Future automation may exist, but only after the manual skill workflow is proven stable.
 
 ---
 

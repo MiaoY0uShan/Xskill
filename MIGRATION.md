@@ -1,46 +1,29 @@
-# Migration to Portable Bundle
+# Migration
 
-This version changes Xskill from a CLI-style project into a portable skill bundle.
+## v0.1.5 -> v0.1.6
 
-## Remove from the old repository
+Xskill's post-run layer changed:
 
-Delete these if they exist:
+- `semantic-memory` is replaced by `schema-memory`.
+- `automate-after-stable` and `learn-after-run` are merged into `adaptive-improvement`.
+- `evidence-ledger` is now an explicit skill.
 
-```text
-musk_skills/
-tests/
-pyproject.toml
-```
-
-They belonged to the earlier Python CLI prototype and are not part of the portable bundle direction.
-
-## Keep
+If you installed a previous Xskill bundle, remove these old directories:
 
 ```text
-README.md
-AGENTS.md
-LICENSE
-CHANGELOG.md
-CONTRIBUTING.md
-xskill/
-docs/
-examples/
-.github/workflows/validate.yml
+xskill/automate-after-stable
+xskill/learn-after-run
+xskill/semantic-memory
 ```
 
-## Release package
+Then copy the new `xskill/` folder from the release zip.
 
-Create a GitHub release and upload:
+The new post-run loop is:
 
 ```text
-xskill-v0.1.0.zip
+evidence-ledger
+→ adaptive-improvement
+→ schema-memory
 ```
 
-The release zip should contain:
-
-```text
-xskill/
-AGENTS.md
-README.md
-LICENSE
-```
+Xskill still has no CLI, npm, npx, pip, runtime, or database.

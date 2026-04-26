@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.6 — Schema memory and adaptive improvement
+
+- Replaced `semantic-memory` with `schema-memory`.
+- Merged `automate-after-stable` and `learn-after-run` into `adaptive-improvement`.
+- Added `evidence-ledger` skill.
+- Added `schema-memory-card`, `adaptive-improvement-report`, and `automation-candidate` templates.
+- Added schema and adaptive improvement examples.
+- Added evidence-based promotion rules: Xskill learns from evidence, not confidence.
+- Clarified that automation is only a candidate after repeated stable manual behavior.
+- Kept Xskill portable: no CLI, runtime, database, npm, npx, pip, or automatic self-modifying engine.
+
+
 ## v0.1.5 — Small-batch optimize path
 
 - Upgraded `optimize-path` with small-batch quick response, agile working increments, lean waste removal, and minimal safety buffers.

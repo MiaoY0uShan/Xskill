@@ -1,168 +1,108 @@
-# Design
+# Xskill Design
 
 Xskill is a portable skill bundle for context-budgeted AI coding.
 
-## Layers
+It is intentionally not a CLI, package manager workflow, autonomous runtime, database, or multi-agent system.
+
+## Core thesis
+
+AI coding agents usually fail by expanding context, expanding scope, and claiming completion without evidence.
+
+Xskill counters this with:
+
+- requirement challenge
+- first-principles scope deletion
+- MVP semantic architecture
+- small-batch implementation path
+- TDD micro-loops
+- evidence ledger
+- adaptive improvement
+- schema memory
+
+## Workflow
 
 ```text
-AGENTS.md
-  Always-on router. Short. Project-level guidance.
-
-xskill/*/SKILL.md
-  On-demand skills. Loaded only when relevant.
-
-templates/*
-  Reusable output formats.
-
-examples/*
-  Concrete examples for users and agents.
+question-requirements
+→ delete-scope
+→ semantic-architecture
+→ optimize-path
+→ shorten-iteration
+→ evidence-ledger
+→ adaptive-improvement
+→ schema-memory
 ```
 
-## Product thesis
+Small tasks do not need the full chain.
 
-Most agent workflows add context.
+## Skill boundaries
 
-Xskill removes context until the task becomes safe to execute.
+### question-requirements
 
-## Current scope
+Find the real goal with Five Whys and inversion. Do not plan implementation.
 
-Xskill currently provides skills and templates only.
+### delete-scope
 
-It does not provide:
+Use first principles and Occam's Razor to reduce the real goal to an MVP nucleus. Do not design the full system.
 
-- CLI runtime
-- npm or pip install
-- state database
-- automatic semantic graph
-- autonomous loop runner
-- automatic self-improvement engine
-- multi-agent orchestration
+### semantic-architecture
 
-## Core artifacts
+Sketch module boundaries from the MVP. Do not expand scope or build a graph database.
 
-- Question Requirements Report
-- Delete Scope Report
-- Semantic Architecture Report
-- Execution Brief
-- Context Budget
-- Evidence Ledger
-- Iteration Learning Note
+### optimize-path
 
-These artifacts are more important than the five-step naming.
+Select the smallest stable implementation path using small-batch, agile, lean, and minimal safety-buffer filters. Do not slice every task.
 
-## Self-iteration boundary
+### shorten-iteration
 
-Xskill supports post-run learning, not autonomous mutation.
+Split large or failed selected paths into TDD micro-loops. Do not redefine product goals.
 
-The `learn-after-run` skill turns evidence into a learning note and may propose a rule or skill patch. It must not modify skills blindly.
+### evidence-ledger
 
-A lesson should be promoted only when it:
+Record what happened. It is the source of truth for completion and later learning.
 
-- repeats across runs,
-- reduces context,
-- narrows scope,
-- improves verification, or
-- prevents a known class of failure.
+### adaptive-improvement
 
-The default action is to keep learning as a local note.
+Turn evidence into feedback, schema updates, checklist improvements, or automation candidates. Do not modify skills automatically.
 
+### schema-memory
 
-## Requirement challenge boundary
+Store reusable task patterns, not raw context. Schema memory should make future work smaller, safer, and easier to verify.
 
-`question-requirements` uses a lightweight Five Whys and inversion pass.
-
-It should reveal the real goal and likely failure paths before planning. It must not become a long interview or an implementation plan. The agent should answer from available context first and ask the user only when a blocking unknown remains.
-
-Outputs from this skill should feed later skills:
-
-- real goal -> `delete-scope`, `semantic-architecture`, and `optimize-path`
-- failure paths -> context budget and stop condition
-- things to avoid -> files to avoid and non-goals
-- success criteria -> evidence ledger
-
-## Scope deletion boundary
-
-`delete-scope` runs after `question-requirements` and before `semantic-architecture`.
-
-It uses first-principles reasoning and Occam's Razor to reduce the real goal into the smallest verifiable MVP.
-
-It should produce:
-
-- first-principles core,
-- entity inventory,
-- Occam filter,
-- MVP nucleus,
-- scope boundary,
-- minimum evidence,
-- MVP module candidates,
-- decoupling notes.
-
-It must not become:
-
-- an implementation plan,
-- a full architecture design,
-- a justification for future-proofing,
-- a reason to add automation,
-- a runtime dependency.
-
-The output should feed later skills:
-
-- MVP nucleus -> `semantic-architecture` or `optimize-path`
-- delete/defer lists -> non-goals and files to avoid
-- module candidates -> decoupling analysis
-- minimum evidence -> evidence ledger
-- stop condition -> context budget
-
-## Semantic architecture boundary
-
-`semantic-architecture` is an optional planning skill used after `delete-scope` for project, system, feature, refactor, workflow, or multi-module MVPs.
-
-It should produce:
-
-- MVP slice,
-- module map,
-- module relationships,
-- coupling risks,
-- decoupling rules,
-- MVP-first build order,
-- deferred modules.
-
-It must not become:
-
-- a graph database,
-- a repository-wide indexer,
-- an automatic diagram tool,
-- a runtime dependency,
-- a required step for small tasks.
-
-The output should feed later skills:
-
-- MVP module map -> `optimize-path`
-- coupling risks -> context budget and stop condition
-- decoupling rules -> `optimize-path`
-- deferred modules -> non-goals
-
-## Small-batch path optimization
-
-`optimize-path` is the boundary between planning and implementation. It should not write code and should not expand the MVP.
-
-It selects one path using four filters:
-
-1. Small-batch quick response: choose the smallest slice that can create feedback.
-2. Agile working increment: produce something observable and reviewable.
-3. Lean waste removal: remove steps that do not create verified learning.
-4. Minimal safety buffer: keep rollback and stop conditions without building just-in-case systems.
-
-The output is an `Optimize Path Report` that can become an execution brief.
-
-## TDD micro-loops
-
-`shorten-iteration` receives the selected path when it is too large or when a run failed.
-
-It breaks work into loops:
+## Adaptive improvement loop
 
 ```text
-RED -> GREEN -> REFACTOR -> EVIDENCE
+evidence ledger
+→ adaptive improvement report
+→ schema memory card
+→ future execution brief
 ```
 
-Each loop should have one behavior, one verification point, a small file budget, a refactor boundary, and an evidence handoff. If a loop fails, split that loop again instead of retrying blindly.
+Promotion requires evidence.
+
+Rules:
+
+1. No evidence, no learning.
+2. One run is usually not enough to promote a rule.
+3. Repetition before automation.
+4. Stability before automation.
+5. Prefer schema memory over raw memory.
+6. Prefer small checklist improvements over new skills.
+7. Do not add process unless it reduces context, narrows scope, improves verification, or prevents repeated failure.
+
+## Memory model
+
+Xskill uses schema memory instead of semantic memory.
+
+Semantic memory stores facts and context.
+
+Schema memory stores reusable patterns:
+
+- task trigger
+- common failure modes
+- recommended path
+- context budget pattern
+- verification pattern
+- files or modules usually avoided
+- stop conditions
+
+This keeps Xskill aligned with its main goal: less context, smaller changes, verified progress.

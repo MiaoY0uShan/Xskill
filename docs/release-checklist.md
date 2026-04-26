@@ -1,40 +1,41 @@
 # Release Checklist
 
-For `v0.1.0`:
+## v0.1.6 — Schema memory and adaptive improvement
 
-- [ ] Confirm root README explains portable installation.
-- [ ] Confirm no Quick Start depends on npm, npx, pip, or CLI.
-- [ ] Confirm every skill folder has `SKILL.md`.
-- [ ] Confirm each `SKILL.md` has `name` and `description` front matter.
-- [ ] Zip the `xskill/` folder with `AGENTS.md`, `README.md`, and `LICENSE` as `xskill-v0.1.0.zip`.
-- [ ] Create GitHub Release `v0.1.0`.
-- [ ] Upload `xskill-v0.1.0.zip`.
-- [ ] Add repository description and topics.
+Before release:
 
-Recommended repository description:
+- [ ] Confirm no CLI, npm, npx, pip, Python package, runtime, database, or automatic self-modifying engine is introduced.
+- [ ] Confirm `adaptive-improvement/SKILL.md` exists.
+- [ ] Confirm `schema-memory/SKILL.md` exists.
+- [ ] Confirm `evidence-ledger/SKILL.md` exists.
+- [ ] Confirm old `automate-after-stable`, `learn-after-run`, and `semantic-memory` directories are removed.
+- [ ] Confirm templates exist:
+  - `adaptive-improvement-report.md`
+  - `schema-memory-card.md`
+  - `automation-candidate.md`
+  - `evidence-ledger.md`
+- [ ] Confirm examples exist:
+  - `password-reset.adaptive-improvement.md`
+  - `validation-bug.schema-memory-card.md`
+  - `validation-bug.automation-candidate.md`
+- [ ] Confirm README and AGENTS.md describe the adaptive improvement loop.
+
+Release title:
 
 ```text
-Context diet for AI coding agents. Less context, smaller changes, verified progress.
+v0.1.6 — Schema memory and adaptive improvement
 ```
 
-Recommended topics:
+Release note:
 
 ```text
-ai-agents, coding-agents, agent-skills, agents-md, context-engineering, claude-code, codex, cursor, developer-tools
+- Replaced semantic-memory with schema-memory
+- Merged automate-after-stable and learn-after-run into adaptive-improvement
+- Added evidence-ledger skill
+- Added schema memory cards
+- Added adaptive improvement reports
+- Added automation candidate template
+- Added evidence-based promotion rules
+- Clarified that Xskill learns from evidence, not confidence
+- Kept Xskill portable: no CLI, runtime, database, npm, npx, pip, or automatic self-modifying engine
 ```
-
-## v0.1.3 checklist
-
-- [ ] Confirm `xskill/semantic-architecture/SKILL.md` exists.
-- [ ] Confirm `xskill/templates/semantic-architecture-report.md` exists.
-- [ ] Confirm `xskill/examples/xskill.semantic-architecture.md` exists.
-- [ ] Confirm README shows semantic architecture as optional for multi-module work.
-- [ ] Confirm no CLI, npm, npx, pip, graph database, or runtime was added.
-
-## v0.1.5 release note
-
-- Upgraded optimize-path with small-batch quick response, agile working increments, lean waste removal, and minimal safety buffers.
-- Upgraded shorten-iteration to split large or failed selected paths into TDD micro-loops.
-- Added optimize-path and shorten-iteration report templates.
-- Added password-reset examples for selected path and TDD micro-loops.
-- Kept Xskill portable: no CLI, runtime, npm, npx, pip, graph system, or automatic executor.

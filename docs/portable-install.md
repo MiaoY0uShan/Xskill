@@ -1,41 +1,43 @@
-# Portable Installation
+# Portable Install
 
-Xskill is designed to work without a CLI or package manager.
+Xskill does not require npm, npx, pip, Python, or a command-line tool.
 
-## Install globally
+## Install
 
-Copy the `xskill/` folder to:
+1. Download the latest release zip.
+2. Unzip it.
+3. Copy the `xskill/` folder into your agent skills directory.
+
+Recommended global location:
 
 ```text
 ~/.agents/skills/xskill
 ```
 
-## Install inside one project
-
-Copy the `xskill/` folder to:
+Recommended project-local location:
 
 ```text
 your-project/.agents/skills/xskill
 ```
 
-Then copy `AGENTS.md` to your project root if your coding agent supports it.
+Optional: copy `AGENTS.md` into your project root.
 
-## Verify structure
+## Validate
+
+Your final folder should include:
 
 ```text
-.agents/skills/xskill/
+xskill/
   question-requirements/SKILL.md
-  semantic-architecture/SKILL.md
   delete-scope/SKILL.md
+  semantic-architecture/SKILL.md
   optimize-path/SKILL.md
   shorten-iteration/SKILL.md
-  automate-after-stable/SKILL.md
-  semantic-memory/SKILL.md
-  learn-after-run/SKILL.md
+  evidence-ledger/SKILL.md
+  adaptive-improvement/SKILL.md
+  schema-memory/SKILL.md
+  templates/
+  examples/
 ```
 
-Restart your coding agent after copying files.
-
-## Optional usage
-
-After copying the bundle, use `optimize-path` to select a small-batch implementation route and `shorten-iteration` to split large or failed routes into TDD micro-loops.
+Restart your coding agent after copying.

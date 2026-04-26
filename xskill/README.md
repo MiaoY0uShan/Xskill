@@ -23,9 +23,9 @@ your-project/.agents/skills/xskill
 - `semantic-architecture`: after scope is deleted, sketch the MVP module map, coupling risks, and decoupling rules for larger tasks.
 - `optimize-path`: select the smallest stable route using small-batch, agile, lean, and minimal safety-buffer filters, then create an execution brief.
 - `shorten-iteration`: split large or failed selected paths into TDD micro-loops.
-- `automate-after-stable`: automate only repeated stable workflows.
-- `semantic-memory`: select relevant context and files to avoid.
-- `learn-after-run`: extract reusable learning after a run without automatic self-modification.
+- `evidence-ledger`: record what actually happened, what was verified, what remains unverified, and whether scope was violated.
+- `adaptive-improvement`: turn post-run evidence into feedback, schema updates, checklist improvements, or automation candidates.
+- `schema-memory`: store reusable task patterns, failure modes, context budget patterns, verification patterns, and stop conditions.
 
 ## Templates
 
@@ -37,7 +37,9 @@ your-project/.agents/skills/xskill
 - `templates/execution-brief.md`
 - `templates/context-budget.md`
 - `templates/evidence-ledger.md`
-- `templates/iteration-learning-note.md`
+- `templates/adaptive-improvement-report.md`
+- `templates/schema-memory-card.md`
+- `templates/automation-candidate.md`
 
 ## Use
 
@@ -65,13 +67,6 @@ Use Xskill semantic-architecture after delete-scope for:
 Then ask:
 
 ```text
-Use Xskill to create an execution brief before editing code:
-<task>
-```
-
-or:
-
-```text
 Use Xskill optimize-path after scope and architecture are clear for:
 <task>
 ```
@@ -83,12 +78,26 @@ Use Xskill shorten-iteration to split the selected path into TDD micro-loops:
 <task>
 ```
 
-## Post-run learning
-
-After a non-trivial task, ask your agent:
+After execution, ask:
 
 ```text
-Use Xskill learn-after-run to extract reusable learning from the evidence ledger.
+Use Xskill evidence-ledger to record what changed and what was verified.
 ```
 
-Do not promote a lesson into a skill unless it is repeated, reduces context, narrows scope, improves verification, or prevents a recurring failure.
+After a non-trivial run with evidence, ask:
+
+```text
+Use Xskill adaptive-improvement to extract reusable improvement from the evidence ledger.
+```
+
+If a repeated task pattern emerges, ask:
+
+```text
+Use Xskill schema-memory to create or update a schema memory card.
+```
+
+## Adaptive improvement
+
+Xskill learns from evidence, not confidence.
+
+Do not promote a lesson into a schema, checklist, template, or automation candidate unless it reduces context, narrows scope, improves verification, prevents a repeated failure, or stabilizes a repeated workflow.
