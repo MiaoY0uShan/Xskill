@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.1.8 — Metrics layer
+
+- Added `metrics` skill.
+- Added `metrics-report.md` template.
+- Added `password-reset.metrics-report.md` example.
+- Added `docs/metrics.md`.
+- Defined TVP: `total_context_tokens / verified_tasks_completed`.
+- Added proxy TVP for portable runs without exact token counts.
+- Added supporting metrics: Scope Creep Rate, Verification Rate, Rework Rate, Context Load Size, and Iteration Half-life.
+- Updated evidence-ledger and adaptive-improvement to use metrics as an evidence-backed handoff.
+- Updated compiled Execution Brief to include metrics to record.
+- Kept Xskill portable: no CLI, runtime, database, npm, npx, pip, token tracker, or automatic benchmark runner.
+
 ## v0.1.7 — Compiled Execution Brief
 
 - Clarified that Xskill is a portable task compiler, not a prompt pack.

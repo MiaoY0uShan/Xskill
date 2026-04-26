@@ -25,6 +25,8 @@ agent execution
   ↓
 evidence ledger
   ↓
+metrics report
+  ↓
 adaptive improvement
   ↓
 schema memory
@@ -188,6 +190,7 @@ Final structure:
   optimize-path/SKILL.md
   shorten-iteration/SKILL.md
   evidence-ledger/SKILL.md
+  metrics/SKILL.md
   adaptive-improvement/SKILL.md
   schema-memory/SKILL.md
   templates/
@@ -312,7 +315,38 @@ If there is no evidence, the task is not done.
 
 ---
 
-### 8. Adaptive improvement and schema memory
+### 8. Metrics
+
+Xskill can measure whether a run actually became smaller, safer, and more verifiable.
+
+Primary metric:
+
+```text
+TVP = total_context_tokens / verified_tasks_completed
+```
+
+When exact token counts are unavailable, Xskill uses a proxy:
+
+```text
+Context Load Proxy = files_read + skills_loaded + reports_generated
+Proxy TVP = context_load_proxy / verified_tasks_completed
+```
+
+Supporting metrics:
+
+```text
+Scope Creep Rate
+Verification Rate
+Rework Rate
+Context Load Size
+Iteration Half-life
+```
+
+Metrics must come from evidence, not guesses.
+
+---
+
+### 9. Adaptive improvement and schema memory
 
 Xskill does not auto-improve blindly.
 
@@ -393,6 +427,36 @@ whether scope was violated
 
 ---
 
+### Metrics Report
+
+A measurement artifact that records whether Xskill reduced context load, scope creep, rework, or unverifiable work.
+
+Primary metric:
+
+```text
+TVP = total_context_tokens / verified_tasks_completed
+```
+
+Proxy metric when token counts are unavailable:
+
+```text
+Proxy TVP = (files_read + skills_loaded + reports_generated) / verified_tasks_completed
+```
+
+Template:
+
+```text
+xskill/templates/metrics-report.md
+```
+
+Example:
+
+```text
+xskill/examples/password-reset.metrics-report.md
+```
+
+---
+
 ### Schema Memory
 
 A reusable pattern extracted from multiple evidence-backed runs.
@@ -438,6 +502,7 @@ Task:
 
 ```text
 Use Xskill evidence-ledger to record what changed, what was verified, and what remains unverified.
+Then use Xskill metrics to measure context load, scope creep, verification, rework, and TVP.
 Then use adaptive-improvement only if there is reusable evidence.
 ```
 
@@ -481,6 +546,7 @@ Choose the smallest stable path.
 Split into TDD micro-loops when needed.
 Compile one brief.
 Execute with evidence.
+Measure verified progress.
 Improve only from evidence.
 ```
 
@@ -488,7 +554,7 @@ Improve only from evidence.
 
 ## Influences
 
-Xskill is influenced by ideas from five-step engineering, first-principles reasoning, Occam's Razor, Toyota-style Five Whys, inversion thinking, small-batch quick response, agile development, lean development, TDD, evidence-ledger workflows, schema memory, and agent skill systems.
+Xskill is influenced by ideas from five-step engineering, first-principles reasoning, Occam's Razor, Toyota-style Five Whys, inversion thinking, small-batch quick response, agile development, lean development, TDD, evidence-ledger workflows, execution metrics, schema memory, and agent skill systems.
 
 It does not copy prompts or workflows from referenced projects. It compresses general execution mechanisms into a portable skill bundle.
 

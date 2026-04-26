@@ -31,3 +31,13 @@ Suggested release note:
 - Updated README, AGENTS.md, xskill README, design docs, examples, and validation
 - Kept Xskill portable: no CLI, runtime, npm, npx, pip, database, graph engine, or automatic executor
 ```
+
+
+## v0.1.8 metrics checks
+
+- [ ] `xskill/metrics/SKILL.md` exists.
+- [ ] `xskill/templates/metrics-report.md` exists.
+- [ ] `xskill/examples/password-reset.metrics-report.md` exists.
+- [ ] `docs/metrics.md` exists.
+- [ ] README explains TVP and proxy TVP.
+- [ ] AGENTS.md says metrics must come from evidence.

@@ -43,6 +43,19 @@ It should be short enough for an agent to execute without rereading every upstre
 
 ## Stop Condition
 
+## Metrics To Record
+
+- Files read
+- Files planned to touch
+- Files actually touched
+- Unplanned files touched
+- Checks required
+- Checks run
+- Checks passed
+- Verified tasks completed
+- Failed or reopened tasks
+- Exact token counts, if available
+
 ## Handoff
 Execute this brief. After execution, produce an Evidence Ledger.
 ```

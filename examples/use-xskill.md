@@ -70,3 +70,14 @@ remaining risk
 If the run produced reusable evidence, the agent may create an Adaptive Improvement Report or Schema Memory Card.
 
 Do not update skills from one run.
+
+
+## Measure the run
+
+After the evidence ledger, ask:
+
+```text
+Use Xskill metrics to calculate TVP, proxy TVP, scope creep rate, verification rate, rework rate, context load size, and iteration half-life from the evidence ledger.
+```
+
+If exact token counts are unavailable, ask the agent to use proxy TVP and label it clearly.

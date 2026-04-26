@@ -120,3 +120,33 @@ auto self-modifying system
 ## Core principle
 
 Xskill deletes process until only the executable contract remains.
+
+
+## Metrics layer
+
+Xskill should not only ask agents to be smaller and more verifiable. It should record whether they were.
+
+Primary metric:
+
+```text
+TVP = total_context_tokens / verified_tasks_completed
+```
+
+If exact token counts are unavailable, Xskill uses a proxy:
+
+```text
+Context Load Proxy = files_read + skills_loaded + reports_generated
+Proxy TVP = context_load_proxy / verified_tasks_completed
+```
+
+Supporting metrics:
+
+- Scope Creep Rate
+- Verification Rate
+- Rework Rate
+- Context Load Size
+- Iteration Half-life
+
+Metrics are optional for tiny tasks but recommended for demos, comparisons, releases, and non-trivial runs.
+
+Metrics must come after evidence-ledger because Xskill measures from evidence, not guesses.

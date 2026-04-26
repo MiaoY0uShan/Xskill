@@ -7,7 +7,7 @@ description: Use after execution to record what changed, what checks ran, which 
 
 If there is no evidence, the task is not done.
 
-This skill records the result of an agent run. It is the source material for adaptive improvement and schema memory.
+This skill records the result of an agent run. It is the source material for metrics, adaptive improvement, and schema memory.
 
 ## Use when
 
@@ -33,7 +33,7 @@ Produce an evidence ledger that separates verified claims from unverified claims
 7. List claims that remain unverified.
 8. Identify scope violations or near-violations.
 9. Record remaining risk.
-10. Recommend whether to finish, split smaller, or run adaptive improvement.
+10. Recommend whether to finish, split smaller, run metrics, or run adaptive improvement.
 
 ## Output contract
 
@@ -62,7 +62,7 @@ Pass | Fail | Blocked | Partial
 ## Remaining Risk
 
 ## Decision
-complete | split_smaller | run_more_checks | adaptive_improvement
+complete | split_smaller | run_more_checks | metrics | adaptive_improvement
 
 ## Recommended Next Skill
 ```
@@ -75,3 +75,21 @@ complete | split_smaller | run_more_checks | adaptive_improvement
 - If claims are not verified, list them explicitly.
 - If scope was exceeded, record it.
 - The evidence ledger should be short, factual, and auditable.
+
+
+## Metrics handoff
+
+If measurement matters, pass this ledger to `metrics` before adaptive improvement.
+
+The metrics skill needs:
+
+- files read;
+- files planned to touch;
+- files actually touched;
+- unplanned files touched;
+- checks required;
+- checks run;
+- checks passed;
+- verified tasks completed;
+- failed or reopened tasks;
+- exact token counts, if available.

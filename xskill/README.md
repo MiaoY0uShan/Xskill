@@ -27,6 +27,7 @@ semantic-architecture/     sketch MVP module boundaries and coupling risks
 optimize-path/             select the smallest stable route and compile the brief
 shorten-iteration/         split large or failed routes into TDD micro-loops
 evidence-ledger/           record proof after execution
+metrics/                   measure TVP, context load, scope creep, verification, and rework
 adaptive-improvement/      improve only from evidence-backed patterns
 schema-memory/             store reusable work schemas, not raw context
 ```
@@ -52,6 +53,8 @@ agent execution
   ↓
 evidence-ledger
   ↓
+metrics, when measurement matters
+  ↓
 adaptive-improvement
   ↓
 schema-memory
@@ -64,6 +67,7 @@ templates/compiled-execution-brief.md
 templates/execution-brief.md
 templates/context-budget.md
 templates/evidence-ledger.md
+templates/metrics-report.md
 templates/adaptive-improvement-report.md
 templates/schema-memory-card.md
 ```
@@ -88,3 +92,16 @@ Use Xskill end to end: question, delete, architecture if needed, optimize, short
 ## Rule
 
 Do not use Xskill to create long planning documents. Use it to create the shortest safe execution contract.
+
+
+## Metrics
+
+When a run needs measurement, use `metrics/` after `evidence-ledger/`.
+
+Primary metric:
+
+```text
+TVP = total_context_tokens / verified_tasks_completed
+```
+
+If exact token counts are unavailable, use the proxy in `templates/metrics-report.md`.

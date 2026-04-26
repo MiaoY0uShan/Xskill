@@ -13,7 +13,8 @@ Before non-trivial coding tasks:
 5. Use `shorten-iteration` if the selected route is too large or needs multiple TDD micro-loops.
 6. Execute only the compiled Execution Brief.
 7. Use `evidence-ledger` after execution.
-8. Use `adaptive-improvement` and `schema-memory` only when evidence shows a reusable pattern.
+8. Use `metrics` when the run should prove context load, scope control, verification, rework, or TVP.
+9. Use `adaptive-improvement` and `schema-memory` only when evidence shows a reusable pattern.
 
 Core rule:
 
@@ -52,4 +53,7 @@ If blocked:
 
 If there is no evidence, the task is not done.
 
+If there is no verified progress, TVP is undefined.
+
+Xskill measures from evidence, not guesses.
 Xskill learns from evidence, not confidence.

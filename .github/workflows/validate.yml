@@ -19,6 +19,7 @@ jobs:
           test -f xskill/optimize-path/SKILL.md
           test -f xskill/shorten-iteration/SKILL.md
           test -f xskill/evidence-ledger/SKILL.md
+          test -f xskill/metrics/SKILL.md
           test -f xskill/adaptive-improvement/SKILL.md
           test -f xskill/schema-memory/SKILL.md
           test -f xskill/templates/question-requirements-report.md
@@ -30,6 +31,7 @@ jobs:
           test -f xskill/templates/compiled-execution-brief.md
           test -f xskill/templates/context-budget.md
           test -f xskill/templates/evidence-ledger.md
+          test -f xskill/templates/metrics-report.md
           test -f xskill/templates/adaptive-improvement-report.md
           test -f xskill/templates/schema-memory-card.md
           test -f xskill/templates/automation-candidate.md
@@ -41,8 +43,10 @@ jobs:
           test -f xskill/examples/password-reset.execution-brief.md
           test -f xskill/examples/password-reset.compiled-execution-brief.json
           test -f xskill/examples/password-reset.evidence-ledger.md
+          test -f xskill/examples/password-reset.metrics-report.md
           test -f xskill/examples/password-reset.adaptive-improvement.md
           test -f xskill/examples/validation-bug.schema-memory-card.md
+          test -f docs/metrics.md
       - name: Check removed legacy skills
         run: |
           test ! -d xskill/automate-after-stable
@@ -65,3 +69,5 @@ jobs:
           grep -q 'portable task compiler' README.md
           grep -q 'compiled Execution Brief' README.md
           grep -q 'Compiled Execution Brief' xskill/optimize-path/SKILL.md
+          grep -q 'TVP' README.md
+          grep -q 'Tokens to Verified Progress' xskill/metrics/SKILL.md

@@ -48,10 +48,11 @@ The report decides whether the evidence should become:
 Prefer these inputs, in order:
 
 1. Evidence Ledger
-2. Execution Brief
-3. Shorten Iteration Report
-4. Existing Schema Memory Card
-5. Previous Adaptive Improvement Reports
+2. Metrics Report
+3. Execution Brief
+4. Shorten Iteration Report
+5. Existing Schema Memory Card
+6. Previous Adaptive Improvement Reports
 
 If there is no evidence ledger, do not proceed.
 
@@ -62,7 +63,7 @@ If there is no evidence ledger, do not proceed.
 3. Extract what worked.
 4. Extract what failed, drifted, or wasted context.
 5. Determine whether the pattern is repeated or one-off.
-6. Decide whether the improvement would reduce context, reduce scope, improve verification, prevent a repeated failure, or stabilize a repeated workflow.
+6. Use the metrics report, if available, to decide whether the improvement would reduce context, reduce scope creep, improve verification, reduce rework, or stabilize a repeated workflow.
 7. Choose one improvement type.
 8. Run a safety check: what could this improvement make worse?
 9. Decide reject, observe more, promote to schema, or mark as automation candidate.
@@ -72,10 +73,10 @@ If there is no evidence ledger, do not proceed.
 Do not promote a lesson unless at least one is true:
 
 - It appeared in more than one run.
-- It clearly reduces context load.
+- It clearly reduces context load or proxy TVP.
 - It narrows future scope.
-- It improves verification.
-- It prevents a repeated failure.
+- It improves verification rate.
+- It prevents a repeated failure or reduces rework rate.
 - It stabilizes a repeated workflow.
 
 Never automate confusion.

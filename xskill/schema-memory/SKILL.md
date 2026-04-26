@@ -131,3 +131,17 @@ Decision: reject
 Reason:
 This appears to be a one-off lesson and should remain in the evidence ledger or adaptive improvement report.
 ```
+
+
+## Metrics pattern
+
+When a schema is updated from repeated runs, record any stable metric pattern:
+
+- typical files read;
+- typical files touched;
+- typical scope creep risks;
+- typical verification checks;
+- typical rework causes;
+- proxy TVP trend, if available.
+
+Do not update schema metrics from one weak or unverifiable run.
