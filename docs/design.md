@@ -141,3 +141,28 @@ The output should feed later skills:
 - coupling risks -> context budget and stop condition
 - decoupling rules -> `optimize-path`
 - deferred modules -> non-goals
+
+## Small-batch path optimization
+
+`optimize-path` is the boundary between planning and implementation. It should not write code and should not expand the MVP.
+
+It selects one path using four filters:
+
+1. Small-batch quick response: choose the smallest slice that can create feedback.
+2. Agile working increment: produce something observable and reviewable.
+3. Lean waste removal: remove steps that do not create verified learning.
+4. Minimal safety buffer: keep rollback and stop conditions without building just-in-case systems.
+
+The output is an `Optimize Path Report` that can become an execution brief.
+
+## TDD micro-loops
+
+`shorten-iteration` receives the selected path when it is too large or when a run failed.
+
+It breaks work into loops:
+
+```text
+RED -> GREEN -> REFACTOR -> EVIDENCE
+```
+
+Each loop should have one behavior, one verification point, a small file budget, a refactor boundary, and an evidence handoff. If a loop fails, split that loop again instead of retrying blindly.

@@ -35,3 +35,7 @@ Then copy `AGENTS.md` to your project root if your coding agent supports it.
 ```
 
 Restart your coding agent after copying files.
+
+## Optional usage
+
+After copying the bundle, use `optimize-path` to select a small-batch implementation route and `shorten-iteration` to split large or failed routes into TDD micro-loops.

@@ -30,3 +30,11 @@ ai-agents, coding-agents, agent-skills, agents-md, context-engineering, claude-c
 - [ ] Confirm `xskill/examples/xskill.semantic-architecture.md` exists.
 - [ ] Confirm README shows semantic architecture as optional for multi-module work.
 - [ ] Confirm no CLI, npm, npx, pip, graph database, or runtime was added.
+
+## v0.1.5 release note
+
+- Upgraded optimize-path with small-batch quick response, agile working increments, lean waste removal, and minimal safety buffers.
+- Upgraded shorten-iteration to split large or failed selected paths into TDD micro-loops.
+- Added optimize-path and shorten-iteration report templates.
+- Added password-reset examples for selected path and TDD micro-loops.
+- Kept Xskill portable: no CLI, runtime, npm, npx, pip, graph system, or automatic executor.

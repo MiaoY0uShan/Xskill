@@ -1,81 +1,226 @@
 ---
 name: xskill-shorten-iteration
-description: Use when work is too large, an attempt failed, or the agent needs to split a task into atomic verifiable iterations with context slices and stop conditions.
+description: Use when work is too large, an attempt failed, or the selected path needs to be split into TDD micro-loops with evidence and stop conditions.
 ---
 
 # Xskill: Shorten Iteration
 
-Break work into smaller verified loops.
+Split large or failed work into TDD micro-loops.
 
-This skill prevents long, drifting agent runs by creating atomic tasks with clean context boundaries.
+This skill prevents long, drifting agent runs by turning a selected path into small loops. Each loop should have one goal, one red check or verification point, one minimal green implementation, one refactor boundary, one evidence requirement, and one stop condition.
 
 ## Use when
 
-- A task is too large for one context window.
+- The selected path from `optimize-path` is too large for one safe run.
 - A previous attempt failed.
-- The agent touched too many files.
 - Verification failed.
-- Work can be parallelized safely.
-- The user asks for a plan that should not sprawl.
+- The agent touched too many files.
+- The work crosses multiple modules.
+- A bug needs to be reproduced before it can be fixed.
+- The task would benefit from multiple TDD cycles.
 
-## Goal
+Do not use this skill to expand the MVP or redesign the product goal.
 
-Produce small tasks where each task has one goal, one context slice, one verification path, and one stop condition.
+---
+
+## Core principle
+
+> One loop. One behavior. One verification. One evidence record.
+
+If a loop fails, split it again. Do not blindly retry the same loop.
+
+---
+
+## TDD micro-loop model
+
+Use this pattern when the task involves code behavior, bug fixes, core logic, public APIs, data validation, or security-sensitive changes:
+
+```text
+RED
+→ GREEN
+→ REFACTOR
+→ EVIDENCE
+```
+
+### RED
+
+Create or identify the smallest failing check.
+
+Examples:
+
+- failing unit test
+- reproduction script
+- failing integration check
+- typecheck error
+- snapshot difference
+- manual reproduction note
+
+### GREEN
+
+Make the smallest change that passes the check.
+
+Rules:
+
+- do not broaden the fix
+- do not refactor unrelated code
+- do not touch files outside the loop budget
+
+### REFACTOR
+
+Only refactor inside the declared boundary.
+
+Use one of:
+
+- `none`
+- `local`
+- `supporting`
+- `defer`
+
+### EVIDENCE
+
+Record what proves the loop passed.
+
+Examples:
+
+- command output
+- test name
+- files touched
+- before/after behavior
+- remaining risk
+
+---
 
 ## Procedure
 
-1. Identify the original task.
-2. Identify the reason it is too large or failed.
-3. Split it into atomic tasks.
-4. Assign each task a context slice.
-5. Define checks for each task.
-6. Define stop conditions.
-7. Group independent tasks if they can be done in parallel.
-8. Define rollback or recovery steps.
+### 1. Read the selected path
+
+Use the latest Optimize Path Report.
+
+If the selected path is missing, ask to run `optimize-path` first.
+
+### 2. Identify why the path is too large or unsafe
+
+Classify the reason:
+
+- too many behaviors
+- too many files
+- unclear verification
+- previous failure
+- cross-module coupling
+- missing reproduction
+- hidden dependency
+- context budget exceeded
+
+### 3. Split into TDD micro-loops
+
+Each micro-loop must have:
+
+- goal
+- red check
+- green implementation boundary
+- files to read
+- files to touch
+- refactor boundary
+- evidence required
+- stop condition
+
+### 4. Order the loops
+
+Order loops so earlier loops reduce uncertainty for later loops.
+
+Prefer this order:
+
+1. reproduce or pin down the behavior
+2. fix the smallest core behavior
+3. add integration or boundary behavior
+4. add adjacent cases
+5. refactor only after evidence exists
+
+### 5. Define integration point
+
+State when the loops should be combined or reviewed together.
+
+### 6. Define failure split rule
+
+For each loop, specify how to split it if it fails.
+
+Example:
+
+```text
+If Loop 2 fails because the mail adapter is hard to mock, split into:
+- extract mail sender seam
+- test token generation without mail
+- reconnect endpoint after seam exists
+```
+
+### 7. Define evidence ledger handoff
+
+State what should be copied into the Evidence Ledger after each loop or after the set of loops.
+
+---
 
 ## Output contract
 
 Return this structure:
 
 ```md
-# Iteration Plan
+# Shorten Iteration Report
 
 ## Original Task
-...
+
+## Selected Path From Optimize Path
 
 ## Why It Needs Shorter Iterations
-...
 
-## Atomic Tasks
+## Iteration Budget
+- Max loops:
+- Max files per loop:
+- Max files touched overall:
+- Stop if:
 
-### T001: ...
-- Goal: ...
-- Context slice: ...
-- Files to read: ...
-- Files to touch: ...
-- Checks: ...
-- Stop condition: ...
+## TDD Micro-Loops
 
-### T002: ...
-- Goal: ...
-- Context slice: ...
-- Files to read: ...
-- Files to touch: ...
-- Checks: ...
-- Stop condition: ...
+### Loop 1: <name>
+- Goal:
+- RED:
+- GREEN:
+- Refactor boundary: none / local / supporting / defer
+- Files to read:
+- Files to touch:
+- Checks:
+- Evidence required:
+- Stop condition:
 
-## Parallel Groups
-- Wave 1: ...
-- Wave 2: ...
+### Loop 2: <name>
+- Goal:
+- RED:
+- GREEN:
+- Refactor boundary: none / local / supporting / defer
+- Files to read:
+- Files to touch:
+- Checks:
+- Evidence required:
+- Stop condition:
 
-## Rollback Plan
-- ...
+## Loop Order Rationale
+
+## Integration Point
+
+## Failure Split Rule
+
+## Evidence Ledger Handoff
+
+## Recommended Next Step
 ```
+
+---
 
 ## Rules
 
-- One task should fit in one clean agent run.
-- Each task must have a verification method.
-- If a task fails, split it again instead of retrying blindly.
-- Do not create parallel tasks that touch the same files.
+- Do not create loops without verification.
+- Do not create loops that all touch the same broad file set.
+- Do not call broad refactors a TDD loop.
 - Do not hide failure behind a vague summary.
+- If one loop is too large, split it again.
+- Prefer fewer, clearer loops over many vague loops.
+- For non-code work, replace RED/GREEN with before/after artifact checks and explicit review evidence.

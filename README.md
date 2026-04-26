@@ -10,7 +10,7 @@ Xskill removes context until the task becomes safe to execute.
 
 Before planning, Xskill can run a lightweight Five Whys and inversion pass: what is the real goal, and how could this fail?
 
-After the real goal is clear, Xskill uses first-principles reasoning and Occam's Razor to cut the request down to the smallest necessary MVP. Only then should larger tasks get a lightweight semantic architecture sketch for module boundaries, coupling risks, and decoupling rules.
+After the real goal is clear, Xskill uses first-principles reasoning and Occam's Razor to cut the request down to the smallest necessary MVP. Larger tasks then get a lightweight semantic architecture sketch for module boundaries, coupling risks, and decoupling rules. Implementation planning uses a small-batch path: smallest useful slice, working increment, lean waste removal, minimal safety buffer, then TDD micro-loops when the route is still too large.
 
 ```text
 Use Xskill to create an execution brief before editing code:
@@ -162,7 +162,7 @@ Use Xskill semantic-architecture after delete-scope for:
 For implementation:
 
 ```text
-Use Xskill optimize-path for:
+Use Xskill optimize-path after semantic-architecture or delete-scope for:
 <your task>
 ```
 
@@ -181,7 +181,7 @@ Use Xskill learn-after-run to extract reusable learning from the evidence.
 If the task fails:
 
 ```text
-Use Xskill shorten-iteration to split this failed task into smaller verified work.
+Use Xskill shorten-iteration to split this selected path or failed task into TDD micro-loops.
 ```
 
 ---
@@ -213,10 +213,29 @@ The rule is simple:
 
 Then `semantic-architecture` can use that MVP nucleus to define module boundaries and decoupling rules.
 
+## Small-batch optimize path
+
+After MVP scope and module boundaries are clear, Xskill does not jump into a large implementation plan.
+
+`optimize-path` selects one route using four filters:
+
+- **Small-batch quick response**: start with the smallest slice that can produce feedback.
+- **Agile working increment**: prefer something observable and reviewable over a broad plan.
+- **Lean waste removal**: delete steps that do not produce verified learning.
+- **Minimal safety buffer**: keep rollback, stop conditions, and fallback checks without building just-in-case systems.
+
+If the selected route is still too large, `shorten-iteration` breaks it into TDD micro-loops:
+
+```text
+RED -> GREEN -> REFACTOR -> EVIDENCE
+```
+
+Each loop should have one goal, one verification point, one small implementation boundary, and one evidence handoff.
+
 ## Core artifacts
 
 
-Xskill is built around six lightweight artifacts.
+Xskill is built around eight lightweight artifacts.
 
 ### 1. Question Requirements Report
 
@@ -242,13 +261,44 @@ See: [`xskill/templates/semantic-architecture-report.md`](xskill/templates/seman
 
 This is not a graph database or runtime. It is a short planning artifact for larger tasks.
 
-### 3. Execution Brief
+### 3. Optimize Path Report
+
+A small-batch implementation route that selects the smallest stable path that can produce verified progress.
+
+It captures:
+
+- candidate paths
+- small-batch slice
+- working increment
+- lean waste removed
+- minimal safety buffer
+- verification strategy
+- context budget
+
+See: [`xskill/templates/optimize-path-report.md`](xskill/templates/optimize-path-report.md)
+
+### 4. Shorten Iteration Report
+
+A TDD micro-loop plan used when the selected path is too large or a previous attempt failed.
+
+It captures:
+
+- iteration budget
+- RED/GREEN/REFACTOR/EVIDENCE loops
+- files per loop
+- stop conditions
+- failure split rules
+- evidence ledger handoff
+
+See: [`xskill/templates/shorten-iteration-report.md`](xskill/templates/shorten-iteration-report.md)
+
+### 5. Execution Brief
 
 A compact task plan that tells the agent what to do, what not to do, and how success will be verified.
 
 See: [`xskill/templates/execution-brief.md`](xskill/templates/execution-brief.md)
 
-### 4. Context Budget
+### 6. Context Budget
 
 A boundary contract for the agent.
 
@@ -263,7 +313,7 @@ It defines:
 
 See: [`xskill/templates/context-budget.md`](xskill/templates/context-budget.md)
 
-### 5. Evidence Ledger
+### 7. Evidence Ledger
 
 A record of what actually happened.
 
@@ -280,7 +330,7 @@ See: [`xskill/templates/evidence-ledger.md`](xskill/templates/evidence-ledger.md
 
 If there is no evidence, the task is not done.
 
-### 6. Iteration Learning Note
+### 8. Iteration Learning Note
 
 A short post-run note that turns evidence into reusable learning.
 
@@ -305,8 +355,8 @@ Xskill does not auto-improve blindly. It learns only from evidence.
 | Question | `question-requirements` | Run Five Whys and inversion to reveal the real goal, failure paths, assumptions, and decision |
 | Architecture | `semantic-architecture` | Sketch the MVP slice, module map, coupling risks, and decoupling rules for larger tasks |
 | Delete | `delete-scope` | Remove unnecessary work and define scope boundaries |
-| Optimize | `optimize-path` | Create the smallest correct execution path |
-| Shorten | `shorten-iteration` | Split large or failed work into smaller verified tasks |
+| Optimize | `optimize-path` | Select the smallest stable route using small-batch, agile, lean, and minimal safety-buffer filters |
+| Shorten | `shorten-iteration` | Split large or failed routes into TDD micro-loops with evidence handoff |
 | Automate | `automate-after-stable` | Automate only stable repeated work |
 | Support | `semantic-memory` | Select only the context needed for this task |
 | Learning | `learn-after-run` | Extract reusable learning after a run without blindly modifying skills |
@@ -344,12 +394,14 @@ Xskill should stay small.
 1. Do not load long context by default.
 2. Question vague or risky requests with Five Whys and inversion before planning.
 3. For multi-module work, sketch semantic architecture after deleting scope.
-4. Create an execution brief before non-trivial edits.
-5. Respect the context budget.
-6. Touch the smallest possible set of files.
-7. Verify with evidence.
-8. If blocked, split the task smaller.
-9. Do not claim completion without an evidence ledger.
+4. Select the smallest stable implementation path before editing.
+5. Prefer small-batch working increments over broad plans.
+6. Respect the context budget.
+7. Touch the smallest possible set of files.
+8. Split large or failed work into TDD micro-loops.
+9. Verify with evidence.
+10. If blocked, split the task smaller.
+11. Do not claim completion without an evidence ledger.
 
 ---
 

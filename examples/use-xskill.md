@@ -123,3 +123,27 @@ Use Xskill learn-after-run to extract reusable learning from the evidence ledger
 ```
 
 Keep the learning as a note unless the same issue repeats or the improvement clearly reduces context, scope, or verification risk.
+
+## Small-batch implementation route
+
+After `delete-scope` and `semantic-architecture`, choose the route before editing:
+
+```text
+Use Xskill optimize-path after semantic-architecture for:
+Fix password reset bug.
+```
+
+The agent should select one small-batch route, remove lean waste, define a minimal safety buffer, and specify verification evidence.
+
+If the route is still too large:
+
+```text
+Use Xskill shorten-iteration to split the selected path into TDD micro-loops:
+Fix password reset bug.
+```
+
+Each loop should follow:
+
+```text
+RED -> GREEN -> REFACTOR -> EVIDENCE
+```

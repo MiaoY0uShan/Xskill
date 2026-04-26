@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.5 — Small-batch optimize path
+
+- Upgraded `optimize-path` with small-batch quick response, agile working increments, lean waste removal, and minimal safety buffers.
+- Upgraded `shorten-iteration` to split large or failed selected paths into TDD micro-loops.
+- Added `optimize-path-report` and `shorten-iteration-report` templates.
+- Added password-reset examples for optimize path and shorten iteration.
+- Clarified the boundary: `optimize-path` selects the route; `shorten-iteration` slices the route.
+- Kept Xskill portable: no CLI, runtime, npm, npx, pip, graph system, or automatic executor.
+
+
 ## v0.1.4 - First-principles scope deletion
 
 - Upgraded `delete-scope` with first-principles reasoning and Occam's Razor.

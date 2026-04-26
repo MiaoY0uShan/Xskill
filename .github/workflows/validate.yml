@@ -24,6 +24,8 @@ jobs:
           test -f xskill/templates/question-requirements-report.md
           test -f xskill/templates/delete-scope-report.md
           test -f xskill/templates/semantic-architecture-report.md
+          test -f xskill/templates/optimize-path-report.md
+          test -f xskill/templates/shorten-iteration-report.md
           test -f xskill/templates/execution-brief.md
           test -f xskill/templates/context-budget.md
           test -f xskill/templates/evidence-ledger.md
@@ -31,6 +33,8 @@ jobs:
           test -f xskill/examples/password-reset.question-requirements.md
           test -f xskill/examples/password-reset.delete-scope.md
           test -f xskill/examples/xskill.semantic-architecture.md
+          test -f xskill/examples/password-reset.optimize-path.md
+          test -f xskill/examples/password-reset.shorten-iteration.md
       - name: Check portable scope
         run: |
           test ! -f pyproject.toml
