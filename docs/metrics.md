@@ -115,3 +115,15 @@ Compare:
 - failed attempts;
 - time or loops to first verified slice;
 - exact tokens, if available.
+
+
+## v0.1.9 contracts layer
+
+Xskill now treats four artifacts as core differentiators:
+
+- Context Budget Contract;
+- Evidence Ledger;
+- Failure-to-Smaller-Task Protocol;
+- Context Diet Map.
+
+These keep the bundle portable while making each run bounded, auditable, failure-shrinking, and context-reducing.

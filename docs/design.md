@@ -150,3 +150,15 @@ Supporting metrics:
 Metrics are optional for tiny tasks but recommended for demos, comparisons, releases, and non-trivial runs.
 
 Metrics must come after evidence-ledger because Xskill measures from evidence, not guesses.
+
+
+## v0.1.9 contracts layer
+
+Xskill now treats four artifacts as core differentiators:
+
+- Context Budget Contract;
+- Evidence Ledger;
+- Failure-to-Smaller-Task Protocol;
+- Context Diet Map.
+
+These keep the bundle portable while making each run bounded, auditable, failure-shrinking, and context-reducing.

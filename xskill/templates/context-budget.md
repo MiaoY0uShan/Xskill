@@ -1,35 +1,21 @@
 # Context Budget
 
-## Task
+Use `context-budget-contract.md` for the full task contract.
 
-...
+This shorter form is only for quick notes.
 
-## Budget
+## Max files to read
 
-- Max files to read: ...
-- Max files to touch: ...
-- Max generated notes: ...
+## Max files to touch
 
-## Allowed Context
+## Max skill tokens
 
-- ...
+## Max execution notes
 
-## Forbidden Context
+## Required semantic / schema nodes
 
-- ...
+## Forbidden context
 
-## Files To Read First
+## Scope boundary
 
-- ...
-
-## Files To Avoid
-
-- ...
-
-## Scope Boundary
-
-...
-
-## Stop Condition
-
-...
+## Violation handling

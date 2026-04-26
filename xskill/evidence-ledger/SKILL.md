@@ -5,6 +5,8 @@ description: Use after execution to record what changed, what checks ran, which 
 
 # Xskill: Evidence Ledger
 
+Every agent claim needs evidence.
+
 If there is no evidence, the task is not done.
 
 This skill records the result of an agent run. It is the source material for metrics, adaptive improvement, and schema memory.
@@ -59,6 +61,8 @@ Pass | Fail | Blocked | Partial
 
 ## Scope Violations
 
+## Context Budget Violations
+
 ## Remaining Risk
 
 ## Decision
@@ -93,3 +97,20 @@ The metrics skill needs:
 - verified tasks completed;
 - failed or reopened tasks;
 - exact token counts, if available.
+
+
+## JSON audit form
+
+When auditability matters, also produce a JSON ledger using `templates/evidence-ledger.md`.
+
+The JSON form should include:
+
+- task_id;
+- files_read;
+- files_touched;
+- commands_run;
+- verified claims with evidence;
+- unverified_claims;
+- scope_violations;
+- context_budget_violations;
+- next_action.

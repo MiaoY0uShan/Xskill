@@ -2,21 +2,7 @@
 
 This folder is the portable Xskill skill bundle.
 
-Xskill is a task compiler for AI coding agents. Its primary output is a compiled **Execution Brief**.
-
-The brief tells the agent:
-
-```text
-what to do
-why it matters
-what not to do
-which files to read
-which files to touch
-which files to avoid
-how to verify
-when to stop
-what evidence is required
-```
+Xskill is a task compiler for AI coding agents. Its primary output is a compiled **Execution Brief** with a Context Budget Contract, Context Diet Map, and Evidence Ledger handoff.
 
 ## Skills
 
@@ -25,7 +11,7 @@ question-requirements/     find the real goal, Five Whys, failure paths
 delete-scope/              reduce to MVP using first principles and Occam's Razor
 semantic-architecture/     sketch MVP module boundaries and coupling risks
 optimize-path/             select the smallest stable route and compile the brief
-shorten-iteration/         split large or failed routes into TDD micro-loops
+shorten-iteration/         split large or failed routes into TDD micro-loops and failure protocol
 evidence-ledger/           record proof after execution
 metrics/                   measure TVP, context load, scope creep, verification, and rework
 adaptive-improvement/      improve only from evidence-backed patterns
@@ -64,12 +50,23 @@ schema-memory
 
 ```text
 templates/compiled-execution-brief.md
-templates/execution-brief.md
-templates/context-budget.md
+templates/context-budget-contract.md
+templates/context-budget-contract.json
+templates/context-diet-map.md
+templates/failure-to-smaller-task-protocol.md
 templates/evidence-ledger.md
 templates/metrics-report.md
 templates/adaptive-improvement-report.md
 templates/schema-memory-card.md
+```
+
+## Four differentiators
+
+```text
+Context Budget Contract       hard limits on reading, touching, notes, and scope
+Evidence Ledger               every agent claim needs evidence
+Failure-to-Smaller Protocol   failed work shrinks into smaller verified tasks
+Context Diet Map              memory used to remove context, not add it
 ```
 
 ## Recommended use
@@ -86,22 +83,9 @@ The agent should produce one final brief before touching code.
 If the task is large, ask:
 
 ```text
-Use Xskill end to end: question, delete, architecture if needed, optimize, shorten if needed, then produce one compiled Execution Brief.
+Use Xskill end to end: question, delete, architecture if needed, optimize, shorten if needed, then produce one compiled Execution Brief with a Context Budget Contract and Context Diet Map.
 ```
 
 ## Rule
 
 Do not use Xskill to create long planning documents. Use it to create the shortest safe execution contract.
-
-
-## Metrics
-
-When a run needs measurement, use `metrics/` after `evidence-ledger/`.
-
-Primary metric:
-
-```text
-TVP = total_context_tokens / verified_tasks_completed
-```
-
-If exact token counts are unavailable, use the proxy in `templates/metrics-report.md`.

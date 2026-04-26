@@ -30,6 +30,15 @@ jobs:
           test -f xskill/templates/execution-brief.md
           test -f xskill/templates/compiled-execution-brief.md
           test -f xskill/templates/context-budget.md
+          test -f xskill/templates/context-budget-contract.md
+          test -f xskill/templates/context-budget-contract.json
+          test -f xskill/templates/context-diet-map.md
+          test -f xskill/templates/failure-to-smaller-task-protocol.md
+          test -f xskill/examples/password-reset.context-budget-contract.json
+          test -f xskill/examples/password-reset.context-diet-map.md
+          test -f xskill/examples/password-reset.evidence-ledger.json
+          test -f xskill/examples/password-reset.failure-to-smaller-task.md
+          test -f docs/contracts.md
           test -f xskill/templates/evidence-ledger.md
           test -f xskill/templates/metrics-report.md
           test -f xskill/templates/adaptive-improvement-report.md
@@ -70,4 +79,8 @@ jobs:
           grep -q 'compiled Execution Brief' README.md
           grep -q 'Compiled Execution Brief' xskill/optimize-path/SKILL.md
           grep -q 'TVP' README.md
+          grep -q 'Context Budget Contract' README.md
+          grep -q 'Evidence Ledger' README.md
+          grep -q 'Failure-to-Smaller-Task Protocol' README.md
+          grep -q 'Context Diet Map' README.md
           grep -q 'Tokens to Verified Progress' xskill/metrics/SKILL.md

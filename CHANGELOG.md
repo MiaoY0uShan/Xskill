@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.9 — Contracts layer
+
+- Added Context Budget Contract template and JSON contract.
+- Added Context Diet Map template and example.
+- Added Failure-to-Smaller-Task Protocol template and example.
+- Added JSON Evidence Ledger audit example.
+- Upgraded the compiled Execution Brief to include contract, diet map, failure protocol, and evidence handoff.
+- Updated README, AGENTS.md, xskill README, design docs, metrics docs, and validation.
+- Kept Xskill portable: no CLI, runtime, database, npm, npx, pip, token tracker, graph engine, or automatic executor.
+
 ## v0.1.8 — Metrics layer
 
 - Added `metrics` skill.

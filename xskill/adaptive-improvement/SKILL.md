@@ -181,3 +181,18 @@ Decision: reject
 Reason:
 No evidence ledger was provided. Xskill learns from evidence, not confidence.
 ```
+
+
+## Automation remains a candidate
+
+Automation is not a default step.
+
+Only suggest automation when evidence shows that a manual step is:
+
+- repeated;
+- stable;
+- bounded by a Context Budget Contract;
+- covered by an Evidence Ledger;
+- likely to reduce context, scope, or rework.
+
+If these conditions are not met, keep the improvement as a schema or checklist.

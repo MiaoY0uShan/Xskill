@@ -224,3 +224,29 @@ Return this structure:
 - If one loop is too large, split it again.
 - Prefer fewer, clearer loops over many vague loops.
 - For non-code work, replace RED/GREEN with before/after artifact checks and explicit review evidence.
+
+
+## Failure-to-Smaller-Task Protocol
+
+If a loop fails, blocks, exceeds the Context Budget Contract, or discovers unexpected coupling, do not retry the same loop blindly.
+
+Return a smaller task set:
+
+```json
+{
+  "failed_task": "",
+  "failure_type": "",
+  "root_cause": "",
+  "evidence": [],
+  "smaller_tasks": [],
+  "new_context_budget": {
+    "max_files_to_read": 0,
+    "max_files_to_touch": 0,
+    "files_to_avoid": []
+  },
+  "new_verification": [],
+  "stop_condition": ""
+}
+```
+
+The smaller task must have one behavior, one check, and one evidence record.

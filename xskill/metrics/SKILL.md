@@ -63,6 +63,20 @@ Prefer these inputs:
 
 ## Metrics
 
+### Context Budget Contract compliance
+
+Record whether the run stayed within:
+
+- max files to read;
+- max files to touch;
+- max skill tokens, if known;
+- max execution notes;
+- forbidden context;
+- scope boundary.
+
+Any violation should be counted as scope or context drift.
+
+
 ### TVP
 
 ```text

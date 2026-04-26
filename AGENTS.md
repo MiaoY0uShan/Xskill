@@ -2,58 +2,57 @@
 
 This repository uses Xskill.
 
-Xskill is a portable task compiler for AI coding agents. Its primary output is a compiled Execution Brief, not a long prompt.
+Xskill is a portable task compiler for AI coding agents. Its primary output is a compiled Execution Brief, not a long plan.
 
-Before non-trivial coding tasks:
+## Core rules
 
-1. Use `question-requirements` to identify the real goal, Five Whys, failure paths, assumptions, success criteria, and non-goals.
-2. Use `delete-scope` to reduce the request to the smallest necessary MVP using first-principles reasoning and Occam's Razor.
-3. Use `semantic-architecture` only when the task spans multiple modules or needs MVP-based module boundaries.
-4. Use `optimize-path` to select the smallest stable implementation route and compile the final Execution Brief.
-5. Use `shorten-iteration` if the selected route is too large or needs multiple TDD micro-loops.
-6. Execute only the compiled Execution Brief.
-7. Use `evidence-ledger` after execution.
-8. Use `metrics` when the run should prove context load, scope control, verification, rework, or TVP.
-9. Use `adaptive-improvement` and `schema-memory` only when evidence shows a reusable pattern.
+1. For non-trivial work, create a compiled Execution Brief before editing code.
+2. Respect the Context Budget Contract.
+3. Use the Context Diet Map to decide what not to read.
+4. Do not touch files outside the declared scope unless the contract is revised.
+5. Run the required checks.
+6. Do not claim completion without an Evidence Ledger.
+7. If the task fails, blocks, or exceeds budget, use the Failure-to-Smaller-Task Protocol instead of retrying blindly.
+8. If measurement matters, create a Metrics Report after the Evidence Ledger.
+9. Use adaptive improvement only from evidence-backed patterns.
+10. Store reusable patterns as schema memory, not raw context.
 
-Core rule:
+## Workflow
 
-> Xskill compiles vague tasks into bounded, verifiable Execution Briefs.
+```text
+question-requirements
+→ delete-scope
+→ semantic-architecture, when needed
+→ optimize-path
+→ shorten-iteration, when needed
+→ compiled execution brief
+→ execution
+→ evidence-ledger
+→ metrics, when needed
+→ adaptive-improvement
+→ schema-memory
+```
 
-The Execution Brief is the contract. Respect:
+## Required artifacts for meaningful tasks
 
-- real goal
-- MVP scope
-- must-not-do list
-- files to read
-- files to touch
-- files to avoid
-- context budget
-- checks
-- TDD micro-loops
-- stop condition
-- evidence required
+- Compiled Execution Brief
+- Context Budget Contract
+- Context Diet Map
+- Evidence Ledger
 
-Do not:
+If the run fails or exceeds budget, also produce:
 
-- expand the MVP
-- read broad context by default
-- touch unrelated files
-- refactor outside the declared boundary
-- claim completion without evidence
-- turn one run into a permanent rule
-- automate before the process is stable
+- Failure-to-Smaller-Task Protocol
 
-If blocked:
+If the run is being measured, also produce:
 
-1. Stop.
-2. Record the blocker.
-3. Split the task smaller.
-4. Produce a narrower Execution Brief.
+- Metrics Report
 
-If there is no evidence, the task is not done.
+## Do not
 
-If there is no verified progress, TVP is undefined.
-
-Xskill measures from evidence, not guesses.
-Xskill learns from evidence, not confidence.
+- Do not load long context by default.
+- Do not read unrelated files just because they may be useful.
+- Do not expand MVP scope without evidence.
+- Do not automate confusion.
+- Do not turn one-off experience into a schema.
+- Do not claim success without checks or explicit evidence.

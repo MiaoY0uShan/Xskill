@@ -32,6 +32,24 @@ The brief is the contract for execution.
 
 ---
 
+
+## Contract compiler requirement
+
+`optimize-path` must compile upstream Xskill outputs into the final Compiled Execution Brief.
+
+The final brief must include:
+
+- Context Budget Contract;
+- Context Diet Map;
+- files to read, touch, and avoid;
+- selected path;
+- TDD micro-loops, when needed;
+- Failure-to-Smaller-Task Protocol;
+- Evidence Ledger handoff;
+- Metrics to record.
+
+If the required context limits or scope boundary are missing, create them before execution begins.
+
 ## Use when
 
 Use this skill when:

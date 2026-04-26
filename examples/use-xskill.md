@@ -81,3 +81,15 @@ Use Xskill metrics to calculate TVP, proxy TVP, scope creep rate, verification r
 ```
 
 If exact token counts are unavailable, ask the agent to use proxy TVP and label it clearly.
+
+
+## v0.1.9 contracts layer
+
+Xskill now treats four artifacts as core differentiators:
+
+- Context Budget Contract;
+- Evidence Ledger;
+- Failure-to-Smaller-Task Protocol;
+- Context Diet Map.
+
+These keep the bundle portable while making each run bounded, auditable, failure-shrinking, and context-reducing.

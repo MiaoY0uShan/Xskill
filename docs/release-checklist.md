@@ -41,3 +41,15 @@ Suggested release note:
 - [ ] `docs/metrics.md` exists.
 - [ ] README explains TVP and proxy TVP.
 - [ ] AGENTS.md says metrics must come from evidence.
+
+
+## v0.1.9 contracts layer
+
+Xskill now treats four artifacts as core differentiators:
+
+- Context Budget Contract;
+- Evidence Ledger;
+- Failure-to-Smaller-Task Protocol;
+- Context Diet Map.
+
+These keep the bundle portable while making each run bounded, auditable, failure-shrinking, and context-reducing.

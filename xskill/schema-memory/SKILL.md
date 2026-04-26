@@ -145,3 +145,18 @@ When a schema is updated from repeated runs, record any stable metric pattern:
 - proxy TVP trend, if available.
 
 Do not update schema metrics from one weak or unverifiable run.
+
+
+## Context Diet Map handoff
+
+Schema memory should help reduce future context load.
+
+When a schema is relevant, provide:
+
+- likely files to read;
+- likely files to avoid;
+- relevant schema cards;
+- common irrelevant context;
+- reason for exclusion.
+
+This should feed the Context Diet Map in the next Compiled Execution Brief.
