@@ -1,131 +1,40 @@
 # Start here
 
-Use this file if you do not want to understand the whole project first.
+Pick your agent, install one pack, restart the agent, then use your agent normally.
 
-## What Xskill does
+Xskill should activate automatically for non-trivial coding tasks.
 
-Xskill makes your coding agent do this before editing code:
-
-```text
-turn a vague task into a small, bounded, verifiable Execution Brief
-```
-
-You install Xskill by copying one ready-made folder for your agent.
-
-No Xskill CLI. No npm. No npx. No pip. No database. No runtime.
-
----
-
-## Step 1: Pick your agent
-
-### Codex
-
-Copy this folder into your repository root:
+Manual override:
 
 ```text
-install/codex/.agents
+Xskill: <your task or idea>
 ```
 
-After copying, your project should contain:
+## Pick your agent
+
+| Agent | Download |
+|---|---|
+| Codex | `xskill-codex-v0.2.3.zip` |
+| Claude Code | `xskill-claude-code-v0.2.3.zip` |
+| Gemini CLI | `xskill-gemini-cli-v0.2.3.zip` |
+| GitHub Copilot CLI | `xskill-github-copilot-cli-v0.2.3.zip` |
+| Any coding agent | `xskill-copy-paste-v0.2.3.md` |
+
+## Use
+
+Ask your agent normally:
 
 ```text
-.agents/skills/xskill/SKILL.md
+Fix the password reset bug.
 ```
 
-### Claude Code
+Expected behavior:
 
-Copy this folder into your repository root:
+- non-trivial task → Xskill activates automatically and produces a Compiled Execution Brief
+- vague idea → Xskill produces 3 Idea Cards first
+
+Manual override:
 
 ```text
-install/claude-code/.claude
-```
-
-After copying, your project should contain:
-
-```text
-.claude/skills/xskill/SKILL.md
-```
-
-### Gemini CLI
-
-Copy this folder:
-
-```text
-install/gemini-cli/xskill
-```
-
-To:
-
-```text
-~/.gemini/extensions/xskill
-```
-
-Or install from the local path:
-
-```bash
-gemini extensions install install/gemini-cli/xskill
-```
-
-### GitHub Copilot CLI
-
-Copy both of these into your repository root:
-
-```text
-install/github-copilot-cli/.github
-install/github-copilot-cli/xskill
-```
-
-After copying, your project should contain:
-
-```text
-.github/agents/xskill.agent.md
-xskill/
-```
-
----
-
-## Step 2: Restart your agent
-
-Restart the agent or reload the project so it can discover the new instructions.
-
----
-
-## Step 3: Use one sentence
-
-Ask your agent:
-
-```text
-Use Xskill to compile this task before editing code:
-<your task>
-```
-
-For Claude Code, you can also use:
-
-```text
-/xskill Compile this task before editing code: <your task>
-```
-
----
-
-## What you should get
-
-The agent should produce a **Compiled Execution Brief** with:
-
-```text
-- real goal
-- MVP scope
-- must not do
-- context budget contract
-- context diet map
-- files to read
-- files to avoid
-- checks
-- evidence required
-- stop condition
-```
-
-If it starts editing code before producing the brief, tell it:
-
-```text
-Stop. Use Xskill first. Produce the Execution Brief before editing code.
+Xskill: Fix the password reset bug.
 ```

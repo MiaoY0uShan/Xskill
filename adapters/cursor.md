@@ -1,18 +1,18 @@
-# Cursor Adapter
+# Xskill adapter: cursor
 
-Cursor support is intentionally lightweight in this release.
+Xskill is agent-agnostic.
 
-Recommended use:
-
-1. Keep `xskill/` in your repository.
-2. Ask Cursor's agent to read `xskill/AGENTS.md`.
-3. Ask it to use only the relevant Xskill module files before editing.
-
-Prompt:
+Default trigger:
 
 ```text
-Use the Xskill protocol from xskill/AGENTS.md. Compile this task into a bounded Execution Brief before editing code:
-<task>
+Xskill: <task or idea>
 ```
 
-A future release may add a dedicated Cursor rules pack.
+Expected behavior:
+
+- vague idea → 3 Idea Cards
+- clear task → Compiled Execution Brief
+- completed task → Evidence Ledger
+- failed task → Failure-to-Smaller-Task Protocol
+
+This adapter does not add a runtime, CLI, npm package, npx installer, pip package, or database.

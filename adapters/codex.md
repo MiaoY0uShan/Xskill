@@ -1,33 +1,18 @@
-# Codex Adapter
+# Xskill adapter: codex
 
-## Recommended install
+Xskill is agent-agnostic.
 
-Copy this ready-made folder into your repository root:
-
-```text
-install/codex/.agents
-```
-
-Your project should then contain:
+Default trigger:
 
 ```text
-.agents/skills/xskill/SKILL.md
-.agents/skills/xskill/references/xskill/...
+Xskill: <task or idea>
 ```
 
-Codex can also use user-level skills by placing skills under:
+Expected behavior:
 
-```text
-~/.agents/skills
-```
+- vague idea → 3 Idea Cards
+- clear task → Compiled Execution Brief
+- completed task → Evidence Ledger
+- failed task → Failure-to-Smaller-Task Protocol
 
-## Use
-
-Ask Codex:
-
-```text
-Use Xskill to compile this task into a bounded Execution Brief before editing code:
-<task>
-```
-
-Codex may invoke the `xskill` skill explicitly or implicitly when the task matches the skill description.
+This adapter does not add a runtime, CLI, npm package, npx installer, pip package, or database.

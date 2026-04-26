@@ -1,42 +1,18 @@
-# Gemini CLI Adapter
+# Xskill adapter: gemini-cli
 
-## Recommended install
+Xskill is agent-agnostic.
 
-Copy this ready-made extension folder to Gemini CLI's extension directory:
-
-```text
-install/gemini-cli/xskill
-```
-
-Target location:
+Default trigger:
 
 ```text
-~/.gemini/extensions/xskill
+Xskill: <task or idea>
 ```
 
-The folder already contains:
+Expected behavior:
 
-```text
-gemini-extension.json
-GEMINI.md
-xskill/...
-```
+- vague idea → 3 Idea Cards
+- clear task → Compiled Execution Brief
+- completed task → Evidence Ledger
+- failed task → Failure-to-Smaller-Task Protocol
 
-Restart Gemini CLI after copying the extension.
-
-## Optional install command
-
-Gemini CLI can also install an extension from a local path:
-
-```bash
-gemini extensions install install/gemini-cli/xskill
-```
-
-## Use
-
-Ask Gemini CLI:
-
-```text
-Use Xskill to compile this task into a bounded Execution Brief before editing code:
-<task>
-```
+This adapter does not add a runtime, CLI, npm package, npx installer, pip package, or database.

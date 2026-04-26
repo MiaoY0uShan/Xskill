@@ -1,32 +1,33 @@
 # Xskill for Gemini CLI
 
-Use Xskill as an execution discipline layer before non-trivial coding work.
+Use Xskill proactively before non-trivial coding work.
 
-Primary protocol:
+Do not wait for the user to say `Xskill`.
+
+Manual override:
 
 ```text
-user task
-→ question-requirements
-→ delete-scope
-→ semantic-architecture, when needed
-→ optimize-path
-→ shorten-iteration, when needed
-→ compiled execution brief
-→ bounded execution
-→ evidence-ledger
-→ metrics, when measurement matters
-→ adaptive-improvement
-→ schema-memory
+Xskill: <task or idea>
 ```
 
-Detailed modules and templates are bundled in `xskill/` inside this extension.
+## Automatic behavior
 
-When the user says "Use Xskill", read only the relevant files under `xskill/` and produce a Compiled Execution Brief before editing code.
+- Clear coding task → create a Compiled Execution Brief before editing code.
+- Vague idea → generate 3 Idea Cards first.
+- Failed task → split into smaller verified work.
+- Completed task → produce an Evidence Ledger before claiming done.
 
-Hard rules:
+Bundled references are inside:
 
-- Respect the Context Budget Contract.
-- Use the Context Diet Map to decide what not to read.
+```text
+xskill/
+```
+
+## Hard rules
+
+- Do not edit code before the brief.
+- Estimate the Context Budget Contract yourself.
+- Respect the Context Diet Map.
 - Do not claim completion without an Evidence Ledger.
-- If the task fails or exceeds budget, produce a Failure-to-Smaller-Task Protocol.
+- If the task fails or exceeds budget, produce a smaller task.
 - Xskill learns from evidence, not confidence.

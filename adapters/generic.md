@@ -1,12 +1,18 @@
-# Generic Adapter
+# Xskill adapter: generic
 
-Use this when your agent does not have native `SKILL.md`, extension, or custom-agent support.
+Xskill is agent-agnostic.
 
-Open `xskill/AGENTS.md`, then tell the agent:
+Default trigger:
 
 ```text
-Use the Xskill protocol in xskill/AGENTS.md. Read only the relevant Xskill module files. Compile this task into a bounded Execution Brief before editing code:
-<task>
+Xskill: <task or idea>
 ```
 
-This keeps Xskill portable even on agents without a formal skill system.
+Expected behavior:
+
+- vague idea → 3 Idea Cards
+- clear task → Compiled Execution Brief
+- completed task → Evidence Ledger
+- failed task → Failure-to-Smaller-Task Protocol
+
+This adapter does not add a runtime, CLI, npm package, npx installer, pip package, or database.

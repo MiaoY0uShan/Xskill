@@ -1,36 +1,18 @@
-# Claude Code Adapter
+# Xskill adapter: claude-code
 
-## Recommended install
+Xskill is agent-agnostic.
 
-Copy this ready-made folder into your repository root:
-
-```text
-install/claude-code/.claude
-```
-
-Your project should then contain:
+Default trigger:
 
 ```text
-.claude/skills/xskill/SKILL.md
-.claude/skills/xskill/references/xskill/...
+Xskill: <task or idea>
 ```
 
-For global use across projects, copy the `xskill` skill folder to:
+Expected behavior:
 
-```text
-~/.claude/skills/xskill
-```
+- vague idea → 3 Idea Cards
+- clear task → Compiled Execution Brief
+- completed task → Evidence Ledger
+- failed task → Failure-to-Smaller-Task Protocol
 
-## Use
-
-Invoke directly:
-
-```text
-/xskill Compile this task into a bounded Execution Brief before editing code: <task>
-```
-
-Or ask naturally:
-
-```text
-Use Xskill before editing code: <task>
-```
+This adapter does not add a runtime, CLI, npm package, npx installer, pip package, or database.

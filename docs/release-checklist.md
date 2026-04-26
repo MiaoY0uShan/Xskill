@@ -1,37 +1,24 @@
 # Release checklist
 
-## Before release
+## v0.2.2 — Xskill router and Idea Cards
 
-- [ ] `README.md` starts with the 30-second start path.
-- [ ] `START_HERE.md` exists.
-- [ ] `INSTALL.md` exists.
-- [ ] `install/README.md` exists.
-- [ ] Codex pack exists: `install/codex/.agents/skills/xskill/SKILL.md`.
-- [ ] Claude Code pack exists: `install/claude-code/.claude/skills/xskill/SKILL.md`.
-- [ ] Gemini CLI pack exists: `install/gemini-cli/xskill/gemini-extension.json`.
-- [ ] GitHub Copilot CLI pack exists: `install/github-copilot-cli/.github/agents/xskill.agent.md`.
-- [ ] No root `AGENTS.md` is required.
-- [ ] `xskill/AGENTS.md` is bundled.
-- [ ] `xskill/templates/compiled-execution-brief.md` exists.
-- [ ] `xskill/templates/context-budget-contract.json` exists.
-- [ ] `xskill/templates/evidence-ledger.md` exists.
-- [ ] `docs/case-studies.md` exists.
-
-## Release title
-
-Recommended:
+Build these assets:
 
 ```text
-v0.2.0 — Dumb-simple install
+Xskill-portable-router-idea-cards-repo.zip
+xskill-v0.2.2-router-idea-cards.zip
+xskill-codex-v0.2.2.zip
+xskill-claude-code-v0.2.2.zip
+xskill-gemini-cli-v0.2.2.zip
+xskill-github-copilot-cli-v0.2.2.zip
+xskill-copy-paste-v0.2.2.md
 ```
 
-## Release note
+Verify:
 
-```text
-- Added START_HERE.md for the shortest possible install path
-- Added INSTALL.md with copy-only instructions for Codex, Claude Code, Gemini CLI, and GitHub Copilot CLI
-- Added install/README.md to make release zip usage clearer
-- Simplified README around a 30-second start path
-- Moved complex protocol details lower in the README
-- Kept Xskill portable: no CLI, npm, npx, pip, database, runtime, or automatic executor
-```
+- `xskill/SKILL.md` exists.
+- Idea Cards template exists.
+- Context Budget Contract includes estimated budget fields.
+- All install packs use `Xskill: <task or idea>`.
+- Each agent package includes `TEST_XSKILL.md`.
+- No CLI, npm, npx, pip, database, or runtime was introduced.

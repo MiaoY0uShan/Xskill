@@ -1,11 +1,26 @@
-# Xskill Bundle
+# Xskill bundle
 
-This folder is the canonical portable Xskill bundle.
+This folder contains the Xskill portable skill bundle.
 
-It contains everything an agent needs to follow the Xskill protocol:
+Users should not call internal skills manually.
+
+Default trigger:
 
 ```text
-AGENTS.md
+Xskill: <task or idea>
+```
+
+The top-level router is:
+
+```text
+SKILL.md
+```
+
+It decides whether to produce Idea Cards, question requirements, delete scope, sketch architecture, optimize path, shorten iteration, or request evidence.
+
+## Internal skills
+
+```text
 question-requirements/
 delete-scope/
 semantic-architecture/
@@ -15,40 +30,24 @@ evidence-ledger/
 metrics/
 adaptive-improvement/
 schema-memory/
-templates/
-examples/
 ```
 
-No separate root `AGENTS.md` is required.
-
-For native agent installs, use the ready-made packs in the repository-level `install/` directory:
+## Key artifacts
 
 ```text
-install/codex/.agents/skills/xskill/
-install/claude-code/.claude/skills/xskill/
-install/gemini-cli/xskill/
-install/github-copilot-cli/.github/agents/xskill.agent.md
-```
-
-## Protocol
-
-```text
-user task
-→ question-requirements
-→ delete-scope
-→ semantic-architecture, when needed
-→ optimize-path
-→ shorten-iteration, when needed
-→ compiled execution brief
-→ bounded execution
-→ evidence-ledger
-→ metrics, when measurement matters
-→ adaptive-improvement
-→ schema-memory
+Idea Cards
+Compiled Execution Brief
+Context Budget Contract
+Context Diet Map
+Failure-to-Smaller-Task Protocol
+Evidence Ledger
+Metrics Report
+Adaptive Improvement Report
+Schema Memory Card
 ```
 
 ## Rule
 
-Do not use Xskill to create long planning documents.
+The agent should produce a Compiled Execution Brief before editing code.
 
-Use it to create the shortest safe execution contract.
+If the user input is vague, the agent should produce 3 Idea Cards first.

@@ -1,53 +1,70 @@
 # Xskill Execution Protocol
 
-Xskill is agent-agnostic.
-
-It is not a Claude Code skill pack, a Codex-only workflow, or a GitHub Copilot-only agent.
-
-It is one execution discipline layer for any coding agent that can read files, instructions, skills, extensions, custom agents, or copied Markdown.
-
-## Protocol
+User-facing protocol:
 
 ```text
-task
-→ compiled execution brief
-→ context budget contract
-→ context diet map
-→ bounded execution
-→ evidence ledger
-→ metrics report, when measurement matters
-→ adaptive improvement
-→ schema memory
+Xskill: <task or idea>
 ```
 
-## Contract
+Internal protocol:
 
-Every meaningful task should produce a Compiled Execution Brief before execution.
+```text
+task or idea
+→ router
+→ idea cards, if vague
+→ brief
+→ bounded execution
+→ evidence
+→ metrics
+→ improvement
+```
 
-That brief must include:
+## Router behavior
 
-- real goal
-- MVP scope
-- must-not-do list
-- Context Budget Contract
-- Context Diet Map
-- files to read
-- files to touch
-- files to avoid
-- checks
-- evidence required
-- stop condition
+The router decides which internal Xskill files are needed.
 
-## Handoff
+The user should not have to call:
 
-After execution, the agent must produce an Evidence Ledger.
+```text
+question-requirements
+delete-scope
+semantic-architecture
+optimize-path
+shorten-iteration
+```
 
-When measurement matters, it also produces a Metrics Report.
+directly.
 
-When learning matters, it produces Adaptive Improvement and Schema Memory updates only from evidence.
+## Vague input
 
-## Rule
+If the user gives an unclear idea, produce 3 Idea Cards.
 
-Xskill does not make an agent more autonomous.
+Each card contains:
 
-It makes the agent more bounded, auditable, and measurable.
+- interpretation
+- MVP
+- best for
+- risk / tradeoff
+- estimated Context Budget Contract
+- recommended workflow
+
+After the user chooses, continue the workflow.
+
+## Clear task
+
+If the task is already specific, produce a Compiled Execution Brief.
+
+## Completion
+
+After execution:
+
+1. Create an Evidence Ledger.
+2. Create a Metrics Report if measurement matters.
+3. Use Adaptive Improvement only from evidence.
+4. Update Schema Memory only for reusable repeated patterns.
+
+## Boundary
+
+Xskill is not a runtime.
+
+It does not execute commands, edit files automatically, store database state, or run background loops.

@@ -1,147 +1,36 @@
 # Install Xskill
 
-This file is intentionally short.
+Xskill has no CLI, npm, npx, pip, database, or runtime.
 
-Xskill is a portable skill bundle. Install it by copying the ready-made folder for your agent.
+Install one pack for your agent. After installation, use your agent normally. Xskill should activate automatically for non-trivial coding tasks.
 
-No Xskill CLI. No npm. No npx. No pip. No database. No runtime.
+Manual override:
 
----
+```text
+Xskill: <your task or idea>
+```
 
 ## Codex
 
-Copy this folder into your repository root:
-
-```text
-install/codex/.agents
+```bash
+unzip xskill-codex-v0.2.3.zip -d your-project/
 ```
-
-Expected result:
-
-```text
-your-project/
-  .agents/
-    skills/
-      xskill/
-        SKILL.md
-        references/
-```
-
-Use:
-
-```text
-Use Xskill to compile this task before editing code:
-<task>
-```
-
----
 
 ## Claude Code
 
-Copy this folder into your repository root:
-
-```text
-install/claude-code/.claude
+```bash
+unzip xskill-claude-code-v0.2.3.zip -d your-project/
 ```
-
-Expected result:
-
-```text
-your-project/
-  .claude/
-    skills/
-      xskill/
-        SKILL.md
-        references/
-```
-
-Use:
-
-```text
-/xskill Compile this task before editing code: <task>
-```
-
-Or:
-
-```text
-Use Xskill to compile this task before editing code:
-<task>
-```
-
----
 
 ## Gemini CLI
 
-Copy this folder:
-
-```text
-install/gemini-cli/xskill
-```
-
-To:
-
-```text
-~/.gemini/extensions/xskill
-```
-
-Or run:
-
 ```bash
-gemini extensions install install/gemini-cli/xskill
+unzip xskill-gemini-cli-v0.2.3.zip
+gemini extensions install ./xskill
 ```
-
-Use:
-
-```text
-Use Xskill to compile this task before editing code:
-<task>
-```
-
----
 
 ## GitHub Copilot CLI
 
-Copy both of these into your repository root:
-
-```text
-install/github-copilot-cli/.github
-install/github-copilot-cli/xskill
+```bash
+unzip xskill-github-copilot-cli-v0.2.3.zip -d your-project/
 ```
-
-Expected result:
-
-```text
-your-project/
-  .github/
-    agents/
-      xskill.agent.md
-  xskill/
-```
-
-Use the `xskill` custom agent and ask:
-
-```text
-Compile this task before editing code:
-<task>
-```
-
----
-
-## Generic manual use
-
-If your agent does not support skills, open:
-
-```text
-xskill/AGENTS.md
-```
-
-Paste it into your agent as project instructions.
-
-Then ask:
-
-```text
-Use Xskill to compile this task before editing code:
-<task>
-```
-
-For task-specific depth, paste only the relevant `xskill/*/SKILL.md` file.

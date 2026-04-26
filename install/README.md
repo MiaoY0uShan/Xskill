@@ -1,24 +1,76 @@
-# Xskill install packs
+# Install packs
 
-Pick one folder. Copy it. Restart your agent. Use one sentence.
+Pick the folder for your agent.
+
+The easiest release experience is to download the dedicated zip for your agent.
+
+## Codex
+
+Use:
 
 ```text
-Use Xskill to compile this task before editing code:
-<task>
+xskill-codex-v0.2.2.zip
 ```
 
-## Available packs
+or copy:
 
-| Agent | Folder to copy/install | Destination |
-|---|---|---|
-| Codex | `install/codex/.agents` | project root |
-| Claude Code | `install/claude-code/.claude` | project root |
-| Gemini CLI | `install/gemini-cli/xskill` | `~/.gemini/extensions/xskill` |
-| GitHub Copilot CLI | `install/github-copilot-cli/.github` and `install/github-copilot-cli/xskill` | project root |
+```text
+install/codex/.agents
+```
 
-## Notes
+to your project root.
 
-- You do not need to copy a separate root `AGENTS.md`.
-- The agent contract lives inside the pack.
-- Xskill does not require an installer, package manager, server, database, or runtime.
-- If your agent is not listed, use `adapters/generic.md`.
+## Claude Code
+
+Use:
+
+```text
+xskill-claude-code-v0.2.2.zip
+```
+
+or copy:
+
+```text
+install/claude-code/.claude
+```
+
+to your project root.
+
+## Gemini CLI
+
+Use:
+
+```text
+xskill-gemini-cli-v0.2.2.zip
+```
+
+then run:
+
+```bash
+gemini extensions install ./xskill
+```
+
+## GitHub Copilot CLI
+
+Use:
+
+```text
+xskill-github-copilot-cli-v0.2.2.zip
+```
+
+or copy:
+
+```text
+install/github-copilot-cli/.github
+install/github-copilot-cli/xskill
+```
+
+to your project root.
+
+## Use
+
+After installing, say:
+
+```text
+Xskill: <your task or idea>
+```

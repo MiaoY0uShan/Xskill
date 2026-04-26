@@ -1,36 +1,18 @@
-# GitHub Copilot CLI Adapter
+# Xskill adapter: github-copilot-cli
 
-## Recommended project install
+Xskill is agent-agnostic.
 
-Copy the ready-made project pack into your repository root:
-
-```text
-install/github-copilot-cli/.github
-install/github-copilot-cli/xskill
-```
-
-Your repository should then contain:
+Default trigger:
 
 ```text
-.github/agents/xskill.agent.md
-xskill/...
+Xskill: <task or idea>
 ```
 
-## Alternative user-level install
+Expected behavior:
 
-Copy only the custom agent file to:
+- vague idea → 3 Idea Cards
+- clear task → Compiled Execution Brief
+- completed task → Evidence Ledger
+- failed task → Failure-to-Smaller-Task Protocol
 
-```text
-~/.copilot/agents/xskill.agent.md
-```
-
-If you use the user-level agent, keep the `xskill/` bundle available in the project or paste the relevant Xskill files when needed.
-
-## Use
-
-In Copilot CLI, select or invoke the `xskill` custom agent, then ask:
-
-```text
-Compile this task into a bounded Execution Brief before editing code:
-<task>
-```
+This adapter does not add a runtime, CLI, npm package, npx installer, pip package, or database.

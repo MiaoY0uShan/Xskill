@@ -9,33 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check required portable bundle files
+      - name: Check required files
         run: |
           test -f README.md
           test -f START_HERE.md
           test -f INSTALL.md
-          test -f install/README.md
+          test -f TEST_XSKILL.md
+          test -f xskill/SKILL.md
           test -f xskill/AGENTS.md
-          test -f xskill/question-requirements/SKILL.md
-          test -f xskill/delete-scope/SKILL.md
-          test -f xskill/semantic-architecture/SKILL.md
-          test -f xskill/optimize-path/SKILL.md
-          test -f xskill/shorten-iteration/SKILL.md
-          test -f xskill/evidence-ledger/SKILL.md
-          test -f xskill/metrics/SKILL.md
-          test -f xskill/adaptive-improvement/SKILL.md
-          test -f xskill/schema-memory/SKILL.md
+          test -f xskill/templates/idea-cards.md
           test -f xskill/templates/compiled-execution-brief.md
+          test -f xskill/templates/context-budget-contract.md
           test -f xskill/templates/context-budget-contract.json
-          test -f xskill/templates/context-diet-map.md
           test -f xskill/templates/evidence-ledger.md
-          test -f xskill/templates/metrics-report.md
-          test -f adapters/README.md
+          test -f docs/router.md
           test -f docs/execution-protocol.md
-          test -f docs/case-studies.md
-          test -f install/codex/.agents/skills/xskill/SKILL.md
-          test -f install/claude-code/.claude/skills/xskill/SKILL.md
-          test -f install/gemini-cli/xskill/gemini-extension.json
-          test -f install/gemini-cli/xskill/GEMINI.md
-          test -f install/github-copilot-cli/.github/agents/xskill.agent.md
-          if [ -f AGENTS.md ]; then echo "Root AGENTS.md should not be required in portable releases"; exit 1; fi
+          test -f install/codex/TEST_XSKILL.md
+          test -f install/claude-code/TEST_XSKILL.md
+          test -f install/gemini-cli/TEST_XSKILL.md
+          test -f install/github-copilot-cli/TEST_XSKILL.md

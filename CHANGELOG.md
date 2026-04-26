@@ -1,5 +1,36 @@
 # Changelog
 
+## v0.2.3 — Proactive Xskill activation
+
+- Made proactive activation the default behavior for non-trivial coding tasks.
+- Downgraded `Xskill: <task>` to a manual override instead of the primary user interface.
+- Updated `xskill/SKILL.md` and `xskill/AGENTS.md` with automatic trigger rules.
+- Updated README, START_HERE, INSTALL, TEST_XSKILL, install packs, copy-paste fallback, and adapter-facing instructions.
+- Kept Xskill portable: no CLI, npm, npx, pip, database, runtime, or automatic executor.
+
+## v0.2.2 — Xskill router and Idea Cards
+
+- Added top-level `xskill/SKILL.md` router.
+- Changed the default user trigger to `Xskill: <task or idea>`.
+- Added Idea Cards for vague user intent.
+- Added `xskill/templates/idea-cards.md`.
+- Added `xskill/examples/dumb-simple-install.idea-cards.md`.
+- Added `docs/router.md`.
+- Upgraded Context Budget Contract to support agent-estimated budgets with confidence and assumptions.
+- Updated README, START_HERE, INSTALL, install packs, test instructions, adapter docs, and release checklist.
+- Kept Xskill portable: no CLI, npm, npx, pip, database, runtime, or automatic executor.
+
+
+## v0.2.1 — One zip per agent
+
+- Added one-zip-per-agent release assets for Codex, Claude Code, Gemini CLI, and GitHub Copilot CLI.
+- Added copy-paste fallback for unsupported agents.
+- Added `TEST_XSKILL.md` for install verification.
+- Added `dist/README.md` and `dist/xskill-copy-paste.md`.
+- Simplified README around: pick agent → download one zip → unzip → say one sentence.
+- Updated `START_HERE.md`, `INSTALL.md`, `install/README.md`, `docs/portable-install.md`, and `docs/release-checklist.md`.
+- Kept Xskill portable: no CLI, npm, npx, pip, database, runtime, or automatic executor.
+
 ## v0.2.0 — Dumb-simple install
 
 - Added `START_HERE.md` for the shortest possible install path.

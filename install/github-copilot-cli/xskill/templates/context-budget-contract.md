@@ -2,9 +2,21 @@
 
 This is a hard execution boundary for one task.
 
-A Context Budget Contract is stronger than a casual context budget. It tells the agent what it may read, what it may touch, what it must avoid, and when it must stop.
+The user should not have to fill this out manually. Xskill estimates the budget from task type, risk, and scope.
 
 ## Task
+
+## Budget Type
+
+```text
+estimated
+```
+
+## Confidence
+
+```text
+low | medium | high
+```
 
 ## Scope Boundary
 
@@ -15,8 +27,8 @@ A Context Budget Contract is stronger than a casual context budget. It tells the
 - Max execution notes:
 
 ## Required Context
-- Required semantic / schema nodes:
 - Required files:
+- Required semantic / schema nodes:
 - Required prior reports:
 
 ## Forbidden Context
@@ -30,6 +42,11 @@ A Context Budget Contract is stronger than a casual context budget. It tells the
 - Files explicitly forbidden to touch:
 - Max scope:
 
+## Budget Assumptions
+- Assumption:
+- Assumption:
+- Assumption:
+
 ## Verification Boundary
 - Required checks:
 - Evidence required:
@@ -41,26 +58,12 @@ If the agent needs to exceed this contract:
 2. State which limit would be exceeded.
 3. Explain why the current contract is insufficient.
 4. Ask for a smaller follow-up task or a revised contract.
-5. Do not continue silently.
 
-## JSON form
+## Default estimation guide
 
-```json
-{
-  "task": "",
-  "max_files_to_read": 5,
-  "max_files_to_touch": 3,
-  "max_skill_tokens": 900,
-  "max_execution_notes": 500,
-  "required_semantic_nodes": [],
-  "required_schema_cards": [],
-  "required_files": [],
-  "forbidden_context": [],
-  "files_allowed_to_touch": [],
-  "files_forbidden_to_touch": [],
-  "scope_boundary": "",
-  "checks": [],
-  "evidence_required": [],
-  "violation_handling": "Stop and request a revised contract before exceeding the budget."
-}
-```
+| Task type | Read | Touch | Skill tokens | Confidence |
+|---|---:|---:|---:|---|
+| Tiny docs/config edit | 2 | 1 | 500 | high |
+| Focused bug fix | 4 | 2 | 900 | medium |
+| Small MVP feature | 6 | 3 | 1200 | medium |
+| Multi-module / architecture task | 8 | 4 | 1500 | low |
