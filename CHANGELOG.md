@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.4 — One-download release kit and keynote README
+
+- Rewrote README around Hero, Enemy, Demo, Magic, Proof, Workflow, Install, Examples, Philosophy, and Credits.
+- Made proactive activation the default user experience in the README.
+- Clarified that `Xskill: <task>` is a manual override, not the default path.
+- Added one total release kit that contains the complete repo package, universal release package, four agent-specific packages, copy-paste fallback, release notes, and git commands.
+- Kept Xskill portable: no CLI, npm, npx, pip, database, runtime, or automatic executor.
+
 ## v0.2.3 — Proactive Xskill activation
 
 - Made proactive activation the default behavior for non-trivial coding tasks.

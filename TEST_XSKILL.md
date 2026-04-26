@@ -1,27 +1,33 @@
 # Test Xskill
 
-Ask your agent normally:
+After installing Xskill, ask your agent a non-trivial but safe task:
 
 ```text
 Rename one README section title without changing anything else.
 ```
 
-Expected result:
+Expected behavior:
 
-The agent should activate Xskill and produce a **Compiled Execution Brief** before editing code.
+```text
+I’ll use Xskill to create a bounded Execution Brief before editing code.
+```
 
-Manual override:
+The agent should produce a brief before editing.
+
+Manual override, if the agent does not activate Xskill automatically:
 
 ```text
 Xskill: Rename one README section title without changing anything else.
 ```
 
-Then test vague intent:
+For vague ideas, test:
 
 ```text
 I want this project to be easier for people to use.
 ```
 
-Expected result:
+Expected behavior:
 
-The agent should generate **3 Idea Cards** first.
+```text
+This idea is broad. I’ll use Xskill Idea Cards first.
+```

@@ -1,12 +1,14 @@
 # Xskill copy-paste fallback
 
-Paste this into any coding agent if you cannot install the Xskill skill bundle.
+Paste this into any coding agent that cannot install Xskill as a skill bundle.
 
 ---
 
-You are using Xskill.
+You have Xskill.
 
-Use Xskill proactively for non-trivial coding tasks. Do not wait for the user to say `Xskill`.
+Use Xskill proactively for non-trivial coding tasks before editing code.
+
+Do not wait for the user to say "Xskill".
 
 Manual override is still supported:
 
@@ -14,39 +16,30 @@ Manual override is still supported:
 Xskill: <task or idea>
 ```
 
-## Default behavior
+For non-trivial coding work, first create a bounded, evidence-backed Execution Brief.
 
-For non-trivial coding tasks, produce a bounded **Compiled Execution Brief** before editing code.
+If the user idea is vague, generate 3 Idea Cards first and ask the user to choose A, B, C, merge cards, or generate 3 new cards.
 
-For vague ideas, generate **3 Idea Cards** first.
-
-For failed tasks, use the **Failure-to-Smaller-Task Protocol** instead of retrying the same task.
-
-For completed tasks, produce an **Evidence Ledger** before claiming completion.
-
-## Automatic trigger
-
-Use Xskill when the user asks you to modify code, fix a bug, add a feature, refactor, change installation flow, change agent instructions, touch multiple files, make an architecture decision, or do work that needs verification.
-
-Do not run the full flow for typos, one-line formatting edits, pure explanations, casual discussion, or tasks where the user explicitly says not to use Xskill.
-
-## Hard rules
-
-- No code edits before the brief.
-- Estimate the Context Budget Contract yourself.
-- Mark budget confidence as low, medium, or high.
-- Respect files to read, files to touch, and files to avoid.
-- If the idea is vague, generate Idea Cards before asking many questions.
-- If blocked or over budget, split smaller instead of retrying.
-- No evidence, no done.
-- Learn from evidence, not confidence.
-
-## Manual trigger
-
-If the user says:
+Use the smallest workflow required by the task:
 
 ```text
-Xskill: <task or idea>
+question requirements when the goal is unclear
+delete scope to reduce to MVP
+sketch architecture only when modules matter
+optimize path for the smallest verified route
+shorten iteration into TDD micro-loops when work is large or failed
+require evidence before claiming done
+record metrics when measurement matters
+learn only from evidence
 ```
 
-force Xskill even if the task looks small.
+Hard rules:
+
+```text
+Do not edit code before the brief.
+Do not read unrelated files.
+Do not touch files outside the scope boundary.
+Do not expand the task.
+If blocked, split smaller instead of retrying the same large task.
+No evidence, no done.
+```

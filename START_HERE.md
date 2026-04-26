@@ -1,28 +1,30 @@
 # Start here
 
-Pick your agent, install one pack, restart the agent, then use your agent normally.
+Install Xskill once. Then use your agent normally.
 
-Xskill should activate automatically for non-trivial coding tasks.
+For non-trivial coding tasks, Xskill should activate automatically before code is edited.
 
-Manual override:
-
-```text
-Xskill: <your task or idea>
-```
-
-## Pick your agent
+## 1. Pick your agent
 
 | Agent | Download |
 |---|---|
-| Codex | `xskill-codex-v0.2.3.zip` |
-| Claude Code | `xskill-claude-code-v0.2.3.zip` |
-| Gemini CLI | `xskill-gemini-cli-v0.2.3.zip` |
-| GitHub Copilot CLI | `xskill-github-copilot-cli-v0.2.3.zip` |
-| Any coding agent | `xskill-copy-paste-v0.2.3.md` |
+| Codex | `xskill-codex-{version}.zip` |
+| Claude Code | `xskill-claude-code-{version}.zip` |
+| Gemini CLI | `xskill-gemini-cli-{version}.zip` |
+| GitHub Copilot CLI | `xskill-github-copilot-cli-{version}.zip` |
+| Any agent | `xskill-copy-paste-{version}.md` |
 
-## Use
+## 2. Install
 
-Ask your agent normally:
+Unzip the package for your agent.
+
+Most project-level packages are designed to unzip into your project root.
+
+## 3. Restart your agent
+
+Reload the project so the agent can discover Xskill.
+
+## 4. Use your agent normally
 
 ```text
 Fix the password reset bug.
@@ -30,8 +32,9 @@ Fix the password reset bug.
 
 Expected behavior:
 
-- non-trivial task → Xskill activates automatically and produces a Compiled Execution Brief
-- vague idea → Xskill produces 3 Idea Cards first
+```text
+I’ll use Xskill to create a bounded Execution Brief before editing code.
+```
 
 Manual override:
 
