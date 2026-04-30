@@ -57,6 +57,13 @@ Use this as the final contract before code editing.
 - REFACTOR boundary:
 - EVIDENCE:
 
+## Verification Command
+
+```bash
+# Provide a one-liner or simple script to verify the task
+...
+```
+
 ## Checks
 
 - ...
