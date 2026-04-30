@@ -3,7 +3,7 @@
 Install:
 
 ```bash
-unzip xskill-codex-v0.2.3.zip -d your-project/
+unzip xskill-codex-v0.2.4.zip -d your-project/
 ```
 
 Restart your agent.

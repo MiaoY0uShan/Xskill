@@ -2,14 +2,14 @@
 
 For the simplest install, download the zip for your agent:
 
-- `xskill-codex-v0.2.3.zip`
-- `xskill-claude-code-v0.2.3.zip`
-- `xskill-gemini-cli-v0.2.3.zip`
-- `xskill-github-copilot-cli-v0.2.3.zip`
+- `xskill-codex-v0.2.4.zip`
+- `xskill-claude-code-v0.2.4.zip`
+- `xskill-gemini-cli-v0.2.4.zip`
+- `xskill-github-copilot-cli-v0.2.4.zip`
 
 Fallback:
 
-- `xskill-copy-paste-v0.2.3.md`
+- `xskill-copy-paste-v0.2.4.md`
 
 After installing, use your agent normally. Xskill should activate automatically for non-trivial coding tasks.
 

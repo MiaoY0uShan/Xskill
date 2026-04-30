@@ -3,7 +3,7 @@
 Install:
 
 ```bash
-unzip xskill-gemini-cli-v0.2.3.zip
+unzip xskill-gemini-cli-v0.2.4.zip
 gemini extensions install ./xskill
 ```
 

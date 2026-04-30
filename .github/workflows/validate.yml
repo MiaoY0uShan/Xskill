@@ -25,6 +25,58 @@ jobs:
           test -f docs/router.md
           test -f docs/execution-protocol.md
           test -f install/codex/TEST_XSKILL.md
+          test -f install/codex/.agents/skills/xskill/SKILL.md
+          test -f install/codex/.agents/skills/xskill/references/xskill/SKILL.md
           test -f install/claude-code/TEST_XSKILL.md
+          test -f install/claude-code/.claude/skills/xskill/SKILL.md
+          test -f install/claude-code/.claude/skills/xskill/references/xskill/SKILL.md
           test -f install/gemini-cli/TEST_XSKILL.md
+          test -f install/gemini-cli/xskill/GEMINI.md
+          test -f install/gemini-cli/xskill/gemini-extension.json
+          test -f install/gemini-cli/xskill/xskill/SKILL.md
           test -f install/github-copilot-cli/TEST_XSKILL.md
+          test -f install/github-copilot-cli/.github/agents/xskill.agent.md
+          test -f install/github-copilot-cli/xskill/SKILL.md
+      - name: Check release version references
+        run: |
+          grep -q '## v0.2.4' CHANGELOG.md
+          grep -q 'xskill-codex-v0.2.4.zip' dist/README.md
+          grep -q 'xskill-claude-code-v0.2.4.zip' dist/README.md
+          grep -q 'xskill-gemini-cli-v0.2.4.zip' dist/README.md
+          grep -q 'xskill-github-copilot-cli-v0.2.4.zip' dist/README.md
+          grep -q 'xskill-copy-paste-v0.2.4.md' dist/README.md
+          grep -q 'xskill-codex-v0.2.4.zip' install/codex/README.md
+          grep -q 'xskill-claude-code-v0.2.4.zip' install/claude-code/README.md
+          grep -q 'xskill-gemini-cli-v0.2.4.zip' install/gemini-cli/README.md
+          grep -q 'xskill-github-copilot-cli-v0.2.4.zip' install/github-copilot-cli/README.md
+          grep -q '"version": "0.2.4"' install/gemini-cli/xskill/gemini-extension.json
+          ! grep -E 'v0\.2\.2|v0\.2\.3' \
+            dist/README.md \
+            docs/portable-install.md \
+            docs/release-checklist.md \
+            install/codex/README.md \
+            install/claude-code/README.md \
+            install/gemini-cli/README.md \
+            install/github-copilot-cli/README.md \
+            install/gemini-cli/xskill/gemini-extension.json
+      - name: Check proactive activation docs
+        run: |
+          grep -q 'activate Xskill proactively' xskill/README.md
+          grep -q 'Use Xskill proactively' adapters/README.md
+          grep -q 'Manual override' adapters/README.md
+          ! grep -R 'Default trigger' \
+            adapters \
+            install/codex/.agents/skills/xskill/references/xskill/README.md \
+            install/claude-code/.claude/skills/xskill/references/xskill/README.md \
+            install/gemini-cli/xskill/xskill/README.md \
+            install/github-copilot-cli/xskill/README.md
+      - name: Check packaged xskill references
+        run: |
+          diff -ru xskill install/codex/.agents/skills/xskill/references/xskill
+          diff -ru xskill install/claude-code/.claude/skills/xskill/references/xskill
+          diff -ru xskill install/gemini-cli/xskill/xskill
+          diff -ru xskill install/github-copilot-cli/xskill
+      - name: Check JSON files
+        run: |
+          python -m json.tool install/gemini-cli/xskill/gemini-extension.json >/dev/null
+          python -m json.tool xskill/templates/context-budget-contract.json >/dev/null
