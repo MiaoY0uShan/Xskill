@@ -86,24 +86,19 @@ Expected output:
 
 ## 4. Magic
 
-Xskill hides the workflow behind one behavior:
+Xskill is now a proactive, automated discipline layer.
 
-> Create a bounded Execution Brief before non-trivial code edits.
+### Ghost Mode
+It detects non-trivial work and activates automatically. No more manual prompting.
 
-Internally, it routes the task:
+### Lessons Learned
+It remembers project-specific traps and anti-patterns in `xskill/lessons-learned/`. It searches this memory before every task.
 
-| Situation | Xskill response |
-|---|---|
-| Vague idea | Generate 3 Idea Cards |
-| Unclear goal | Run Five Whys and inversion |
-| Scope too large | Delete down to MVP |
-| Multi-module work | Sketch module boundaries |
-| Clear implementation | Choose the smallest verifiable path |
-| Large implementation | Split into TDD micro-loops |
-| Failed task | Split into a smaller task |
-| Completed task | Require evidence, metrics, and learning when useful |
+### Auto-Verification
+Every plan includes a mandatory `verification_command`. Xskill runs it automatically after editing code. No more "trust me, it's done."
 
-Users do not need to choose skills manually.
+### Simplified Idea Cards
+Broad ideas are met with a simple [A] [B] [C] choice menu. Fast decision, fast execution.
 
 ---
 
@@ -235,33 +230,41 @@ Card B — Demo-first README
 Card C — Copy-paste fallback
 ```
 
+### Case Study 06: Auto-Metrics & Self-Refactor
+**Task:** Refactor Xskill for Ghost Mode and implement automated metrics.
+**Outcome:** Verified implementation with zero scope creep.
+
+| Metric | Result |
+|---|---|
+| Context Load Proxy | 9 (Low) |
+| Files Read | 6 |
+| Scope Creep Rate | 0.00% |
+| Verification Rate | 100% |
+| Proxy TVP | 9.00 |
+
+*Data generated automatically by the new `xskill/metrics/collect.js` tool.*
+
 See `examples/case-studies/` and `xskill/examples/`.
 
 ---
 
 ## 9. Philosophy
 
-Less is the feature.
+**Tokens are precious.**
 
-Most agent workflows add more prompts, more memory, more roles, and more automation.
+Most agent workflows (like Superpowers or get-shit-down) add more prompts, more memory, more roles, and more automation. They treat the context window as infinite, leading to "context corruption"—where the agent hallucinates, loses focus, and forgets the original goal.
 
-Xskill removes until the work is small enough to verify.
+Xskill is the **ultra-lean alternative**. It removes until the work is small enough to verify. It is designed to take a baseline model (Pro) and elevate it to Max-level performance through sheer discipline, without the token bloat.
 
-Core rules:
+### The Five Pillars of Xskill
 
-```text
-Do not edit before the brief.
-Do not read everything.
-Do not touch unrelated files.
-Do not expand the task.
-Do not claim done without evidence.
-Do not retry large failures.
-Do not learn from confidence; learn from evidence.
-```
+1. **Context Diet:** Do not read everything. Do not touch unrelated files. Every token must earn its keep.
+2. **Musk-Style 5-Step Engineering:** Question the requirements, delete the scope, optimize the path, accelerate the iteration time, and automate verification.
+3. **Semantic Architecture:** Design the smallest decoupling boundary before writing code, preventing monolithic spaghetti.
+4. **Schema Memory:** Do not remember raw code. Remember the *shape* of the solution and the *lessons learned* from failure.
+5. **Anti-Corruption:** Stop context degradation by forcing a hard reset (Failure-to-Smaller-Task) instead of blindly retrying failed large tasks.
 
-Xskill is not a full agent runtime.
-
-It is a small execution discipline layer.
+Xskill is not a full agent runtime. It is an **execution discipline layer** that forces the AI to think like a senior engineer.
 
 ---
 

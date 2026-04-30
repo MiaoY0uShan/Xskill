@@ -2,23 +2,16 @@
 
 Xskill is agent-agnostic.
 
-Default behavior:
+## Default behavior (Ghost Mode)
 
-```text
-Use Xskill proactively for non-trivial coding work. Do not wait for the user to say "Xskill".
-```
+**Proactively activate Xskill for non-trivial work.**
 
-Manual override:
+- **Vague idea →** Generate **3 Simplified Idea Cards** (A/B/C choice).
+- **Clear task →** Create a **Compiled Execution Brief** with an **Auto-Verification Command**.
+- **Execution →** Run verification commands automatically.
+- **Evidence →** Produce an **Evidence Ledger**.
 
-```text
-Xskill: <task or idea>
-```
-
-Expected behavior:
-
-- vague idea -> 3 Idea Cards
-- clear task -> Compiled Execution Brief
-- completed task -> Evidence Ledger
-- failed task -> Failure-to-Smaller-Task Protocol
-
-This adapter does not add a runtime, CLI, npm package, npx installer, pip package, or database.
+## Rules
+- Check `xskill/lessons-learned/` before planning.
+- No brief, no edit.
+- No evidence, no done.
