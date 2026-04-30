@@ -1,6 +1,6 @@
 ---
 name: xskill-evidence-ledger
-description: Use after execution to record what changed, what checks ran, which claims are verified, which claims remain unverified, and whether scope was violated.
+description: "Use after execution to record what changed, what checks ran, which claims are verified, which claims remain unverified, and whether scope was violated."
 ---
 
 # Xskill: Evidence Ledger

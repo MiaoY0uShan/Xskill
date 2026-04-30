@@ -1,6 +1,6 @@
 ---
 name: xskill-adaptive-improvement
-description: Use after a non-trivial run to turn evidence into feedback, schema memory updates, checklist improvements, or automation candidates. Learns from evidence, not confidence.
+description: "Use after a non-trivial run to turn evidence into feedback, schema memory updates, checklist improvements, or automation candidates. Learns from evidence, not confidence."
 ---
 
 # Xskill: Adaptive Improvement

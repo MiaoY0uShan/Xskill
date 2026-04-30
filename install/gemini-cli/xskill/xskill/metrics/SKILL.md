@@ -1,6 +1,6 @@
 ---
 name: xskill-metrics
-description: Use after evidence-ledger to measure context load, scope creep, verification, rework, iteration speed, and TVP for a run or small batch of runs.
+description: "Use after evidence-ledger to measure context load, scope creep, verification, rework, iteration speed, and TVP for a run or small batch of runs."
 ---
 
 # Xskill: Metrics

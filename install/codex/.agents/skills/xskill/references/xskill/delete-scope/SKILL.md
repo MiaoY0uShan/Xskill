@@ -1,6 +1,6 @@
 ---
 name: xskill-delete-scope
-description: Use after question-requirements to reduce the real goal into the smallest necessary MVP using first-principles reasoning and Occam's Razor. Produces MVP nucleus, entity cuts, scope boundary, minimum evidence, and module candidates for later decoupling.
+description: "Use after question-requirements to reduce the real goal into the smallest necessary MVP using first-principles reasoning and Occam's Razor. Produces MVP nucleus, entity cuts, scope boundary, minimum evidence, and module candidates for later decoupling."
 ---
 
 # Xskill: Delete Scope

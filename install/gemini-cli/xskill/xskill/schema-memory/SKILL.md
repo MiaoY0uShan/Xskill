@@ -1,6 +1,6 @@
 ---
 name: xskill-schema-memory
-description: Use after evidence has accumulated to store reusable task patterns, failure modes, context budget patterns, verification patterns, and stop conditions. This is pattern memory, not raw context memory.
+description: "Use after evidence has accumulated to store reusable task patterns, failure modes, context budget patterns, verification patterns, and stop conditions. This is pattern memory, not raw context memory."
 ---
 
 # Xskill: Schema Memory

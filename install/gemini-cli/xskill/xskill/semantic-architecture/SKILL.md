@@ -1,6 +1,6 @@
 ---
 name: xskill-semantic-architecture
-description: Use after delete-scope when the scoped MVP crosses modules or has coupling risk. Produces a lightweight semantic architecture sketch, module map, coupling risks, and decoupling rules without building a graph runtime.
+description: "Use after delete-scope when the scoped MVP crosses modules or has coupling risk. Produces a lightweight semantic architecture sketch, module map, coupling risks, and decoupling rules without building a graph runtime."
 ---
 
 # Xskill: Semantic Architecture

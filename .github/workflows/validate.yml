@@ -37,6 +37,52 @@ jobs:
           test -f install/github-copilot-cli/TEST_XSKILL.md
           test -f install/github-copilot-cli/.github/agents/xskill.agent.md
           test -f install/github-copilot-cli/xskill/SKILL.md
+      - name: Check skill metadata frontmatter
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          failures = []
+          for path in Path(".").rglob("SKILL.md"):
+              lines = path.read_text(encoding="utf-8").splitlines()
+              if len(lines) < 4 or lines[0] != "---":
+                  failures.append(f"{path}: missing YAML frontmatter")
+                  continue
+              try:
+                  end = lines[1:].index("---") + 1
+              except ValueError:
+                  failures.append(f"{path}: unterminated YAML frontmatter")
+                  continue
+
+              frontmatter = lines[1:end]
+              fields = {}
+              for line in frontmatter:
+                  if not line.strip():
+                      continue
+                  if ": " not in line:
+                      failures.append(f"{path}: invalid frontmatter line: {line}")
+                      continue
+                  key, value = line.split(": ", 1)
+                  fields[key] = value
+
+              for key in ("name", "description"):
+                  if key not in fields:
+                      failures.append(f"{path}: missing {key}")
+
+              description = fields.get("description")
+              if description is not None:
+                  if not (description.startswith('"') and description.endswith('"')):
+                      failures.append(f"{path}: description must be double-quoted YAML")
+                  else:
+                      try:
+                          json.loads(description)
+                      except json.JSONDecodeError as exc:
+                          failures.append(f"{path}: invalid quoted description: {exc}")
+
+          if failures:
+              raise SystemExit("\n".join(failures))
+          PY
       - name: Check release version references
         run: |
           grep -q '## v0.2.4' CHANGELOG.md

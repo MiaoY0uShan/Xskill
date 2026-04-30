@@ -1,6 +1,6 @@
 ---
 name: xskill-optimize-path
-description: Use after MVP scope and module boundaries are defined to choose the smallest stable path and compile upstream Xskill outputs into the final Execution Brief.
+description: "Use after MVP scope and module boundaries are defined to choose the smallest stable path and compile upstream Xskill outputs into the final Execution Brief."
 ---
 
 # Xskill: Optimize Path

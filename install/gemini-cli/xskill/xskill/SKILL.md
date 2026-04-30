@@ -1,6 +1,6 @@
 ---
 name: xskill
-description: Use proactively before non-trivial coding tasks to create a bounded, evidence-backed Execution Brief. Do not wait for the user to say "Xskill". Manual override: "Xskill: <task or idea>".
+description: "Use proactively before non-trivial coding tasks to create a bounded, evidence-backed Execution Brief. Do not wait for the user to say \"Xskill\". Manual override: \"Xskill: <task or idea>\"."
 ---
 
 # Xskill

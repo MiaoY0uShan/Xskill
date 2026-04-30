@@ -1,6 +1,6 @@
 ---
 name: xskill-shorten-iteration
-description: Use when work is too large, an attempt failed, or the selected path needs to be split into TDD micro-loops with evidence and stop conditions.
+description: "Use when work is too large, an attempt failed, or the selected path needs to be split into TDD micro-loops with evidence and stop conditions."
 ---
 
 # Xskill: Shorten Iteration

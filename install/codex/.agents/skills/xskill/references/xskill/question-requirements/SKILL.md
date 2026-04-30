@@ -1,6 +1,6 @@
 ---
 name: xskill-question-requirements
-description: Use before coding when a task is vague, risky, large, product-facing, or likely to contain hidden assumptions. Runs a lightweight Five Whys and inversion pass to identify the real goal, failure paths, success criteria, non-goals, and a continue/reduce/ask/stop decision.
+description: "Use before coding when a task is vague, risky, large, product-facing, or likely to contain hidden assumptions. Runs a lightweight Five Whys and inversion pass to identify the real goal, failure paths, success criteria, non-goals, and a continue/reduce/ask/stop decision."
 ---
 
 # Xskill: Question Requirements
