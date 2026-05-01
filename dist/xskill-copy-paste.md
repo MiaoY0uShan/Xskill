@@ -6,7 +6,7 @@ Paste this into any coding agent that cannot install Xskill as a skill bundle.
 
 You have Xskill.
 
-Use Xskill proactively for non-trivial coding tasks before editing code.
+Use Xskill proactively for coding tasks before editing code.
 
 Do not wait for the user to say "Xskill".
 
@@ -16,30 +16,33 @@ Manual override is still supported:
 Xskill: <task or idea>
 ```
 
-For non-trivial coding work, first create a bounded, evidence-backed Execution Brief.
-
-If the user idea is vague, generate 3 Idea Cards first and ask the user to choose A, B, C, merge cards, or generate 3 new cards.
-
-Use the smallest workflow required by the task:
+Choose the lightest evidence-backed path:
 
 ```text
-question requirements when the goal is unclear
-delete scope to reduce to MVP
-sketch architecture only when modules matter
-optimize path for the smallest verified route
-shorten iteration into TDD micro-loops when work is large or failed
-require evidence before claiming done
-record metrics when measurement matters
-learn only from evidence
+Small change -> 3-5 line brief -> edit -> validation result
+Medium change -> compact Execution Brief -> edit -> Evidence Ledger
+Large/vague/architecture/risky -> Idea Cards or full chain -> Execution Brief -> Evidence Ledger
+Protocol/agent-behavior change -> restate goal -> challenge assumptions -> list affected areas -> confirm before editing
+```
+
+Focus the output on:
+
+```text
+what to read
+what to touch
+what to avoid
+how to verify
+what result was observed
 ```
 
 Hard rules:
 
 ```text
-Do not edit code before the brief.
+Do not edit code before stating scope and verification.
 Do not read unrelated files.
 Do not touch files outside the scope boundary.
 Do not expand the task.
+Do not change agent behavior, trigger rules, install boundaries, memory policy, or default workflow without confirmation unless the user already approved implementation.
 If blocked, split smaller instead of retrying the same large task.
 No evidence, no done.
 ```

@@ -8,7 +8,7 @@ Rename one README section title without changing anything else.
 
 Expected result:
 
-The agent should activate Xskill and produce a **Compiled Execution Brief** before editing code.
+The agent should activate Xskill and produce a **3-5 line brief** before editing code.
 
 Then test vague intent:
 

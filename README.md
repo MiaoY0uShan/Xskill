@@ -4,7 +4,7 @@
 
 Install it once. Then use your coding agent normally.
 
-For non-trivial coding work, Xskill should activate before code is edited and produce a bounded, evidence-backed **Execution Brief**.
+For coding work, Xskill should activate before code is edited and choose the lightest evidence-backed path.
 
 Manual override:
 
@@ -35,11 +35,11 @@ Agents usually fail in predictable ways:
 | Vague request | Agent guesses the real goal |
 | Too much context | Agent reads unrelated files |
 | Scope creep | Agent touches files outside the task |
-| False completion | Agent says “done” without proof |
+| False completion | Agent says "done" without proof |
 | Failed run | Agent retries the same large task |
 | Memory bloat | Agent remembers raw context instead of useful patterns |
 
-Xskill makes these failures harder by forcing a bounded execution contract before non-trivial work starts.
+Xskill makes these failures harder by matching process weight to task risk before work starts.
 
 ---
 
@@ -51,13 +51,13 @@ User asks normally:
 Fix the password reset bug.
 ```
 
-Expected first response:
+Expected first response for a medium task:
 
 ```text
-I’ll use Xskill to create a bounded Execution Brief before editing code.
+I will use Xskill's medium path: compact Execution Brief, bounded edit, Evidence Ledger.
 ```
 
-Expected output:
+Expected compact output:
 
 ```json
 {
@@ -89,7 +89,12 @@ Expected output:
 Xskill is now a proactive, automated discipline layer.
 
 ### Ghost Mode
-It detects non-trivial work and activates automatically. No more manual prompting.
+It detects coding work and activates automatically. No more manual prompting.
+
+### Tiered Routing
+Small changes get a 3-5 line brief plus validation result. Medium changes get an Execution Brief and Evidence Ledger. Large, vague, architectural, or risky tasks use the full chain.
+
+Protocol or agent-behavior changes are confirm-first: restate the goal, challenge assumptions, list affected areas, and ask before editing unless the user has already approved implementation.
 
 ### Lessons Learned
 It remembers project-specific traps and anti-patterns in `xskill/lessons-learned/`. It searches this memory before every task.
@@ -137,39 +142,42 @@ See `docs/metrics.md` and `docs/case-studies.md`.
 
 ## 6. Workflow
 
-Simple protocol:
+Default protocol:
 
 ```text
-task → brief → bounded execution → evidence → metrics → improvement
+task -> smallest useful brief -> bounded execution -> evidence
 ```
 
-Full internal flow:
+Routing:
+
+```text
+small change -> 3-5 line brief -> validation result
+medium change -> Execution Brief -> Evidence Ledger
+large/vague/architecture/risky -> full chain -> compact Execution Brief -> Evidence Ledger
+```
+
+Full internal flow is reserved for large, vague, architectural, or risky work:
 
 ```text
 user task or vague idea
-→ Xskill router
-→ Idea Cards, if needed
-→ question-requirements
-→ delete-scope
-→ semantic-architecture, when needed
-→ optimize-path
-→ shorten-iteration, when needed
-→ compiled execution brief
-→ bounded execution
-→ evidence-ledger
-→ metrics, when useful
-→ adaptive-improvement
-→ schema-memory
+-> Xskill router
+-> Idea Cards or question-requirements, if needed
+-> delete-scope
+-> semantic-architecture, when needed
+-> optimize-path
+-> shorten-iteration, when needed
+-> execution brief
+-> bounded execution
+-> evidence ledger
+-> metrics/adaptive-improvement/schema-memory, only when useful
 ```
 
-The five operating principles:
+The operating rule:
 
 ```text
-Question.
-Delete.
-Optimize.
-Shorten iteration.
-Improve from evidence.
+Read only what matters.
+Touch only what is in scope.
+Verify before claiming done.
 ```
 
 ---
@@ -198,6 +206,12 @@ Xskill: <task or idea>
 
 See `START_HERE.md`, `INSTALL.md`, and `install/README.md`.
 
+When installing Codex directly from this repository, copy `install/codex/.agents` into the target project root. This repository tracks `install/codex/.agents/` as an install template; a copied target-project `.agents/skills/` directory is local agent configuration unless that project explicitly opts in.
+
+Install packs keep generated copies of `xskill/` for agent portability. Treat root `xskill/` as the source of truth and refresh generated copies with `powershell -ExecutionPolicy Bypass -File .\scripts\sync-install-packs.ps1`.
+
+Release assets are built by `.github/workflows/release.yml`: Codex gets `.agents/`, Claude Code gets `.claude/`, Gemini CLI gets `xskill/`, and GitHub Copilot CLI gets `.github/` plus `xskill/`.
+
 ---
 
 ## 8. Examples
@@ -225,9 +239,9 @@ Agent: Records Evidence Ledger.
 For vague ideas, Xskill produces 3 Idea Cards:
 
 ```text
-Card A — Dumb-simple install
-Card B — Demo-first README
-Card C — Copy-paste fallback
+Card A - Dumb-simple install
+Card B - Demo-first README
+Card C - Copy-paste fallback
 ```
 
 ### Case Study 06: Auto-Metrics & Self-Refactor
@@ -252,7 +266,7 @@ See `examples/case-studies/` and `xskill/examples/`.
 
 **Tokens are precious.**
 
-Most agent workflows (like Superpowers or get-shit-down) add more prompts, more memory, more roles, and more automation. They treat the context window as infinite, leading to "context corruption"—where the agent hallucinates, loses focus, and forgets the original goal.
+Most agent workflows (like Superpowers or get-shit-down) add more prompts, more memory, more roles, and more automation. They treat the context window as infinite, leading to "context corruption", where the agent hallucinates, loses focus, and forgets the original goal.
 
 Xskill is the **ultra-lean alternative**. It removes until the work is small enough to verify. It is designed to take a baseline model (Pro) and elevate it to Max-level performance through sheer discipline, without the token bloat.
 
@@ -270,7 +284,7 @@ Xskill is not a full agent runtime. It is an **execution discipline layer** that
 
 ## 10. Credits / disclaimer
 
-Xskill is inspired by ideas from Musk-style five-step engineering, Toyota Five Whys, first-principles reasoning, Occam’s Razor, small-batch quick response, agile and lean development, TDD micro-loops, evidence-led execution, schema-based learning, and agent skill systems such as Superpowers.
+Xskill is inspired by ideas from Musk-style five-step engineering, Toyota Five Whys, first-principles reasoning, Occam's Razor, small-batch quick response, agile and lean development, TDD micro-loops, evidence-led execution, schema-based learning, and agent skill systems such as Superpowers.
 
 Xskill is not affiliated with Elon Musk, Tesla, SpaceX, X, xAI, Toyota, SHEIN, Superpowers, OpenAI, Anthropic, Google, GitHub, or any referenced project.
 

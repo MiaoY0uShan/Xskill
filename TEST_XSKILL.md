@@ -1,6 +1,6 @@
 # Test Xskill
 
-After installing Xskill, ask your agent a non-trivial but safe task:
+After installing Xskill, ask your agent a small safe task:
 
 ```text
 Rename one README section title without changing anything else.
@@ -9,10 +9,10 @@ Rename one README section title without changing anything else.
 Expected behavior:
 
 ```text
-I’ll use Xskill to create a bounded Execution Brief before editing code.
+Xskill small brief: task, read/touch, verify, result.
 ```
 
-The agent should produce a brief before editing.
+The agent should not produce a full Execution Brief for this small change unless risk appears.
 
 Manual override, if the agent does not activate Xskill automatically:
 
@@ -29,5 +29,5 @@ I want this project to be easier for people to use.
 Expected behavior:
 
 ```text
-This idea is broad. I’ll use Xskill Idea Cards first.
+This idea is broad. I will use Xskill Idea Cards first.
 ```

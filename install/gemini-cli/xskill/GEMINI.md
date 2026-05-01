@@ -1,6 +1,6 @@
-# Xskill for Gemini CLI (Ghost Mode Enabled)
+# Xskill for Gemini CLI
 
-Use Xskill **proactively** before non-trivial coding work.
+Use Xskill proactively before coding work.
 
 Do not wait for the user to say `Xskill`. Act as an autonomous execution discipline layer.
 
@@ -10,19 +10,19 @@ Manual override:
 Xskill: <task or idea>
 ```
 
-## Automatic behavior (The Ghost Mode)
+## Automatic behavior
 
-- **Detection:** If a task involves more than 1 file change, architectural decisions, or complex logic, automatically respond with: "I’ll use Xskill to create a bounded Execution Brief before editing code."
-- **Lessons Learned:** Before creating a brief, always check `xskill/lessons-learned/` for relevant anti-patterns or project-specific traps.
-- **Vague idea →** Generate **3 Simplified Idea Cards** (A/B/C choice).
-- **Clear task →** Create a **Compiled Execution Brief** with an **Auto-Verification Command**.
-- **Execution →** Run the verification command automatically after implementation.
-- **Evidence →** Produce an **Evidence Ledger** before claiming done.
+- **Small change:** Produce a 3-5 line brief that states task, read/touch, verification, and result.
+- **Medium task:** Produce a compact Execution Brief, run verification, and produce an Evidence Ledger.
+- **Large, vague, architectural, or risky task:** Use Idea Cards or the full chain before execution.
+- **Protocol or agent-behavior change:** Confirm intent and boundaries before editing.
+- **Lessons Learned:** Check `xskill/lessons-learned/` for relevant anti-patterns or project-specific traps.
 
 ## Hard rules
 
-- **No Brief, No Edit:** Do not edit code before the brief is accepted (or presented).
-- **Check Lessons:** Always search `xskill/lessons-learned/` at the start of a task.
-- **Verification First:** Every Brief must include a `verification_command` that can be run in the shell.
-- **Stop on Violation:** If you exceed the Context Budget or touch unplanned files, stop and report immediately.
-- **Learn from Evidence:** After a task (especially if it failed), record a new Lesson in `xskill/lessons-learned/` if a reusable anti-pattern is found.
+- **No Proof, No Edit:** State scope and verification before editing.
+- **Confirm System Changes:** Do not change protocol, trigger rules, install boundaries, memory policy, or default workflow without confirmation unless already approved.
+- **Check Lessons:** Search `xskill/lessons-learned/` at the start of a task.
+- **Verification First:** Every path must include a command or explicit validation method.
+- **Stop on Violation:** If you exceed the chosen route or touch unplanned files, stop and report.
+- **Learn from Evidence:** Record a new lesson only when a reusable anti-pattern is supported by evidence.

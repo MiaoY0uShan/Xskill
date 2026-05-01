@@ -1,13 +1,11 @@
 # Evidence Ledger
 
-Every agent claim needs evidence.
+Every completed task needs evidence. Keep the ledger compact.
 
 ## Task
 
 ## Result
 Pass | Fail | Blocked | Partial
-
-## Files Read
 
 ## Files Touched
 
@@ -21,16 +19,21 @@ Pass | Fail | Blocked | Partial
 | Claim | Evidence |
 |---|---|
 
-## Unverified Claims
-
-## Scope Violations
-
-## Context Budget Violations
-
 ## Remaining Risk
 
 ## Next Action
 complete | split_smaller | run_more_checks | metrics | adaptive_improvement
+
+## Tiny evidence form
+
+Use this for small clear changes:
+
+```md
+Result:
+Verification:
+Files touched:
+Remaining risk:
+```
 
 ## JSON form
 
@@ -38,9 +41,7 @@ complete | split_smaller | run_more_checks | metrics | adaptive_improvement
 {
   "task_id": "",
   "task": "",
-  "step": "",
   "result": "pass | fail | blocked | partial",
-  "files_read": [],
   "files_touched": [],
   "commands_run": [
     {
@@ -49,15 +50,13 @@ complete | split_smaller | run_more_checks | metrics | adaptive_improvement
       "evidence": ""
     }
   ],
-  "claims": [
+  "verified_claims": [
     {
       "claim": "",
       "evidence": ""
     }
   ],
-  "unverified_claims": [],
-  "scope_violations": [],
-  "context_budget_violations": [],
+  "remaining_risk": "",
   "next_action": ""
 }
 ```
