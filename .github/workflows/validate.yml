@@ -119,7 +119,7 @@ jobs:
             install/github-copilot-cli/xskill/README.md
       - name: Check install pack source of truth docs
         run: |
-          grep -q 'source of truth' install/README.md
+          grep -qi 'source of truth' install/README.md
           grep -q 'scripts/sync-install-packs.ps1' install/README.md
           grep -q 'scripts/sync-install-packs.ps1' docs/release-checklist.md
       - name: Check packaged xskill references
