@@ -17,8 +17,9 @@ Fix the password reset bug.
 
 Expected:
 
-- non-trivial task → Xskill activates automatically and produces a Compiled Execution Brief
-- vague idea → Xskill produces 3 Idea Cards first
+- small change -> Xskill activates automatically and produces a 3-5 line brief plus validation result
+- medium task -> Xskill produces a compact Execution Brief and Evidence Ledger
+- large, vague, architectural, or risky task -> Xskill uses the full chain
 
 Manual override:
 

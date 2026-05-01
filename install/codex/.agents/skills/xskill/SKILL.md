@@ -1,15 +1,15 @@
 ---
 name: xskill
-description: "Use proactively before non-trivial coding tasks to create a bounded, evidence-backed Execution Brief. Do not wait for explicit \"Xskill\" invocation. Manual override: \"Xskill: <task or idea>\"."
+description: "Use proactively before coding tasks to choose the lightest evidence-backed path: tiny brief, Execution Brief, or full chain. Manual override: \"Xskill: <task or idea>\"."
 ---
 
 # Xskill
 
 Xskill is the proactive execution discipline layer for AI coding agents.
 
-Use Xskill **before editing code** when the user asks for non-trivial coding work.
+Use Xskill before editing code, then select the lightest useful path.
 
-Do **not** wait for the user to say `Xskill`.
+Do not wait for the user to say `Xskill`.
 
 `Xskill: <task or idea>` is only a manual override.
 
@@ -25,10 +25,15 @@ Use Xskill when the user asks you to modify code, fix a bug, add a feature, refa
 
 ## Default behavior
 
-- Clear task → produce a Compiled Execution Brief before editing code.
-- Vague idea → produce 3 Idea Cards first.
-- Failed task → use Failure-to-Smaller-Task Protocol.
-- Completed task → produce Evidence Ledger before claiming done.
+- Small change -> produce a 3-5 line brief and validation result.
+- Medium task -> produce a compact Execution Brief and Evidence Ledger.
+- Large, vague, architectural, or risky task -> use Idea Cards or the full chain before execution.
+- Protocol or agent-behavior change -> confirm intent and boundaries before editing.
+- Failed task -> use Failure-to-Smaller-Task Protocol.
+
+## Repository boundary
+
+`.agents/skills/` is local agent configuration, not project source, unless the repository explicitly opts in.
 
 ## Manual override
 
@@ -38,9 +43,9 @@ Xskill: <task or idea>
 
 ## Hard rules
 
-1. Do not edit code before producing the brief.
-2. Estimate the Context Budget Contract yourself.
-3. Mark budget confidence as low, medium, or high.
+1. Pick small, medium, full-chain, or confirm-first routing before editing.
+2. Confirm before changing protocol, trigger rules, install boundaries, memory policy, or default workflow unless already approved.
+3. State what to read, what to touch, and how to verify.
 4. Respect files to read, files to touch, and files to avoid.
 5. If vague, generate Idea Cards before asking many questions.
 6. If blocked or over budget, split smaller instead of retrying.

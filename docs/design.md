@@ -12,21 +12,25 @@ Users should only need to say:
 Xskill: <task or idea>
 ```
 
-Xskill should decide the workflow.
+Xskill should decide the workflow and keep the process weight proportional to the task.
 
 ## Main loop
 
 ```text
 Xskill trigger
-→ router
-→ Idea Cards, if needed
-→ Compiled Execution Brief
-→ bounded execution
-→ Evidence Ledger
-→ Metrics Report
-→ Adaptive Improvement
-→ Schema Memory
+-> router
+-> smallest useful brief
+-> bounded execution
+-> evidence
+-> optional metrics or learning
 ```
+
+## Routing levels
+
+- Small change -> 3-5 line brief plus validation result.
+- Medium task -> compact Execution Brief plus Evidence Ledger.
+- Large, vague, architectural, or risky task -> Idea Cards or full chain, then compact Execution Brief and Evidence Ledger.
+- Protocol or agent-behavior change -> confirm intent and boundaries before editing.
 
 ## Why a router exists
 
@@ -46,9 +50,7 @@ They give the user three close implementation paths to choose from.
 
 ## Estimated budgets
 
-Xskill estimates the Context Budget Contract instead of asking the user to fill it out.
-
-Every estimate must include confidence and assumptions.
+Use explicit budgets only when the task is medium or large enough for budget risk to matter.
 
 ## Portable boundary
 

@@ -10,13 +10,11 @@ Internal protocol:
 
 ```text
 task or idea
-→ router
-→ idea cards, if vague
-→ brief
-→ bounded execution
-→ evidence
-→ metrics
-→ improvement
+-> router
+-> smallest useful brief
+-> bounded execution
+-> evidence
+-> optional metrics or improvement
 ```
 
 ## Router behavior
@@ -35,33 +33,43 @@ shorten-iteration
 
 directly.
 
-## Vague input
+## Small clear change
 
-If the user gives an unclear idea, produce 3 Idea Cards.
+Use a 3-5 line brief:
 
-Each card contains:
+- task
+- read/touch
+- verification
+- result
 
-- interpretation
-- MVP
-- best for
-- risk / tradeoff
-- estimated Context Budget Contract
-- recommended workflow
+Do not produce a full Execution Brief or Evidence Ledger unless risk appears.
 
-After the user chooses, continue the workflow.
+## Medium clear task
 
-## Clear task
+Use a compact Execution Brief before editing and a compact Evidence Ledger after verification.
 
-If the task is already specific, produce a Compiled Execution Brief.
+## Vague, large, architectural, or risky input
+
+Use Idea Cards or requirements clarification first. Add delete-scope, semantic-architecture, optimize-path, and shorten-iteration only when they reduce risk or scope.
+
+## Protocol or agent-behavior change
+
+Before editing Xskill itself, trigger rules, install boundaries, memory policy, or the default workflow:
+
+- restate the inferred goal
+- challenge unclear or risky assumptions
+- list proposed files or areas
+- ask for confirmation
+
+Skip this only when the user explicitly says to implement already-discussed feedback.
 
 ## Completion
 
-After execution:
+Match evidence weight to task weight:
 
-1. Create an Evidence Ledger.
-2. Create a Metrics Report if measurement matters.
-3. Use Adaptive Improvement only from evidence.
-4. Update Schema Memory only for reusable repeated patterns.
+- small change -> validation result
+- medium task -> Evidence Ledger
+- large/risky task -> Evidence Ledger plus metrics or learning only when useful
 
 ## Boundary
 

@@ -22,6 +22,7 @@ jobs:
           test -f xskill/templates/context-budget-contract.md
           test -f xskill/templates/context-budget-contract.json
           test -f xskill/templates/evidence-ledger.md
+          test -f scripts/sync-install-packs.ps1
           test -f docs/router.md
           test -f docs/execution-protocol.md
           test -f install/codex/TEST_XSKILL.md
@@ -116,6 +117,11 @@ jobs:
             install/claude-code/.claude/skills/xskill/references/xskill/README.md \
             install/gemini-cli/xskill/xskill/README.md \
             install/github-copilot-cli/xskill/README.md
+      - name: Check install pack source of truth docs
+        run: |
+          grep -q 'source of truth' install/README.md
+          grep -q 'scripts/sync-install-packs.ps1' install/README.md
+          grep -q 'scripts/sync-install-packs.ps1' docs/release-checklist.md
       - name: Check packaged xskill references
         run: |
           diff -ru xskill install/codex/.agents/skills/xskill/references/xskill

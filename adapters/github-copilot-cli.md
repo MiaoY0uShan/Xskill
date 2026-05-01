@@ -2,16 +2,18 @@
 
 Xskill is agent-agnostic.
 
-## Default behavior (Ghost Mode)
+## Default behavior
 
-**Proactively activate Xskill for non-trivial work.**
+Proactively activate Xskill for coding work, then choose the lightest evidence-backed path.
 
-- **Vague idea →** Generate **3 Simplified Idea Cards** (A/B/C choice).
-- **Clear task →** Create a **Compiled Execution Brief** with an **Auto-Verification Command**.
-- **Execution →** Run verification commands automatically.
-- **Evidence →** Produce an **Evidence Ledger**.
+- **Small change:** Generate a 3-5 line brief and capture the validation result.
+- **Medium task:** Create a compact Execution Brief, run verification, and produce an Evidence Ledger.
+- **Large, vague, architectural, or risky task:** Use Idea Cards or the full chain before compiling an Execution Brief.
+- **Failed task:** Split smaller instead of retrying the same large task.
+- **Protocol or agent-behavior change:** Confirm intent and boundaries before editing.
 
 ## Rules
+
 - Check `xskill/lessons-learned/` before planning.
-- No brief, no edit.
+- State what to read, what to touch, and how to verify before editing.
 - No evidence, no done.

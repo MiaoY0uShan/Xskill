@@ -5,27 +5,28 @@ Use Xskill with any coding agent that can read Markdown files, skills, extension
 ## Prompt
 
 ```text
-Use Xskill to compile this task into a bounded Execution Brief before editing code:
+Use Xskill to choose the lightest evidence-backed path before editing code:
 <task>
 ```
 
 ## Expected result
 
-The agent should produce:
+For a small clear change, the agent should produce:
 
-- Compiled Execution Brief
-- Context Budget Contract
-- Context Diet Map
-- Evidence requirements
-- Stop condition
+- 3-5 line brief
+- validation result
 
-After execution, the agent should produce:
+For a medium task, the agent should produce:
 
+- Execution Brief
 - Evidence Ledger
-- Metrics Report, when measurement matters
-- Adaptive Improvement Report, when reusable learning appears
-- Schema Memory Card, only after repeated evidence
-```
+
+For a large, vague, architectural, or risky task, the agent should produce:
+
+- Idea Cards or requirements clarification
+- delete-scope / architecture / optimize-path only as needed
+- compact Execution Brief
+- Evidence Ledger
 
 ## Install packs
 

@@ -12,7 +12,7 @@ Pick your agent
 -> use your agent normally
 ```
 
-For non-trivial coding tasks, Xskill should activate automatically before code is edited.
+For coding tasks, Xskill should activate automatically before code is edited and choose the lightest useful path.
 
 Manual override:
 
@@ -30,6 +30,14 @@ xskill-github-copilot-cli-v0.2.4.zip
 xskill-copy-paste-v0.2.4.md
 ```
 
+## Repository boundary
+
+Install packs may intentionally contain agent config templates. For example, `install/codex/.agents/` is tracked so users can copy it into a target project root.
+
+After copying, `your-project/.agents/skills/` is local agent configuration unless that target repository explicitly opts in.
+
+Changes to agent behavior, trigger rules, or install boundaries should be confirmed before editing because they affect future agent behavior.
+
 ## Test
 
 Ask:
@@ -40,7 +48,7 @@ Rename one README section title without changing anything else.
 
 Expected:
 
-- clear task -> Compiled Execution Brief before editing
+- small clear change -> 3-5 line brief plus validation result
 - vague idea -> Idea Cards
 
 If the agent does not activate automatically, use the manual override:

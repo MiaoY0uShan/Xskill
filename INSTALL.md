@@ -4,6 +4,8 @@ Xskill has no CLI, npm, npx, pip, database, or runtime.
 
 Download the package for your agent, unzip it, restart the agent, and use your agent normally.
 
+Agent-local directories such as `.agents/skills/` are not project source. Do not commit them unless your repository explicitly says it owns that directory. Keep portable Xskill content in `xskill/`.
+
 ## Codex
 
 ```bash
@@ -45,10 +47,10 @@ After installing, ask:
 Rename one README section title without changing anything else.
 ```
 
-Expected behavior:
+Expected behavior for this small change:
 
 ```text
-I’ll use Xskill to create a bounded Execution Brief before editing code.
+Xskill small brief: task, read/touch, verify, result.
 ```
 
 Manual override:

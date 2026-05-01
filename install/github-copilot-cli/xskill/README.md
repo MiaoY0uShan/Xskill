@@ -7,7 +7,7 @@ Users should not call internal skills manually.
 Default behavior:
 
 ```text
-For non-trivial coding tasks, activate Xskill proactively before editing code.
+For coding tasks, activate Xskill proactively before editing code and choose the lightest useful path.
 ```
 
 Manual override:
@@ -18,7 +18,7 @@ Xskill: <task or idea>
 
 The top-level router is `SKILL.md`.
 
-It decides whether to produce Idea Cards, question requirements, delete scope, sketch architecture, optimize path, shorten iteration, or request evidence.
+It decides whether to use a tiny brief, a compact Execution Brief plus Evidence Ledger, Idea Cards, or the full chain.
 
 ## Internal skills
 
@@ -37,12 +37,11 @@ schema-memory/
 ## Key artifacts
 
 ```text
-Idea Cards
-Compiled Execution Brief
-Context Budget Contract
-Context Diet Map
-Failure-to-Smaller-Task Protocol
+Tiny Brief
+Execution Brief
 Evidence Ledger
+Idea Cards
+Failure-to-Smaller-Task Protocol
 Metrics Report
 Adaptive Improvement Report
 Schema Memory Card
@@ -50,6 +49,10 @@ Schema Memory Card
 
 ## Rule
 
-The agent should produce a Compiled Execution Brief before non-trivial code edits.
+Small changes should get a 3-5 line brief and validation result.
 
-If the user input is vague, the agent should produce 3 Idea Cards first.
+Medium changes should get an Execution Brief and Evidence Ledger.
+
+Large, vague, architectural, or risky tasks should use the full chain.
+
+Protocol or agent-behavior changes should confirm intent and boundaries before editing, unless the user explicitly says to implement already-discussed feedback.

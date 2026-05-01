@@ -17,9 +17,19 @@ RELEASE_NOTES-v0.2.4.md
 git-commands-v0.2.4.txt
 ```
 
+GitHub Actions can build and upload the per-agent release assets from a `v*` tag or a manual workflow dispatch:
+
+```text
+.github/workflows/release.yml
+```
+
 Verify:
 
 - `xskill/SKILL.md` exists.
+- `xskill/` is treated as the source of truth for bundled install-pack references.
+- Run `powershell -ExecutionPolicy Bypass -File .\scripts\sync-install-packs.ps1` before packaging.
+- Run `powershell -ExecutionPolicy Bypass -File .\scripts\sync-install-packs.ps1 -Check` before release.
+- Confirm `release.yml` packages Codex as `.agents/`, Claude Code as `.claude/`, Gemini CLI as `xskill/`, and GitHub Copilot CLI as `.github/` plus `xskill/`.
 - Idea Cards template exists.
 - Context Budget Contract includes estimated budget fields.
 - All install packs describe proactive activation as the default behavior.
