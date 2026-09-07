@@ -1,2 +1,0 @@
-[2025-07-26 10:00] apply-config --commit started
-[2025-07-26 10:01] TIMEOUT after 30s

@@ -1,6 +1,0 @@
-{
-  "name": "pager",
-  "scripts": {
-    "test": "node --test test/pager.test.js"
-  }
-}
